@@ -1,0 +1,11 @@
+{
+  "name": "booking-node-api",
+  "version": "1.0.0",
+  "description": "a quick api to run some experiments with",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jon Roberts",
+  "license": "ISC"
+}

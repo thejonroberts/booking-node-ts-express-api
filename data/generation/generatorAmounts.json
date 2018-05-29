@@ -1,0 +1,11 @@
+{
+	"amounts": {
+    "numUsers": 200,
+		"numBands": 20,
+		"numVenues": 40,
+		"numLineups": 25,
+		"numEvents": 350,
+		"numGenres": 400,
+		"numAddresses": 500
+	}
+}

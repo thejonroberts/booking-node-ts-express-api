@@ -30,8 +30,10 @@ for (let i = 0; i < numBands; i++) {
   });
 }
 
-const usersJSONSTRING = JSON.stringify(bands);
+const bandsJson = JSON.stringify(bands);
 
-fs.writeFile('../bands.json', usersJSONSTRING, err => {
-  if (err) console.log('error!', err);
+fs.writeFile('./data/bands.json', bandsJson, err => {
+  if (err) throw err;
+  // eslint-disable-next-line
+  console.log('bands json saved');
 });

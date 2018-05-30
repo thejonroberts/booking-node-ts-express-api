@@ -3,7 +3,7 @@
 // using Faker to generate venues
 const faker = require('faker');
 const {
-	amounts: { numVenues, numAddresses, numGenres },
+	amounts: { numVenues, numAddresses },
 } = require('./generatorAmounts.json');
 const fs = require('fs');
 
@@ -12,7 +12,6 @@ let venues = [];
 for (let i = 0; i < numVenues; i++) {
   const name = faker.name.lastName();
   const AddressId = Math.floor(Math.random() * numAddresses) + 1;
-  const genreId = Math.floor(Math.random() * numGenres) + 1;
 
 	const createdAt = faker.date.past().toISOString();
 	const updatedAt = new Date().toISOString();
@@ -20,14 +19,15 @@ for (let i = 0; i < numVenues; i++) {
 	venues.push({
     name,
     AddressId,
-    genreId,
 		updatedAt,
 		createdAt,
 	});
 }
 
-venues = JSON.stringify(venues);
+const venuesJson = JSON.stringify(venues);
 
-fs.writeFile('../venues.json', venues, err => {
-	if (err) console.log('error!', err);
+fs.writeFile('./data/venues.json', venuesJson, err => {
+  if (err) throw err;
+  // eslint-disable-next-line
+  console.log('venues json saved');
 });

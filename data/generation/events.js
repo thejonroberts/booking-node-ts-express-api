@@ -8,8 +8,8 @@ const {
 const fs = require('fs');
 
 let events = [];
-let pastDate = faker.date.pastDate();
-let futureDate = faker.date.futureDate();
+let pastDate = faker.date.past();
+let futureDate = faker.date.future();
 const startTime = '9:00 PM';
 const endTime = '12:00 PM';
 
@@ -34,8 +34,10 @@ for (let i = 0; i < numEvents; i++) {
 	});
 }
 
-events = JSON.stringify(events);
+const eventsJson = JSON.stringify(events);
 
-fs.writeFile('../events.json', events, err => {
-	if (err) console.log('error!', err);
+fs.writeFile('./data/events.json', eventsJson, err => {
+  if (err) throw err;
+  // eslint-disable-next-line
+  console.log('events json saved');
 });

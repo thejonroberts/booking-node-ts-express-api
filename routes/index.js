@@ -9,7 +9,7 @@ router.get('/', (req, res, next) => {
     keyAgain: "other Data",
     fakeArray: [1, 2, 3],
   }
-  console.log('root', testData);
+  // console.log('root', testData);
   res.json(testData);
   next();
 });

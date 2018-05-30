@@ -1,14 +1,17 @@
 {
 	"amounts": {
-    "numUsers": 300,
-		"numBands": 150,
-		"numVenues": 30,
-		"numEvents": 100,
-		"numGenres": 10,
-    "numAddresses": 330,
-    "numEventBands": 350,
-    "numUsersBands": 500,
-    "numUsersVenues": 120,
-    "numVenueGenres": 50
+    "numUsers": 50,
+		"numBands": 10,
+		"numVenues": 5,
+		"numEvents": 10,
+		"numGenres": 5,
+    "numAddresses": 55,
+    "numEventBands": 40,
+    "numUsersBands": 40,
+    "numUsersVenues": 15,
+    "numVenueGenres": 10,
+    "maxBandsPerEvent": 3,
+    "maxUsersPerBand": 4,
+    "maxUsersPerVenue": 2
 	}
 }

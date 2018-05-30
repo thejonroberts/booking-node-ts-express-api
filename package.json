@@ -9,6 +9,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --watch --recursive -R spec",
+    "faker": "node data/generation/generate-json-data.js",
     "teardown": "sequelize db:migrate:undo:all",
     "build": "sequelize db:migrate",
     "seed": "sequelize db:seed:all",

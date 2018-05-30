@@ -32,8 +32,10 @@ for (let i = 0; i < numAddresses; i++) {
   });
 }
 
-const usersJSONSTRING = JSON.stringify(addresses);
+const usersJson = JSON.stringify(addresses);
 
-fs.writeFile('../addresses.json', usersJSONSTRING, err => {
-  if (err) console.log('error!', err);
+fs.writeFile('./addresses.json', usersJson, err => {
+  if (err) throw err;
+  // eslint-disable-next-line
+  console.log('addresses json saved');
 });

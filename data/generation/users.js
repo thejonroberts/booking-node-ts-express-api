@@ -41,8 +41,10 @@ for (let i = 0; i < numUsers; i++) {
   });
 }
 
-const usersJsonString = JSON.stringify(users);
+const usersJson = JSON.stringify(users);
 
-fs.writeFile('../users.json', usersJsonString, err => {
-  if (err) console.log('error!', err);
+fs.writeFile('./data/users.json', usersJson, err => {
+  if (err) throw err;
+  // eslint-disable-next-line
+  console.log('users json saved');
 });

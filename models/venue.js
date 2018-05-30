@@ -1,18 +1,10 @@
 'use strict';
-module.exports = function(sequelize, DataTypes) {
-  var Venue = sequelize.define(
-    'Venue',
-    {
-      name: DataTypes.STRING,
-    },
-    {
-      timestamps: true,
-      paranoid: true,
-    }
-  );
-
-  Venue.associate = models => {
-		Venue.belongsTo(models.Genre, {
+module.exports = (sequelize, DataTypes) => {
+  var Venue = sequelize.define('Venue', {
+    name: DataTypes.STRING,
+  }, {});
+  Venue.associate = function(models) {
+    Venue.belongsTo(models.Genre, {
 			foreignKey: 'GenreId',
     });
 
@@ -25,7 +17,6 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });
-	};
-
+  };
   return Venue;
 };

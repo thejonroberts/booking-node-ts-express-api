@@ -16,5 +16,15 @@ module.exports = function(sequelize, DataTypes) {
     }
   );
 
+  Address.associate = models => {
+		Address.hasMany(models.User, {
+			foreignKey: 'AddressId',
+		});
+
+		Address.hasMany(models.Venue, {
+			foreignKey: 'AddressId',
+		});
+	};
+
   return Address;
 };

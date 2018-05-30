@@ -18,16 +18,22 @@ module.exports = function(sequelize, DataTypes) {
   );
 
   User.associate = function(models) {
-    User.hasOne(models.address, {
+    User.hasOne(models.Address, {
       foreignKey: 'addressId',
     });
-  };
 
-  // User.associate = function(models) {
-  //   User.hasMany(models.order, {
-  //     foreignKey: 'customerUserId'
-  //   });
-  // };
+    User.belongsToMany(models.Band, {
+      through: 'UsersBands',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
+
+    User.belongsToMany(models.Venue, {
+      through: 'UsersVenues',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
+  };
 
   return User;
 };

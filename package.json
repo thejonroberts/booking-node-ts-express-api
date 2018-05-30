@@ -8,16 +8,17 @@
   },
   "main": "index.js",
   "scripts": {
-		"test": "mocha --watch --recursive -R spec",
-		"teardown": "sequelize db:migrate:undo:all",
-		"build": "sequelize db:migrate",
-		"seed": "sequelize db:seed:all",
-		"dbrb": "npm run teardown && npm run build && npm run seed",
+    "test": "mocha --watch --recursive -R spec",
+    "teardown": "sequelize db:migrate:undo:all",
+    "build": "sequelize db:migrate",
+    "seed": "sequelize db:seed:all",
+    "dbrb": "npm run teardown && npm run build && npm run seed",
     "dev": "nodemon server.js"
   },
   "author": "Jon Roberts",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",

@@ -3,29 +3,26 @@
 // using Faker to generate venues
 const faker = require('faker');
 const {
-	amounts: { numVenues, numUsers }
+	amounts: { numVenues, numAddresses, numGenres },
 } = require('./generatorAmounts.json');
-let fs = require('fs');
+const fs = require('fs');
 
 let venues = [];
 
 for (let i = 0; i < numVenues; i++) {
-	// let orderDate = faker.date.past().toISOString(); //generates an ISO formate date string
-	// let customerUserId = Math.floor(Math.random() * numUsers) + 1;
-	// let PaymentTypeId = null;
-	// let closedOrderChance = Math.floor(Math.random() * 100);
-	// if (closedOrderChance > 50) {
-	// 	PaymentTypeId = Math.floor(Math.random() * numPaymentTypes) + 1;
-	// }
-	let createdAt = faker.date.past().toISOString();
-	let updatedAt = new Date().toISOString();
+  const name = faker.name.lastName();
+  const AddressId = Math.floor(Math.random() * numAddresses) + 1;
+  const genreId = Math.floor(Math.random() * numGenres) + 1;
+
+	const createdAt = faker.date.past().toISOString();
+	const updatedAt = new Date().toISOString();
 
 	venues.push({
-		// orderDate,
-		// PaymentTypeId,
-		// customerUserId,
+    name,
+    AddressId,
+    genreId,
 		updatedAt,
-		createdAt
+		createdAt,
 	});
 }
 

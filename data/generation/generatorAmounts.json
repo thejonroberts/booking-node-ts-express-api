@@ -1,11 +1,14 @@
 {
 	"amounts": {
-    "numUsers": 200,
-		"numBands": 20,
-		"numVenues": 40,
-		"numLineups": 25,
-		"numEvents": 350,
-		"numGenres": 400,
-		"numAddresses": 500
+    "numUsers": 300,
+		"numBands": 150,
+		"numVenues": 30,
+		"numEvents": 100,
+		"numGenres": 10,
+    "numAddresses": 330,
+    "numEventBands": 350,
+    "numUsersBands": 500,
+    "numUsersVenues": 120,
+    "numVenueGenres": 50
 	}
 }

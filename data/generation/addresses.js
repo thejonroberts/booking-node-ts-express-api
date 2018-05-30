@@ -34,7 +34,7 @@ for (let i = 0; i < numAddresses; i++) {
 
 const usersJson = JSON.stringify(addresses);
 
-fs.writeFile('./addresses.json', usersJson, err => {
+fs.writeFile('./data/addresses.json', usersJson, err => {
   if (err) throw err;
   // eslint-disable-next-line
   console.log('addresses json saved');

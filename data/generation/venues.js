@@ -3,7 +3,7 @@
 // using Faker to generate venues
 const faker = require('faker');
 const {
-	amounts: { numVenues, numAddresses },
+  amounts: { numVenues, numAddresses },
 } = require('./generatorAmounts.json');
 const fs = require('fs');
 
@@ -13,15 +13,15 @@ for (let i = 0; i < numVenues; i++) {
   const name = faker.name.lastName();
   const AddressId = Math.floor(Math.random() * numAddresses) + 1;
 
-	const createdAt = faker.date.past().toISOString();
-	const updatedAt = new Date().toISOString();
+  const createdAt = faker.date.past().toISOString();
+  const updatedAt = new Date().toISOString();
 
-	venues.push({
+  venues.push({
     name,
     AddressId,
-		updatedAt,
-		createdAt,
-	});
+    updatedAt,
+    createdAt,
+  });
 }
 
 const venuesJson = JSON.stringify(venues);

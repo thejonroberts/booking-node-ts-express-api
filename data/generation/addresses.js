@@ -2,7 +2,9 @@
 
 // generate a bunch of addresses with Faker
 const faker = require('faker');
-const { amounts: { numAddresses } } = require('./generatorAmounts.json');
+const {
+  amounts: { numAddresses },
+} = require('./generatorAmounts.json');
 const fs = require('fs');
 
 let addresses = [];

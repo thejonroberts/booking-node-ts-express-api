@@ -2,7 +2,9 @@
 
 // generate a bunch of customers with Faker
 const faker = require('faker');
-const { amounts: { numUsers, numAddresses } } = require('./generatorAmounts.json');
+const {
+  amounts: { numUsers, numAddresses },
+} = require('./generatorAmounts.json');
 const fs = require('fs');
 const bCrypt = require('bcrypt-nodejs');
 
@@ -22,10 +24,12 @@ for (let i = 0; i < numUsers; i++) {
 
   const createdAt = faker.date.past().toISOString();
   const recent_date = faker.date.recent().toISOString();
-  const lastLoginDate = faker.date.between(createdAt, recent_date).toISOString();
+  const lastLoginDate = faker.date
+    .between(createdAt, recent_date)
+    .toISOString();
   const updatedAt = new Date().toISOString();
 
-  const addressId = Math.floor(Math.random() * numAddresses) + 1;
+  const AddressId = Math.floor(Math.random() * numAddresses) + 1;
 
   users.push({
     email,
@@ -34,7 +38,7 @@ for (let i = 0; i < numUsers; i++) {
     firstName,
     lastName,
     phoneNumber,
-    addressId,
+    AddressId,
     createdAt,
     lastLoginDate,
     updatedAt,

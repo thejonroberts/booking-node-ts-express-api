@@ -2,36 +2,39 @@
 
 // using Faker to generate events
 const faker = require('faker');
+const moment = require('moment');
 const {
-	amounts: { numEvents, numVenues },
+  amounts: { numEvents, numVenues },
 } = require('./generatorAmounts.json');
 const fs = require('fs');
 
 let events = [];
 let pastDate = faker.date.past();
 let futureDate = faker.date.future();
-const startTime = '9:00 PM';
-const endTime = '12:00 PM';
 
 for (let i = 0; i < numEvents; i++) {
-  const venueId = Math.floor(Math.random() * numVenues) + 1;
+  const VenueId = Math.floor(Math.random() * numVenues) + 1;
   const title = faker.commerce.productName();
   const date = faker.date.between(pastDate, futureDate);
-  const description = faker.lorem.sentences();
+  const startsAt = moment(date).toISOString();
+  const endsAt = moment(startsAt)
+    .add(3, 'hours')
+    .toISOString();
 
-	const createdAt = faker.date.past().toISOString();
-	const updatedAt = new Date().toISOString();
+  const description = faker.lorem.sentence();
 
-	events.push({
-    venueId,
-    date,
-    startTime,
-    endTime,
+  const createdAt = faker.date.past().toISOString();
+  const updatedAt = new Date().toISOString();
+
+  events.push({
+    VenueId,
+    startsAt,
+    endsAt,
     title,
     description,
-		updatedAt,
-		createdAt,
-	});
+    updatedAt,
+    createdAt,
+  });
 }
 
 const eventsJson = JSON.stringify(events);

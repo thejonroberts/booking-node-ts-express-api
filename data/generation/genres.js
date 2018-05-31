@@ -2,17 +2,11 @@
 
 const faker = require('faker');
 const {
-	amounts: { numGenres },
+  amounts: { numGenres },
 } = require('./generatorAmounts.json');
 const fs = require('fs');
 
-const seedGenres = [
-  'Blues',
-  'Country',
-  'Electronic',
-  'Hip-Hop',
-  'Rock',
-];
+const seedGenres = ['Blues', 'Country', 'Electronic', 'Hip-Hop', 'Rock'];
 
 let genres = [];
 // Warn if number of genres in generatorAmounts.json is different.
@@ -25,14 +19,14 @@ if (seedGenres.length !== numGenres) {
 for (let i = 0; i < seedGenres.length; i++) {
   const name = seedGenres[i];
 
-	const createdAt = faker.date.past().toISOString();
-	const updatedAt = new Date().toISOString();
+  const createdAt = faker.date.past().toISOString();
+  const updatedAt = new Date().toISOString();
 
-	genres.push({
+  genres.push({
     name,
-		updatedAt,
-		createdAt,
-	});
+    updatedAt,
+    createdAt,
+  });
 }
 
 const genresJson = JSON.stringify(genres);

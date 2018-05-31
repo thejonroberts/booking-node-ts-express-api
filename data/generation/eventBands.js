@@ -2,7 +2,9 @@
 
 const faker = require('faker');
 
-const { amounts: { numEvents, numBands, maxBandsPerEvent } } = require('./generatorAmounts.json');
+const {
+  amounts: { numEvents, numBands, maxBandsPerEvent },
+} = require('./generatorAmounts.json');
 let fs = require('fs');
 
 let eventBands = [];
@@ -18,7 +20,7 @@ for (let k = 1; k <= numEvents; k++) {
     // choose random product out of the total number of products
     let BandId = Math.floor(Math.random() * numBands) + 1;
     // if we haven't already used this random genre:
-    if ( previousBandIds.indexOf(BandId) === -1 ) {
+    if (previousBandIds.indexOf(BandId) === -1) {
       previousBandIds.push(BandId); // store for check
 
       let createdAt = faker.date.past().toISOString();

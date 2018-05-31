@@ -26,6 +26,9 @@ module.exports = {
       timeZone: {
         type: Sequelize.STRING,
       },
+      placeId: {
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

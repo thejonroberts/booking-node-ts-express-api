@@ -8,10 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      startTime: {
+      startsAt: {
         type: Sequelize.DATE,
       },
-      endTime: {
+      endsAt: {
         type: Sequelize.DATE,
       },
       title: {

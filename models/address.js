@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       stateCode: DataTypes.STRING,
       zipCode: DataTypes.STRING,
       timeZone: DataTypes.STRING,
+      placeId: DataTypes.INTEGER,
     },
     {
       timestamps: true,

@@ -4,14 +4,17 @@ const { Router } = require('express');
 const router = Router();
 
 router.get('/', (req, res, next) => {
-  const testData = {
-    key: "data",
-    keyAgain: "other Data",
-    fakeArray: [1, 2, 3],
-  }
-  // console.log('root', testData);
-  res.json(testData);
-  next();
+  const { Event } = req.app.get('models');
+  Event.findAll()
+    .then(data => {
+      // data.productTypes = data.map(trainee => {
+      //   return Object.assign({}, trainee.dataValues);
+      // });
+      res.json(data);
+    })
+    .catch(err => {
+      next(err);
+    });
 });
 
 // pipe all other requests through the route modules

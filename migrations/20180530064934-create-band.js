@@ -20,6 +20,9 @@ module.exports = {
       label: {
         type: Sequelize.STRING,
       },
+      GenreId: {
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

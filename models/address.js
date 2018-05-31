@@ -1,21 +1,28 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Address = sequelize.define('Address', {
-    street: DataTypes.STRING,
-    streetTwo: DataTypes.STRING,
-    city: DataTypes.STRING,
-    stateCode: DataTypes.STRING,
-    zipCode: DataTypes.STRING,
-    timeZone: DataTypes.STRING,
-  }, {});
+  var Address = sequelize.define(
+    'Address',
+    {
+      street: DataTypes.STRING,
+      streetTwo: DataTypes.STRING,
+      city: DataTypes.STRING,
+      stateCode: DataTypes.STRING,
+      zipCode: DataTypes.STRING,
+      timeZone: DataTypes.STRING,
+    },
+    {
+      timestamps: true,
+      paranoid: true,
+    }
+  );
   Address.associate = function(models) {
     Address.hasMany(models.User, {
-			foreignKey: 'AddressId',
-		});
+      foreignKey: 'AddressId',
+    });
 
-		Address.hasMany(models.Venue, {
-			foreignKey: 'AddressId',
-		});
+    Address.hasMany(models.Venue, {
+      foreignKey: 'AddressId',
+    });
   };
   return Address;
 };

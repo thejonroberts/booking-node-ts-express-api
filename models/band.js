@@ -1,14 +1,22 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Band = sequelize.define('Band', {
-    name: DataTypes.STRING,
-    bandcamp: DataTypes.STRING,
-    website: DataTypes.STRING,
-    label: DataTypes.STRING,
-  }, {});
+  var Band = sequelize.define(
+    'Band',
+    {
+      name: DataTypes.STRING,
+      bandcamp: DataTypes.STRING,
+      website: DataTypes.STRING,
+      label: DataTypes.STRING,
+      GenreId: DataTypes.INTEGER,
+    },
+    {
+      timestamps: true,
+      paranoid: true,
+    }
+  );
   Band.associate = function(models) {
     Band.belongsTo(models.Genre, {
-			foreignKey: 'GenreId',
+      foreignKey: 'GenreId',
     });
 
     Band.belongsToMany(models.User, {

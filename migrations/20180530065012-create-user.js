@@ -29,6 +29,9 @@ module.exports = {
       lastLoginDate: {
         type: Sequelize.DATE,
       },
+      AddressId: {
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

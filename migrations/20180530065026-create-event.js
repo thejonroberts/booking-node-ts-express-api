@@ -20,6 +20,9 @@ module.exports = {
       description: {
         type: Sequelize.STRING,
       },
+      VenueId: {
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -1,4 +1,8 @@
 'use strict';
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
 module.exports = (sequelize, DataTypes) => {
   var Event = sequelize.define(
     'Event',
@@ -18,6 +22,13 @@ module.exports = (sequelize, DataTypes) => {
     Event.belongsTo(models.Venue, {
       foreignKey: 'VenueId',
     });
+
+    Event.belongsToMany(models.Band, {
+      through: 'EventsBands',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   };
+
   return Event;
 };

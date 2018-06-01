@@ -11,9 +11,16 @@ module.exports = (sequelize, DataTypes) => {
       paranoid: true,
     }
   );
+
   Venue.associate = function(models) {
-    Venue.belongsTo(models.Genre, {
-      foreignKey: 'GenreId',
+    Venue.belongsToMany(models.Genre, {
+      through: 'VenuesGenres',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
+
+    Venue.hasMany(models.Event, {
+      foreignKey: 'VenueId',
     });
 
     Venue.belongsTo(models.Address, {

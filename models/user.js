@@ -17,9 +17,10 @@ module.exports = (sequelize, DataTypes) => {
       paranoid: true,
     }
   );
+
   User.associate = function(models) {
     User.hasOne(models.Address, {
-      foreignKey: 'addressId',
+      foreignKey: 'id',
     });
 
     User.belongsToMany(models.Band, {

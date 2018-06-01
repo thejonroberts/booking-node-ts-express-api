@@ -1,6 +1,5 @@
 'use strict';
 
-// using Faker to generate venues
 const faker = require('faker');
 const {
   amounts: { numVenues, numAddresses },

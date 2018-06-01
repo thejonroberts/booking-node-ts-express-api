@@ -4,16 +4,24 @@ const { Router } = require('express');
 const router = Router();
 
 router.get('/', (req, res, next) => {
-  const testData = {
-    key: "data",
-    keyAgain: "other Data",
-    fakeArray: [1, 2, 3],
-  }
-  // console.log('root', testData);
-  res.json(testData);
-  next();
+  const routes = {
+    endpoints: [
+      '/addresses',
+      '/bands',
+      '/events',
+      '/genres',
+      '/users',
+      '/venues',
+    ],
+  };
+  res.json(routes);
 });
 
-// pipe all other requests through the route modules
+router.use(require('./bands'));
+router.use(require('./events'));
+router.use(require('./genres'));
+router.use(require('./users'));
+router.use(require('./venues'));
+router.use(require('./address'));
 
 module.exports = router;

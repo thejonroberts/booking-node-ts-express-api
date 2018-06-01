@@ -10,8 +10,9 @@ module.exports = (sequelize, DataTypes) => {
       paranoid: true,
     }
   );
+
   Genre.associate = function(models) {
-    Genre.belongsTo(models.Band, {
+    Genre.hasMany(models.Band, {
       foreignKey: 'GenreId',
     });
 

@@ -1,5 +1,8 @@
 'use strict';
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 module.exports = (sequelize, DataTypes) => {
   var Band = sequelize.define(
     'Band',
@@ -15,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
       paranoid: true,
     }
   );
-
   Band.associate = function(models) {
     Band.belongsTo(models.Genre, {
       foreignKey: 'GenreId',

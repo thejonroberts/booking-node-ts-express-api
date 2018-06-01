@@ -1,5 +1,8 @@
 'use strict';
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 module.exports = (sequelize, DataTypes) => {
   var Address = sequelize.define(
     'Address',
@@ -17,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
       paranoid: true,
     }
   );
-
   Address.associate = function(models) {
     Address.hasMany(models.User, {
       foreignKey: 'AddressId',
@@ -27,6 +29,5 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'AddressId',
     });
   };
-
   return Address;
 };

@@ -1,5 +1,4 @@
 'use strict';
-
 module.exports = (sequelize, DataTypes) => {
   var Venue = sequelize.define(
     'Venue',
@@ -34,6 +33,5 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'CASCADE',
     });
   };
-
   return Venue;
 };

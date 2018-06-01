@@ -22,6 +22,5 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'CASCADE',
     });
   };
-
   return Genre;
 };

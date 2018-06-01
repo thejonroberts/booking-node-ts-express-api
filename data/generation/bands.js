@@ -1,6 +1,5 @@
 'use strict';
 
-// generate a bunch of addresses with Faker
 const faker = require('faker');
 const {
   amounts: { numBands, numGenres },

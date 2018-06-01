@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
   var Venue = sequelize.define(
     'Venue',
@@ -11,11 +12,16 @@ module.exports = (sequelize, DataTypes) => {
       paranoid: true,
     }
   );
+
   Venue.associate = function(models) {
     Venue.belongsToMany(models.Genre, {
       through: 'VenuesGenres',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
+    });
+
+    Venue.hasMany(models.Event, {
+      foreignKey: 'VenueId',
     });
 
     Venue.belongsTo(models.Address, {
@@ -28,5 +34,6 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'CASCADE',
     });
   };
+
   return Venue;
 };

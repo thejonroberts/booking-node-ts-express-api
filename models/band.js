@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
   var Band = sequelize.define(
     'Band',
@@ -14,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       paranoid: true,
     }
   );
+
   Band.associate = function(models) {
     Band.belongsTo(models.Genre, {
       foreignKey: 'GenreId',
@@ -24,6 +26,13 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });
+
+    Band.belongsToMany(models.Event, {
+      through: 'EventsBands',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   };
+
   return Band;
 };

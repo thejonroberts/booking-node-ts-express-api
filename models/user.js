@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define(
     'User',
@@ -17,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       paranoid: true,
     }
   );
+
   User.associate = function(models) {
     User.hasOne(models.Address, {
       foreignKey: 'id',
@@ -34,5 +36,6 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'CASCADE',
     });
   };
+
   return User;
 };

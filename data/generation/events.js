@@ -1,6 +1,5 @@
 'use strict';
 
-// using Faker to generate events
 const faker = require('faker');
 const moment = require('moment');
 const {

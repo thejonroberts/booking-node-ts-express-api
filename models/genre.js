@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       paranoid: true,
     }
   );
+
   Genre.associate = function(models) {
     Genre.hasMany(models.Band, {
       foreignKey: 'GenreId',
@@ -21,5 +22,6 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'CASCADE',
     });
   };
+
   return Genre;
 };

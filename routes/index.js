@@ -4,19 +4,24 @@ const { Router } = require('express');
 const router = Router();
 
 router.get('/', (req, res, next) => {
-  const { Event } = req.app.get('models');
-  Event.findAll()
-    .then(data => {
-      // data.productTypes = data.map(trainee => {
-      //   return Object.assign({}, trainee.dataValues);
-      // });
-      res.json(data);
-    })
-    .catch(err => {
-      next(err);
-    });
+  const routes = {
+    endpoints: [
+      '/addresses',
+      '/bands',
+      '/events',
+      '/genres',
+      '/users',
+      '/venues',
+    ],
+  };
+  res.json(routes);
 });
 
-// pipe all other requests through the route modules
+router.use(require('./bands'));
+router.use(require('./events'));
+router.use(require('./genres'));
+router.use(require('./users'));
+router.use(require('./venues'));
+router.use(require('./address'));
 
 module.exports = router;

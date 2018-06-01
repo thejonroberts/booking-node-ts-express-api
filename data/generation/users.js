@@ -1,6 +1,5 @@
 'use strict';
 
-// generate a bunch of customers with Faker
 const faker = require('faker');
 const {
   amounts: { numUsers, numAddresses },

@@ -6,6 +6,7 @@ let bodyParser = require('body-parser');
 
 require('dotenv').config();
 const port = process.env.PORT || 8080;
+const host = process.env.HOST || '127.0.0.1';
 
 // Attach the models module to the express application:
 app.set('models', require('./models'));
@@ -40,5 +41,5 @@ app.use(routes);
 
 app.listen(port, () => {
   /* eslint-disable-next-line */
-  console.log(`listening on port ${port}`);
+  console.log(`listening on http://${host}:${port}`);
 });

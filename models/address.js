@@ -1,10 +1,6 @@
 'use strict';
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 module.exports = (sequelize, DataTypes) => {
-  var Address = sequelize.define(
+  let Address = sequelize.define(
     'Address',
     {
       street: DataTypes.STRING,

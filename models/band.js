@@ -1,10 +1,6 @@
 'use strict';
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 module.exports = (sequelize, DataTypes) => {
-  var Band = sequelize.define(
+  let Band = sequelize.define(
     'Band',
     {
       name: DataTypes.STRING,

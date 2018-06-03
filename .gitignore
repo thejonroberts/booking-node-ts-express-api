@@ -59,4 +59,5 @@ Thumbs.db
 
 # generated data #
 ######################
-/data/*.json
+# TODO commenting out so that deployment has fake data
+# /data/*.json

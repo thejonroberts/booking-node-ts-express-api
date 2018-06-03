@@ -3,13 +3,13 @@
 const faker = require('faker');
 const {
   amounts: { numGenres },
-} = require('./generatorAmounts.json');
+} = require('./generator-amounts.json');
 const fs = require('fs');
 
 const seedGenres = ['Blues', 'Country', 'Electronic', 'Hip-Hop', 'Rock'];
 
 let genres = [];
-// Warn if number of genres in generatorAmounts.json is different.
+// Warn if number of genres in generator-amounts.json is different.
 // - will cause problems with join tables.
 if (seedGenres.length !== numGenres) {
   //eslint-disable-next-line

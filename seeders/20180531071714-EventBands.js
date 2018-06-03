@@ -1,6 +1,6 @@
 'use strict';
 
-const eventBands = require('../data/eventBands');
+const eventBands = require('../data/event-bands');
 
 module.exports = {
   /* eslint-disable no-unused-vars */

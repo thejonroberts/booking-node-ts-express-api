@@ -4,7 +4,7 @@ const faker = require('faker');
 
 const {
   amounts: { numEvents, numBands, maxBandsPerEvent },
-} = require('./generatorAmounts.json');
+} = require('./generator-amounts.json');
 let fs = require('fs');
 
 let eventBands = [];
@@ -38,7 +38,7 @@ for (let k = 1; k <= numEvents; k++) {
 
 const eventBandsJson = JSON.stringify(eventBands);
 
-fs.writeFile('./data/eventBands.json', eventBandsJson, err => {
+fs.writeFile('./data/event-bands.json', eventBandsJson, err => {
   if (err) throw err;
   // eslint-disable-next-line
   console.log('eventBands json saved');

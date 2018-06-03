@@ -5,7 +5,7 @@ let fs = require('fs');
 
 const {
   amounts: { numUsers, numBands, maxUsersPerBand },
-} = require('./generatorAmounts.json');
+} = require('./generator-amounts.json');
 
 let UsersBands = [];
 
@@ -38,8 +38,8 @@ for (let k = 1; k <= numBands; k++) {
 
 const UsersBandsJson = JSON.stringify(UsersBands);
 
-fs.writeFile('./data/usersBands.json', UsersBandsJson, err => {
+fs.writeFile('./data/users-bands.json', UsersBandsJson, err => {
   if (err) throw err;
   // eslint-disable-next-line
-  console.log('usersBands json saved');
+  console.log('users-bands json saved');
 });

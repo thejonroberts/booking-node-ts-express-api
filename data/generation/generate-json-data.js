@@ -6,7 +6,7 @@ require('./venues');
 require('./events');
 require('./bands');
 // join tables
-require('./venueGenres');
-require('./usersBands');
-require('./usersVenues');
-require('./eventBands');
+require('./venue-genres');
+require('./users-bands');
+require('./users-venues');
+require('./event-bands');

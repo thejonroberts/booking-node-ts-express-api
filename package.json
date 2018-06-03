@@ -6,6 +6,9 @@
     "type": "git",
     "url": "https://github.com/thejonroberts/booking-node-api"
   },
+  "engines": {
+    "node":  "10.2.1"
+  },
   "main": "index.js",
   "scripts": {
     "test": "mocha --watch --recursive -R spec",

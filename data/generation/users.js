@@ -3,7 +3,7 @@
 const faker = require('faker');
 const {
   amounts: { numUsers, numAddresses },
-} = require('./generatorAmounts.json');
+} = require('./generator-amounts.json');
 const fs = require('fs');
 const bCrypt = require('bcrypt-nodejs');
 

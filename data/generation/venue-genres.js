@@ -4,7 +4,7 @@ const faker = require('faker');
 
 const {
   amounts: { numGenres, numVenues },
-} = require('./generatorAmounts.json');
+} = require('./generator-amounts.json');
 let fs = require('fs');
 
 let venueGenres = [];
@@ -38,7 +38,7 @@ for (let k = 1; k <= numVenues; k++) {
 
 const venueGenresJson = JSON.stringify(venueGenres);
 
-fs.writeFile('./data/venueGenres.json', venueGenresJson, err => {
+fs.writeFile('./data/venue-genres.json', venueGenresJson, err => {
   if (err) throw err;
   // eslint-disable-next-line
   console.log('venueGenres json saved');

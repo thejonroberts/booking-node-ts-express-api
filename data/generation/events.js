@@ -4,7 +4,7 @@ const faker = require('faker');
 const moment = require('moment');
 const {
   amounts: { numEvents, numVenues },
-} = require('./generatorAmounts.json');
+} = require('./generator-amounts.json');
 const fs = require('fs');
 
 let events = [];

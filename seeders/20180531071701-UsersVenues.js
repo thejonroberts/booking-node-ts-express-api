@@ -1,6 +1,6 @@
 'use strict';
 
-const usersVenues = require('../data/usersVenues');
+const usersVenues = require('../data/users-venues');
 
 module.exports = {
   /* eslint-disable no-unused-vars */

@@ -3,7 +3,7 @@
 const faker = require('faker');
 const {
   amounts: { numVenues, numAddresses },
-} = require('./generatorAmounts.json');
+} = require('./generator-amounts.json');
 const fs = require('fs');
 
 let venues = [];

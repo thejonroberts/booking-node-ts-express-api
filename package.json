@@ -7,7 +7,7 @@
     "url": "https://github.com/thejonroberts/booking-node-api"
   },
   "engines": {
-    "node":  "10.2.1"
+    "node": "10.2.1"
   },
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,8 @@
     "build": "sequelize db:migrate",
     "seed": "sequelize db:seed:all",
     "dbrb": "npm run teardown && npm run build && npm run seed",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "author": "Jon Roberts",
   "license": "ISC",

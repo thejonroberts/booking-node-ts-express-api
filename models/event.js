@@ -1,10 +1,6 @@
 'use strict';
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 module.exports = (sequelize, DataTypes) => {
-  var Event = sequelize.define(
+  let Event = sequelize.define(
     'Event',
     {
       startsAt: DataTypes.DATE,

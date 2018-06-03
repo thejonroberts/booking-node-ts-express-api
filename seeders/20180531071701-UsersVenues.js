@@ -3,6 +3,7 @@
 const usersVenues = require('../data/usersVenues');
 
 module.exports = {
+  /* eslint-disable no-unused-vars */
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('UsersVenues', usersVenues, {});
   },
@@ -10,4 +11,5 @@ module.exports = {
   down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete('UsersVenues', null, {});
   },
+  /* eslint-enable no-unused-vars */
 };

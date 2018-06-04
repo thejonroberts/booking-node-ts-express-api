@@ -11,7 +11,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "mocha --watch --recursive -R spec",
+    "test": "mocha test/server.test.js -R spec",
+    "dev test": "mocha --watch --recursive -R spec",
     "faker": "node data/generation/generate-json-data.js",
     "teardown": "sequelize db:migrate:undo:all",
     "build": "sequelize db:migrate",
@@ -34,10 +35,13 @@
     "sequelize": "^4.37.10"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
     "eslint": "^4.19.1",
     "eslint-plugin-sonarjs": "^0.1.0",
     "faker": "^4.1.0",
     "markdownlint": "^0.10.0",
-    "nodemon": "^1.17.5"
+    "mocha": "^5.2.0",
+    "nodemon": "^1.17.5",
+    "supertest": "^3.1.0"
   }
 }

@@ -14,13 +14,12 @@ module.exports = {
     // secret_key: process.env.SECRET_KEY,
   },
   production: {
-      use_env_variable: process.env.DATABASE_URL
-    }
-    //   username: process.env.PROD_DB_USERNAME || 'postgres',
-    //   password: process.env.PROD_DB_PASSWORD,
-    //   database: process.env.PROD_DB_NAME || booking,
-    //   host: process.env.PROD_DB_HOSTNAME,
-    //   port: process.env.PROD_DB_PORT || 5432,
-    //   dialect: 'postgres',
+    use_env_variable: process.env.DATABASE_URL,
   },
+  //   username: process.env.PROD_DB_USERNAME || 'postgres',
+  //   password: process.env.PROD_DB_PASSWORD,
+  //   database: process.env.PROD_DB_NAME || booking,
+  //   host: process.env.PROD_DB_HOSTNAME,
+  //   port: process.env.PROD_DB_PORT || 5432,
+  //   dialect: 'postgres',
 };

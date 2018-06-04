@@ -19,8 +19,7 @@ deploy:
   run:
     - "npm install"
     - "npm run dbrb"
-    - restart
-    - "npm test"
+    - "npm start"
 install: npm install
 services:
   - postgresql

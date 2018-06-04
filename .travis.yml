@@ -22,16 +22,20 @@ services:
   - postgresql
 before_script:
   - npm install -g sequelize-cli
-  # - psql -c 'create database travis_ci_test;' -U postgres
+  - psql -c 'create database travis_ci_test;' -U postgres
   - sequelize db:migrate:undo:all
   - sequelize db:migrate
   - sequelize db:seed:all
 script: npm test
-addons:
-  postgresql: "10"
+# addons:
+#   postgresql: "9.5"
   # apt:
   #   packages:
   #   - postgresql-10
   #   - postgresql-client-10
 global:
-  - PGPORT=5432
+  - PGPORT=5433
+  - CI_DB_USERNAME='postgres'
+  - CI_DB_PASSWORD=''
+  - CI_DB_NAME='travis_ci_test'
+  - DB_PORT=5433

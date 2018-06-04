@@ -8,8 +8,10 @@ let path = require('path');
 let Sequelize = require('sequelize');
 let basename = path.basename(__filename);
 let env = process.env.NODE_ENV || 'development';
-let config = require(__dirname + '/../config/config.json')[env];
+let config = require(__dirname + '/../config/config')[env];
 let db = {};
+// eslint-disable-next-line
+console.log('config', env, config);
 
 if (config.use_env_variable) {
   /* eslint-disable */

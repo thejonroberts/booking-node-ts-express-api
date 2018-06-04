@@ -1,6 +1,8 @@
 language: node_js
 nvm:
 - 10.2.1
+env:
+  - NODE_ENV=test
 deploy:
   provider: heroku
   api_key:
@@ -8,7 +10,16 @@ deploy:
   app: shrouded-depths-22477
   on:
     repo: thejonroberts/booking-node-api
-  run:
-    - "npm run dbrb"
-    - restart
-    - "npm start"
+  # run:
+  #   - "npm run dbrb"
+  #   - restart
+  #   - "npm test"
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database booking_test;' -U postgres
+  - psql -c "CREATE USER root WITH PASSWORD 'password';" -U postgres
+  - npm run dbrb
+script: npm test
+addons:
+  postgresql: "10.4"

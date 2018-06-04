@@ -3,6 +3,7 @@ module.exports = {
   env: {
     node: true,
     es6: true,
+    mocha: true,
   },
   plugins: ['sonarjs'],
   extends: ['eslint:recommended', 'plugin:sonarjs/recommended'],

@@ -13,7 +13,7 @@ module.exports.getAll = (req, res, next) => {
     ],
   })
     .then(data => {
-      res.json(data);
+      res.status(200).json(data);
     })
     .catch(err => {
       next(err);

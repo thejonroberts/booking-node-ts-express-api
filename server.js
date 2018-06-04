@@ -43,3 +43,5 @@ app.listen(port, () => {
   /* eslint-disable-next-line */
   console.log(`listening on http://${host}:${port}`);
 });
+
+module.exports = app;

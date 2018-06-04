@@ -22,7 +22,7 @@ services:
   - postgresql
   # - sequelize
 before_script:
-  - npm install sequelize-cli
+  - npm install -g sequelize-cli
   - npm run ci-db
 script: npm test
 addons:

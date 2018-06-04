@@ -1,6 +1,6 @@
 language: node_js
-nvm:
-- 10.2.1
+# nvm:
+# - 10.2.1
 # cache:
 #   directories:
 #     - node_modules
@@ -13,26 +13,25 @@ deploy:
   app: shrouded-depths-22477
   on:
     repo: thejonroberts/booking-node-api
-  # run:
-  #   - "npm run dbrb"
-  #   - restart
-  #   - "npm test"
+  run:
+    - "npm run dbrb"
+    - restart
+    - "npm test"
 install: npm install
 services:
   - postgresql
-  # - sequelize
 before_script:
   - npm install -g sequelize-cli
-  - psql -c 'create database travis_ci_test;' -U postgres
+  # - psql -c 'create database travis_ci_test;' -U postgres
   - sequelize db:migrate:undo:all
   - sequelize db:migrate
   - sequelize db:seed:all
 script: npm test
 addons:
   postgresql: "10"
-  apt:
-    packages:
-    - postgresql-10
-    - postgresql-client-10
+  # apt:
+  #   packages:
+  #   - postgresql-10
+  #   - postgresql-client-10
 global:
-  - PGPORT=5433
+  - PGPORT=5432

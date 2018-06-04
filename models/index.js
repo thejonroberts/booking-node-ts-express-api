@@ -12,13 +12,7 @@ let config = require(__dirname + '/../config/config')[env];
 let db = {};
 
 if (config.use_env_variable) {
-  /* eslint-disable */
-  console.log(
-    'config.use_env_variable',
-    config.use_env_variable,
-    process.env[config.use_env_variable],
-    config
-  );
+  /* eslint-disable no-var, no-redeclare */
   var sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
   var sequelize = new Sequelize(
@@ -27,7 +21,7 @@ if (config.use_env_variable) {
     config.password,
     config
   );
-  /* eslint-enable */
+  /* eslint-enable no-var, no-redeclare*/
 }
 
 fs

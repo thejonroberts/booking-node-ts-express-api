@@ -23,7 +23,10 @@ services:
   # - sequelize
 before_script:
   - npm install -g sequelize-cli
-  - npm run ci-db
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - sequelize db:migrate:undo:all
+  - sequelize db:migrate
+  - sequelize db:seed:all
 script: npm test
 addons:
   postgresql: "10"

@@ -14,8 +14,8 @@ module.exports = {
     dialect: 'postgres',
   },
   ci: {
-    username: process.env.CI_DB_USERNAME,
-    password: process.env.CI_DB_PASSWORD,
+    // username: process.env.CI_DB_USERNAME,
+    // password: process.env.CI_DB_PASSWORD,
     database: process.env.CI_DB_NAME,
     host: '127.0.0.1',
     dialect: 'postgres',

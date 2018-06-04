@@ -19,7 +19,9 @@
     "seed": "sequelize db:seed:all",
     "dbrb": "npm run teardown && npm run build && npm run seed",
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "ci-db":
+      "./node_modules/sequelize-cli/bin/sequelize db:migrate && ./node_modules/sequelize-cli/bin/sequelize db:seed:all"
   },
   "author": "Jon Roberts",
   "license": "ISC",

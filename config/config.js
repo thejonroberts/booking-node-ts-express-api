@@ -14,7 +14,7 @@ module.exports = {
     // secret_key: process.env.SECRET_KEY,
   },
   production: {
-    use_env_variable: process.env.DATABASE_URL,
+    use_env_variable: 'DATABASE_URL',
   },
   //   username: process.env.PROD_DB_USERNAME || 'postgres',
   //   password: process.env.PROD_DB_PASSWORD,

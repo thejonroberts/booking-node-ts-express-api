@@ -1,6 +1,3 @@
 npm: npm install
-database
-teardown: sequelize db:migrate:undo:all
-build: sequelize db:migrate
-seed: sequelize db:seed:all
+build: npm run dbrb
 web: node server.js

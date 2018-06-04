@@ -13,6 +13,12 @@ let db = {};
 
 if (config.use_env_variable) {
   /* eslint-disable */
+  console.log(
+    'config.use_env_variable',
+    config.use_env_variable,
+    process.env[config.use_env_variable],
+    config
+  );
   var sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
   var sequelize = new Sequelize(

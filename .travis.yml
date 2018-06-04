@@ -1,9 +1,9 @@
 language: node_js
 nvm:
 - 10.2.1
-cache:
-  directories:
-    - node_modules
+# cache:
+#   directories:
+#     - node_modules
 env:
   - NODE_ENV=test
 deploy:
@@ -30,3 +30,7 @@ before_script:
 script: npm test
 addons:
   postgresql: "10"
+  apt:
+    packages:
+    - postgresql-10
+    - postgresql-client-10

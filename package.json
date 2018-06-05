@@ -14,8 +14,6 @@
     "test": "nyc --reporter=html --reporter=text mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "dev-test": "mocha --watch --recursive -R spec",
-    "it":
-      "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "faker": "node data/generation/generate-json-data.js",
     "teardown": "node_modules/.bin/sequelize db:migrate:undo:all",
     "build": "node_modules/.bin/sequelize db:migrate",

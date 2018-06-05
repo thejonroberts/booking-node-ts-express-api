@@ -11,13 +11,8 @@ module.exports = {
     host: '127.0.0.1',
     port: process.env.CI_DB_PORT || 5432,
     dialect: 'postgres',
-    // secret_key: process.env.SECRET_KEY,
   },
   production: {
-    username: process.env.PROD_DB_USERNAME,
-    password: process.env.PROD_DB_PASSWORD,
-    database: process.env.PROD_DB_NAME,
-    host: process.env.PROD_DB_HOSTNAME,
-    dialect: 'postgres',
+    use_env_variable: 'DATABASE_URL',
   },
 };

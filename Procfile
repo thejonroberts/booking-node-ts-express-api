@@ -1,3 +1,3 @@
 npm: npm install
-build: npm run dbrb
+build: npm run build
 web: node server.js

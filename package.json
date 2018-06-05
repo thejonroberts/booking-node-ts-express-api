@@ -11,8 +11,11 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/server.test.js -R spec",
+    "test": "nyc --reporter=html --reporter=text mocha",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "dev-test": "mocha --watch --recursive -R spec",
+    "it":
+      "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "faker": "node data/generation/generate-json-data.js",
     "teardown": "node_modules/.bin/sequelize db:migrate:undo:all",
     "build": "node_modules/.bin/sequelize db:migrate",
@@ -36,12 +39,15 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "coveralls": "^3.0.1",
     "eslint": "^4.19.1",
     "eslint-plugin-sonarjs": "^0.1.0",
     "faker": "^4.1.0",
     "markdownlint": "^0.10.0",
     "mocha": "^5.2.0",
+    "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.17.5",
+    "nyc": "^12.0.2",
     "sequelize-cli": "^4.0.0",
     "supertest": "^3.1.0"
   }

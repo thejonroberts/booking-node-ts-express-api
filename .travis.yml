@@ -16,6 +16,7 @@ deploy:
   app: shrouded-depths-22477
   on:
     repo: thejonroberts/booking-node-api
+    branch: master
 install: npm install
 services:
   - postgresql
@@ -28,3 +29,4 @@ before_script:
 script: npm test
 # addons:
 #   postgresql: "10"
+after_success: npm run coverage

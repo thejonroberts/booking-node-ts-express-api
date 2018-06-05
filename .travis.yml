@@ -9,14 +9,6 @@ global:
 - CI_DB_PASSWORD=null
 - CI_DB_NAME='travis_ci_test'
 - CI_DB_PORT=5433
-deploy:
-  provider: heroku
-  api_key:
-    secure: "mvclBVdCBLTFm50jJB+BQPgVA5r1RwcAWgSu7yE2MJ/5YV+kByNlmUbvtVq/5iIKjRZYjr+pHnNSMtp/sjhTIEsIYcR+EBMqODN+hHaTon0vuHqPb+AjAKZem2OO5AY26FDj8y4x3opeLwv8eAb9+2+o4mrs1EEOnjMM277m/kvEpk1U9VeVBDrK57eBg9gFUGeCjXvkWkltVE29jcypp0etrE/EyICf4nXQpxazEViu9WbjdnbPbu0bYz9znUHjShARz886HoioMhSSetUVKG6fL0K708ht4BFrFoRR9i/Z+ydvxr/2OzG+wkDwPutLcZwL/zqaJVW3GpXzidUTdh1sWw/HrzRqxz25NG43sKGx8FmJmVl7SrIuL5AWtN62Hihg6tA+TUboMrrnUFKBz47CVbT53m8qbOqltXnFRhQ0rX7sygCCAEhZGyoimprZLCZRv+HYV+fVK3cvU+FDgGNuGhPM7EcUjkQGYeCT9jcqnt/m3VnOO9Pm4Q77wv9p+92QmdTyIK9r6CIQ9whv1p7eZjsdOEDbLwCxBLOUfdlCKN5rIyvsQ8Ns5n/MiP/uYt5k4kc6URMKnNSSl2IQF6UtX+FacV8cp9lyQNo2+QgI9JzqysR+53q2hUuZhLz6sJEXad95b44aabtEHZ8goAtiNmWhf2k2OxNQPp52SZQ="
-  app: shrouded-depths-22477
-  on:
-    repo: thejonroberts/booking-node-api
-    branch: master
 install: npm install
 services:
 - postgresql

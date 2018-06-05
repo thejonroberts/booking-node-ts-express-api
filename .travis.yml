@@ -2,31 +2,30 @@ language: node_js
 nvm:
 - 10.2.1
 env:
-  - NODE_ENV=test
+- NODE_ENV=test
 global:
-  - PGPORT=5433
-  - CI_DB_USERNAME='postgres'
-  - CI_DB_PASSWORD=null
-  - CI_DB_NAME='travis_ci_test'
-  - CI_DB_PORT=5433
+- PGPORT=5433
+- CI_DB_USERNAME='postgres'
+- CI_DB_PASSWORD=null
+- CI_DB_NAME='travis_ci_test'
+- CI_DB_PORT=5433
 deploy:
   provider: heroku
   api_key:
-    secure: P3uawqFtIH1E/w5k++fXGfbWhyq/gb954J8msM5bhvHcvjVJx7JVme7WxAlhZBcZPJf4kuiFDjZsU1QBDR8Mdl9+A3o1QqBjTSOWwR25z9/uSbPBQ4MitdJqeyAgG4QFo/MjaY0hpQCaBVsi8BDDj3CXmLFfKXLlKfjMLb+cBnkrSyByYXV+5EV9IYkontt11O3HbMCDU+GF5lGOz4CHLahRzwZaKiycoeml+Qzo9oDXln2ziSk9JksBPH1RuS0HXd2pURlHle6H0eKfueSs1mv6nmYKYaLJdAUlom3XKERsGm8y+k7/KRqfuqgjISFu1VGxQGA0A/Mvk3NmMUcnJ+6ZBZjk/ujqRgWuBpBW9mJginZwYmd99EePI2JZkx2aJkiGPO3SVWdDWcyS8InJwCtlK6E/XEUtl/DeHwgbYee7uhc9I+X7gimuqwDK6ZfuGYdhNu7dT20LJkSTF12wJ+6+acB1i6aoYAwcWj7AaoceAfxGYwOSSD+n/pQpYnVLJMMHHJoBeC4tXWUGtr1HijINdO+R29B5VkUktt+8gUaOK+41A5KpAY/W0F/exQx0d2+8YStca2fPRS5bcNPqrHqBzJHpsQ+lKRuSkGmvVPWlHcQQIOP6V/EJgyDAuPKuDVorGLdqUJtjfAsBxxz3BTQ+utrzDWYNm8NSlWJHCRo=
+    secure: mvclBVdCBLTFm50jJB+BQPgVA5r1RwcAWgSu7yE2MJ/5YV+kByNlmUbvtVq/5iIKjRZYjr+pHnNSMtp/sjhTIEsIYcR+EBMqODN+hHaTon0vuHqPb+AjAKZem2OO5AY26FDj8y4x3opeLwv8eAb9+2+o4mrs1EEOnjMM277m/kvEpk1U9VeVBDrK57eBg9gFUGeCjXvkWkltVE29jcypp0etrE/EyICf4nXQpxazEViu9WbjdnbPbu0bYz9znUHjShARz886HoioMhSSetUVKG6fL0K708ht4BFrFoRR9i/Z+ydvxr/2OzG+wkDwPutLcZwL/zqaJVW3GpXzidUTdh1sWw/HrzRqxz25NG43sKGx8FmJmVl7SrIuL5AWtN62Hihg6tA+TUboMrrnUFKBz47CVbT53m8qbOqltXnFRhQ0rX7sygCCAEhZGyoimprZLCZRv+HYV+fVK3cvU+FDgGNuGhPM7EcUjkQGYeCT9jcqnt/m3VnOO9Pm4Q77wv9p+92QmdTyIK9r6CIQ9whv1p7eZjsdOEDbLwCxBLOUfdlCKN5rIyvsQ8Ns5n/MiP/uYt5k4kc6URMKnNSSl2IQF6UtX+FacV8cp9lyQNo2+QgI9JzqysR+53q2hUuZhLz6sJEXad95b44aabtEHZ8goAtiNmWhf2k2OxNQPp52SZQ=
   app: shrouded-depths-22477
   on:
     repo: thejonroberts/booking-node-api
     branch: master
 install: npm install
 services:
-  - postgresql
+- postgresql
 before_script:
-  - npm install -g sequelize-cli
-  - psql -c 'create database travis_ci_test;' -U postgres
-  - sequelize db:migrate:undo:all
-  - sequelize db:migrate
-  - sequelize db:seed:all
+- npm install -g sequelize-cli
+- psql -c 'create database travis_ci_test;' -U postgres
+- sequelize db:migrate:undo:all
+- sequelize db:migrate
+- sequelize db:seed:all
 script: npm test
-# addons:
-#   postgresql: "10"
-after_success: npm run coverage
+after_success:
+- test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && npm run coverage

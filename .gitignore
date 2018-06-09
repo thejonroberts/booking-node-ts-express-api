@@ -51,14 +51,16 @@ Thumbs.db
 /css/***
 /dist/***
 
+# environment/config #
+######################
+
 .env
 /config/config.json
-/docs/***
-
-/**/fb-config.js
 
 # generated data #
-######################
-# TODO commenting out so that deployment has fake data
+##################
+
+/docs/***
 /data/*.json
 /coverage/**
+**/.nyc_output

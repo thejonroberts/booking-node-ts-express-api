@@ -71,9 +71,12 @@ app.use(function(error, req, res, next) {
   res.json({ message: error.message });
 });
 
-app.listen(port, () => {
-  /* eslint-disable-next-line */
-  console.log(`listening on http://${host}:${port}`);
-});
+// if we are not running this from supertest in spec files!
+if (!module.parent) {
+  app.listen(port, () => {
+    /* eslint-disable-next-line */
+    console.log(`listening on http://${host}:${port}`);
+  });
+}
 
 module.exports = app;

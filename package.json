@@ -11,15 +11,15 @@
   },
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon server.js",
+    "dev-test": "mocha --watch --recursive test/**/*.spec.js -R spec",
     "test": "nyc --reporter=html --reporter=text mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "dev-test": "mocha --watch --recursive -R spec",
     "faker": "node data/generation/generate-json-data.js",
     "teardown": "node_modules/.bin/sequelize db:migrate:undo:all",
     "build": "node_modules/.bin/sequelize db:migrate",
     "seed": "node_modules/.bin/sequelize db:seed:all",
     "dbrb": "npm run teardown && npm run build && npm run seed",
-    "dev": "nodemon server.js",
     "start": "node server.js"
   },
   "author": "Jon Roberts",

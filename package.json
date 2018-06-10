@@ -20,6 +20,7 @@
     "build": "node_modules/.bin/sequelize db:migrate",
     "seed": "node_modules/.bin/sequelize db:seed:all",
     "dbrb": "npm run teardown && npm run build && npm run seed",
+    "heroku-build": "npm install && npm run build",
     "start": "node server.js"
   },
   "author": "Jon Roberts",

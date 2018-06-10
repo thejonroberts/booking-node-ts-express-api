@@ -16,7 +16,6 @@ let routes = require('./routes/');
 // MIDDLEWARE
 // TODO method-override
 // app.use(
-//  /* eslint-disable-next-line */
 // 	methodOverride(function(req, res) {
 // 		if (req.body && typeof req.body === 'object' && '_method' in req.body) {
 // 			let method = req.body._method;
@@ -68,7 +67,11 @@ app.get('*', function(req, res, next) {
 });
 
 app.use(function(error, req, res, next) {
-  res.json({ message: error.message });
+  if (error) {
+    res.json({ message: error.message });
+  } else {
+    next();
+  }
 });
 
 // if we are not running this from supertest in spec files!

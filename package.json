@@ -12,8 +12,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "dev-test": "mocha --watch --recursive test/**/*.spec.js -R spec",
-    "test": "nyc --reporter=html --reporter=text mocha",
+    "dev-test": "mocha --watch --recursive test/**/*.test.js -R spec & npm run dev &",
+    "test": "nyc --reporter=html --reporter=text mocha --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "faker": "node data/generation/generate-json-data.js",
     "teardown": "node_modules/.bin/sequelize db:migrate:undo:all",

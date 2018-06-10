@@ -1,17 +1,8 @@
 'use strict';
 
 module.exports.getAll = (req, res, next) => {
-  const { Address, User, Venue } = req.app.get('models');
-  Address.findAll({
-    include: [
-      {
-        model: Venue,
-      },
-      {
-        model: User,
-      },
-    ],
-  })
+  const { Address } = req.app.get('models');
+  Address.findAll()
     .then(data => {
       res.status(200).json(data);
     })

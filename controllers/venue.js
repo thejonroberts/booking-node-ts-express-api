@@ -1,21 +1,10 @@
 'use strict';
 
 module.exports.getAll = (req, res, next) => {
-  const { Event, User, Venue } = req.app.get('models');
-  Venue.findAll({
-    include: [
-      {
-        model: Event,
-      },
-      {
-        model: User,
-      },
-    ],
-  })
+  const { Venue } = req.app.get('models');
+  Venue.findAll()
     .then(data => {
       res.json(data);
     })
-    .catch(err => {
-      next(err);
-    });
+    .catch(next);
 };

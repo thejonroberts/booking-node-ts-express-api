@@ -4,6 +4,12 @@ module.exports = {
     host: '127.0.0.1',
     dialect: 'postgres',
   },
+  testing: {
+    database: 'booking',
+    host: '127.0.0.1',
+    dialect: 'postgres',
+    port: process.env.TEST_DB_PORT || 5432,
+  },
   test: {
     username: process.env.CI_DB_USERNAME || 'postgres',
     password: process.env.CI_DB_PASSWORD || null,

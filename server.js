@@ -74,9 +74,10 @@ app.use(function(error, req, res, next) {
   }
 });
 
-// if we are not running this from supertest in spec files!
+// if we are not running this from dev-test script!
 if (!module.parent) {
   app.listen(port, () => {
+    // if (process.env.NODE_ENV === 'development') {
     /* eslint-disable-next-line */
     console.log(`listening on http://${host}:${port}`);
   });

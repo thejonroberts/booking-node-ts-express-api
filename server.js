@@ -16,7 +16,6 @@ let routes = require('./routes/');
 // MIDDLEWARE
 // TODO method-override
 // app.use(
-//  /* eslint-disable-next-line */
 // 	methodOverride(function(req, res) {
 // 		if (req.body && typeof req.body === 'object' && '_method' in req.body) {
 // 			let method = req.body._method;
@@ -38,10 +37,49 @@ app.use(routes);
 
 // TODO 404 error handler
 // Add error handler to pipe all server errors to from the routing middleware
+// NOTE res.status(500).send({error: 'Internal server error happened'})
+// 2xx, if everything was okay,
+// 3xx, if the resource was moved,
+// 4xx, if the request cannot be fulfilled because of a client error (like requesting a resource that does not exist),
+// 5xx, if something went wrong on the API side (like an exception happened).
 
-app.listen(port, () => {
-  /* eslint-disable-next-line */
-  console.log(`listening on http://${host}:${port}`);
+// http://thecodebarbarian.com/80-20-guide-to-express-error-handling.html
+// const { MongoError } = require('mongodb');
+
+// app.use(function handleDatabaseError(error, req, res, next) {
+//   if (error instanceof MongoError) {
+//     return res.status(503).json({
+//       type: 'MongoError',
+//       message: error.message,
+//     });
+//   }
+//   next(error);
+// });
+
+// TODO HTTP Headers
+
+app.get('*', function(req, res, next) {
+  // request at bad route
+  setImmediate(() => {
+    res.status(404);
+    next(new Error(`${req.path} does not exist`));
+  });
 });
+
+app.use(function(error, req, res, next) {
+  if (error) {
+    res.json({ message: error.message });
+  } else {
+    next();
+  }
+});
+
+// if we are not running this from supertest in spec files!
+if (!module.parent) {
+  app.listen(port, () => {
+    /* eslint-disable-next-line */
+    console.log(`listening on http://${host}:${port}`);
+  });
+}
 
 module.exports = app;

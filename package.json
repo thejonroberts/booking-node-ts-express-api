@@ -12,7 +12,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "dev-test": "NODE_ENV=testing mocha --watch --recursive test/**/*.test.js -R spec & npm run dev &",
+    "dev-test": "NODE_ENV=testing mocha --watch --recursive test/**/*.test.js -R spec",
     "test": "nyc --reporter=html --reporter=text mocha --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "faker": "node data/generation/generate-json-data.js",

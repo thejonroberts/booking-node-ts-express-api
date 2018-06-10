@@ -77,9 +77,12 @@ app.use(function(error, req, res, next) {
 // if we are not running this from dev-test script!
 if (!module.parent) {
   app.listen(port, () => {
-    // if (process.env.NODE_ENV === 'development') {
-    /* eslint-disable-next-line */
-    console.log(`listening on http://${host}:${port}`);
+    if (process.env.NODE_ENV === 'development') {
+      /* eslint-disable-next-line */
+      console.log(
+        `ENV: ${process.env.NODE_ENV} is listening on http://${host}:${port}`
+      );
+    }
   });
 }
 

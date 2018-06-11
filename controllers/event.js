@@ -25,8 +25,17 @@ module.exports.create = (req, res, next) => {
 };
 
 module.exports.getId = (req, res, next) => {
-  const { Event } = req.app.get('models');
-  Event.findById(req.params.id, {})
+  const { Band, Event, Venue } = req.app.get('models');
+  Event.findById(req.params.id, {
+    include: [
+      {
+        model: Band,
+      },
+      {
+        model: Venue,
+      },
+    ],
+  })
     .then(data => {
       res.status(200).json(data);
     })

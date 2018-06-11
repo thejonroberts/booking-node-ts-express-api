@@ -11,10 +11,14 @@ const {
   updateId,
 } = require('../controllers/address');
 
-router.get('/addresses', getAll);
-router.get('/addresses/:id', getId);
-router.post('/addresses', create);
-router.patch('/addresses/:id', updateId);
-router.delete('/addresses/:id', deleteId);
+router
+  .route('/addresses')
+  .get(getAll)
+  .post(create);
+router
+  .route('/addresses/:id')
+  .get(getId)
+  .patch(updateId)
+  .delete(deleteId);
 
 module.exports = router;

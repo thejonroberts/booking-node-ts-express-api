@@ -14,16 +14,6 @@ app.set('models', require('./models'));
 let routes = require('./routes/');
 
 // MIDDLEWARE
-// TODO method-override
-// app.use(
-// 	methodOverride(function(req, res) {
-// 		if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-// 			let method = req.body._method;
-// 			return method;
-// 		}
-// 	})
-// );
-
 // body-parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -34,6 +24,7 @@ app.use(bodyParser.json());
 
 // ROUTES
 app.use(routes);
+// TODO HTTP Headers
 
 // TODO 404 error handler
 // Add error handler to pipe all server errors to from the routing middleware
@@ -56,8 +47,7 @@ app.use(routes);
 //   next(error);
 // });
 
-// TODO HTTP Headers
-
+// 404
 app.get('*', function(req, res, next) {
   // request at bad route
   setImmediate(() => {
@@ -68,13 +58,13 @@ app.get('*', function(req, res, next) {
 
 app.use(function(error, req, res, next) {
   if (error) {
-    res.json({ message: error.message });
+    res.json(error);
   } else {
     next();
   }
 });
 
-// if we are not running this from dev-test script!
+// if we are not running this from test/setup.js / dev-test script!
 if (!module.parent) {
   app.listen(port, () => {
     if (process.env.NODE_ENV === 'development') {

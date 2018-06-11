@@ -11,10 +11,14 @@ const {
   updateId,
 } = require('../controllers/user');
 
-router.get('/users', getAll);
-router.get('/users/:id', getId);
-router.post('/users', create);
-router.patch('/users/:id', updateId);
-router.delete('/users/:id', deleteId);
+router
+  .route('/users')
+  .get(getAll)
+  .post(create);
+router
+  .route('/users/:id')
+  .get(getId)
+  .patch(updateId)
+  .delete(deleteId);
 
 module.exports = router;

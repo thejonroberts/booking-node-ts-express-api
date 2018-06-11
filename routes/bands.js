@@ -11,10 +11,14 @@ const {
   updateId,
 } = require('../controllers/band');
 
-router.get('/bands', getAll);
-router.get('/bands/:id', getId);
-router.post('/bands', create);
-router.patch('/bands/:id', updateId);
-router.delete('/bands/:id', deleteId);
+router
+  .route('/bands')
+  .get(getAll)
+  .post(create);
+router
+  .route('/bands/:id')
+  .get(getId)
+  .patch(updateId)
+  .delete(deleteId);
 
 module.exports = router;

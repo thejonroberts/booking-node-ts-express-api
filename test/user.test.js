@@ -39,7 +39,14 @@ describe('POST /users', function() {
         if (err) return done(err);
         expect(res.body).to.be.an('object');
         createdId = parseInt(res.body.id, 10);
-        expect(res.body.name).to.equal(newUser.name);
+        expect(res.body.firstName).to.equal(newUser.firstName);
+        expect(res.body.lastName).to.equal(newUser.lastName);
+        expect(res.body.email).to.equal(newUser.email);
+        expect(res.body.username).to.equal(newUser.username);
+        expect(res.body.password).to.equal(newUser.password);
+        expect(res.body.phoneNumber).to.equal(newUser.phoneNumber);
+        expect(res.body.lastLoginDate).to.equal(newUser.lastLoginDate);
+        expect(res.body.AddressId).to.equal(newUser.AddressId);
         done();
       });
   });
@@ -53,6 +60,7 @@ const userUpdate = {
   password: 'worse',
   phoneNumber: '7777777777',
   lastLoginDate: new Date().toISOString(),
+  AddressId: 2,
 };
 
 describe('PATCH /users', function() {
@@ -65,7 +73,14 @@ describe('PATCH /users', function() {
       .end(function(err, res) {
         if (err) return done(err);
         expect(res.body[1][0]).to.be.an('object');
-        expect(res.body[1][0].name).to.equal(userUpdate.name);
+        expect(res.body[1][0].firstName).to.equal(userUpdate.firstName);
+        expect(res.body[1][0].lastName).to.equal(userUpdate.lastName);
+        expect(res.body[1][0].email).to.equal(userUpdate.email);
+        expect(res.body[1][0].username).to.equal(userUpdate.username);
+        expect(res.body[1][0].password).to.equal(userUpdate.password);
+        expect(res.body[1][0].phoneNumber).to.equal(userUpdate.phoneNumber);
+        expect(res.body[1][0].lastLoginDate).to.equal(userUpdate.lastLoginDate);
+        expect(res.body[1][0].AddressId).to.equal(userUpdate.AddressId);
         done();
       });
   });
@@ -93,8 +108,14 @@ describe('DELETE /users', function() {
       .end(function(err, res) {
         if (err) return done(err);
         expect(res.body[0]).to.be.an('object');
-        expect(res.body[0].name).to.equal(userUpdate.name);
-        expect(res.body[0].deletedAt).to.be.a('string');
+        expect(res.body[0].firstName).to.equal(userUpdate.firstName);
+        expect(res.body[0].lastName).to.equal(userUpdate.lastName);
+        expect(res.body[0].email).to.equal(userUpdate.email);
+        expect(res.body[0].username).to.equal(userUpdate.username);
+        expect(res.body[0].password).to.equal(userUpdate.password);
+        expect(res.body[0].phoneNumber).to.equal(userUpdate.phoneNumber);
+        expect(res.body[0].lastLoginDate).to.equal(userUpdate.lastLoginDate);
+        expect(res.body[0].AddressId).to.equal(userUpdate.AddressId);
         done();
       });
   });

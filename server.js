@@ -11,6 +11,19 @@ const app = express();
 // Attach models
 app.set('models', require('./models'));
 
+// TODO HTTP Headers
+// Enable CORS from client-side - TODO check best practices / security
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials'
+  );
+  res.header('Access-Control-Allow-Credentials', 'true');
+  next();
+});
+
 // MIDDLEWARE
 
 //static assets
@@ -52,8 +65,6 @@ app.use(router);
 // const swaggerDocument = require('./config/swagger.json');
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // app.use('/api/v1', router);
-
-// TODO HTTP Headers
 
 // TODO error handlers
 // Add error handler to pipe all server errors to from the routing middleware

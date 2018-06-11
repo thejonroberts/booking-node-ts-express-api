@@ -14,14 +14,14 @@ router.get('/', (req, res, next) => {
       '/venues',
     ],
   };
-  res.json(routes);
+  next(res.json(routes));
 });
 
+router.use(require('./address'));
 router.use(require('./bands'));
 router.use(require('./events'));
 router.use(require('./genres'));
 router.use(require('./users'));
 router.use(require('./venues'));
-router.use(require('./address'));
 
 module.exports = router;

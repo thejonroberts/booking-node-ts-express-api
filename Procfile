@@ -1,3 +1,2 @@
-npm: npm install
-build: npm run build
-web: node server.js
+build: npm run heroku-build
+web: npm run start

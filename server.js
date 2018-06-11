@@ -6,6 +6,7 @@ const host = process.env.HOST || '127.0.0.1';
 
 const express = require('express');
 const app = express();
+// const logger = require('debug')('logger');
 
 // Attach models
 app.set('models', require('./models'));
@@ -19,7 +20,7 @@ app.set('models', require('./models'));
 let session = require('express-session');
 app.use(
   session({
-    secret: 'keyboard cat', // TODO
+    secret: process.env.SESSION_SECRET || 'keyboard cat', // TODO
     resave: true,
     saveUninitialized: true,
   })

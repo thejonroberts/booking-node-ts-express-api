@@ -2,7 +2,6 @@
 
 const { Router } = require('express');
 const router = Router();
-
 const {
   create,
   deleteId,
@@ -10,15 +9,16 @@ const {
   getId,
   updateId,
 } = require('../controllers/address');
+const { isLoggedIn } = require('../controllers/authentication');
 
 router
   .route('/addresses')
-  .get(getAll)
-  .post(create);
+  .get(isLoggedIn, getAll)
+  .post(isLoggedIn, create);
 router
   .route('/addresses/:id')
-  .get(getId)
-  .patch(updateId)
-  .delete(deleteId);
+  .get(isLoggedIn, getId)
+  .patch(isLoggedIn, updateId)
+  .delete(isLoggedIn, deleteId);
 
 module.exports = router;

@@ -7,37 +7,58 @@ const host = process.env.HOST || '127.0.0.1';
 const express = require('express');
 const app = express();
 
-// Attach the models module to the express application:
+// Attach models
 app.set('models', require('./models'));
 
 // MIDDLEWARE
+
+//static assets
+// app.use('/public', express.static(__dirname + '/static'));
+
+// SESSION / AUTH
+let session = require('express-session');
+app.use(
+  session({
+    secret: 'keyboard cat', // TODO
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+const passport = require('passport');
+require('./config/passport.js');
+app.use(passport.initialize());
+app.use(passport.session());
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  next();
+});
+
 // body-parser
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // TODO express-validator
-// validation - must be after bodyParser as it uses to access parameters
-// app.use(expressValidator());
-
-// TODO HTTP Headers
+const expressValidator = require('express-validator');
+app.use(expressValidator());
 
 // ROUTES
 const router = require('./routes/');
 app.use(router);
 
-// DOCS - TODO - swagger spec vs. api/jsonDoc
+// DOCS - TODO - swagger-ui & swaager-jsonDoc
 // const swaggerUi = require('swagger-ui-express');
 // const swaggerDocument = require('./config/swagger.json');
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // app.use('/api/v1', router);
 
-// TODO 404 error handler
+// TODO HTTP Headers
+
+// TODO error handlers
 // Add error handler to pipe all server errors to from the routing middleware
 // NOTE res.status(500).send({error: 'Internal server error happened'})
 // 2xx, if everything was okay,
 // 3xx, if the resource was moved,
-// 4xx, if the request cannot be fulfilled because of a client error (like requesting a resource that does not exist),
 // 5xx, if something went wrong on the API side (like an exception happened).
 
 // http://thecodebarbarian.com/80-20-guide-to-express-error-handling.html
@@ -53,6 +74,7 @@ app.use(router);
 //   next(error);
 // });
 
+// 4xx, if the request cannot be fulfilled because of a client error (like requesting a resource that does not exist),
 // 404
 app.get('*', function(req, res, next) {
   // request at bad route

@@ -29,6 +29,11 @@ app.use((req, res, next) => {
 //static assets
 // app.use('/public', express.static(__dirname + '/static'));
 
+// body-parser
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 // SESSION / AUTH
 let session = require('express-session');
 app.use(
@@ -46,11 +51,6 @@ app.use((req, res, next) => {
   res.locals.session = req.session;
   next();
 });
-
-// body-parser
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
 // TODO express-validator
 const expressValidator = require('express-validator');

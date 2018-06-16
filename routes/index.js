@@ -17,6 +17,7 @@ router.get('/', (req, res, next) => {
   next(res.json(routes));
 });
 
+router.use(require('./authentication'));
 router.use(require('./address'));
 router.use(require('./bands'));
 router.use(require('./events'));

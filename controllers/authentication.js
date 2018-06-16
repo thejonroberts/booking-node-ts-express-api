@@ -19,14 +19,11 @@ module.exports.register = (req, res, next) => {
         // NOTE
         return next(new Error(`no user`));
       }
-
-      // TODO refactor to helper loginUser
       req.logIn(user, err => {
         if (err) {
           return next(err);
         }
-        // res.redirect('/');
-        // NOTE
+        // console.log('msgObj', msgObj);
         res.status(200).json(msgObj);
       });
     })(req, res, next);
@@ -52,6 +49,7 @@ module.exports.login = (req, res, next) => {
         return next(err);
       }
       // TODO - better / more user info ?
+      console.log('msgObj', msgObj);
       res.status(200).json(msgObj);
     });
   })(req, res, next);

@@ -1,6 +1,6 @@
-'use strict';
+import { NextFunction, Request, Response } from 'express';
 
-module.exports.getAll = (req, res, next) => {
+export function getAll(req: Request, res: Response, next: NextFunction): void {
   const { Band } = req.app.get('models');
   Band.findAll()
     .then(data => {
@@ -9,9 +9,9 @@ module.exports.getAll = (req, res, next) => {
     .catch(err => {
       next(err);
     });
-};
+}
 
-module.exports.create = (req, res, next) => {
+export function create(req: Request, res: Response, next: NextFunction): void {
   const { Band } = req.app.get('models');
   const band = new Band(req.body);
   band
@@ -22,19 +22,19 @@ module.exports.create = (req, res, next) => {
     .catch(err => {
       next(err);
     });
-};
+}
 
-module.exports.getId = (req, res, next) => {
+export function getId(req: Request, res: Response, next: NextFunction): void {
   const { Band, Event, User } = req.app.get('models');
   Band.findById(req.params.id, {
     include: [
       {
-        model: User,
+        model: User
       },
       {
-        model: Event,
-      },
-    ],
+        model: Event
+      }
+    ]
   })
     .then(data => {
       res.status(200).json(data);
@@ -42,9 +42,13 @@ module.exports.getId = (req, res, next) => {
     .catch(err => {
       next(err);
     });
-};
+}
 
-module.exports.updateId = (req, res, next) => {
+export function updateId(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void {
   const { Band } = req.app.get('models');
   Band.update(req.body, { returning: true, where: { id: req.params.id } })
     .then(response => {
@@ -53,9 +57,13 @@ module.exports.updateId = (req, res, next) => {
     .catch(err => {
       next(err);
     });
-};
+}
 
-module.exports.deleteId = (req, res, next) => {
+export function deleteId(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void {
   const { Band } = req.app.get('models');
   Band.destroy({ returning: true, where: { id: req.params.id } })
     .then(response => {
@@ -64,4 +72,4 @@ module.exports.deleteId = (req, res, next) => {
     .catch(err => {
       next(err);
     });
-};
+}

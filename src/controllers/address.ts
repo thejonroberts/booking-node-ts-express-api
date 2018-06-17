@@ -1,6 +1,6 @@
-'use strict';
+import { NextFunction, Request, Response } from 'express';
 
-module.exports.getAll = (req, res, next) => {
+export function getAll(req: Request, res: Response, next: NextFunction): void {
   const { Address } = req.app.get('models');
   Address.findAll()
     .then(data => {
@@ -9,9 +9,9 @@ module.exports.getAll = (req, res, next) => {
     .catch(err => {
       next(err);
     });
-};
+}
 
-module.exports.create = (req, res, next) => {
+export function create(req: Request, res: Response, next: NextFunction): void {
   const { Address } = req.app.get('models');
   const address = new Address(req.body);
   address
@@ -22,9 +22,9 @@ module.exports.create = (req, res, next) => {
     .catch(err => {
       next(err);
     });
-};
+}
 
-module.exports.getId = (req, res, next) => {
+export function getId(req: Request, res: Response, next: NextFunction): void {
   const { Address } = req.app.get('models');
   Address.findById(req.params.id, {})
     .then(data => {
@@ -33,9 +33,13 @@ module.exports.getId = (req, res, next) => {
     .catch(err => {
       next(err);
     });
-};
+}
 
-module.exports.updateId = (req, res, next) => {
+export function updateId(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void {
   const { Address } = req.app.get('models');
   Address.update(req.body, { returning: true, where: { id: req.params.id } })
     .then(response => {
@@ -44,9 +48,13 @@ module.exports.updateId = (req, res, next) => {
     .catch(err => {
       next(err);
     });
-};
+}
 
-module.exports.deleteId = (req, res, next) => {
+export function deleteId(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void {
   const { Address } = req.app.get('models');
   Address.destroy({ returning: true, where: { id: req.params.id } })
     .then(response => {
@@ -55,4 +63,4 @@ module.exports.deleteId = (req, res, next) => {
     .catch(err => {
       next(err);
     });
-};
+}

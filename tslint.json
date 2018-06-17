@@ -7,6 +7,8 @@
     "tslint-sonarts"
   ],
   "jsRules": {},
-  "rules": {},
+  "rules": {
+    "max-line-length": [true, 100]
+  },
   "rulesDirectory": []
 }

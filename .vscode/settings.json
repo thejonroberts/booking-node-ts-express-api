@@ -1,9 +1,6 @@
 {
-  "eslint.enable": true,
-  "eslint.provideLintTask": true,
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
-  "prettier.eslintIntegration": true,
   "prettier.singleQuote": true,
   "prettier.useTabs": false
 }

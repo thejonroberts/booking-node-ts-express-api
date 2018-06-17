@@ -1,10 +1,8 @@
 import bodyParser from 'body-parser';
-import express from 'express';
+import express, { Application, NextFunction, Request, Response } from 'express';
 import session from 'express-session';
 import validator from 'express-validator';
 import passport from 'passport';
-
-import { NextFunction, Request, Response } from 'express';
 
 import * as dotenv from 'dotenv';
 const env = dotenv.config();
@@ -14,7 +12,7 @@ import * as models from './models';
 import router from './routes/';
 
 class App {
-  public app: express.Application;
+  public app: Application;
 
   constructor() {
     this.app = express();
@@ -52,7 +50,7 @@ class App {
       session({
         resave: true,
         saveUninitialized: true,
-        secret: process.env.SESSION_SECRET || 'keyboard cat' // TODO
+        secret: process.env.SESSION_SECRET || 'keyboard cat'
       })
     );
 
@@ -67,7 +65,7 @@ class App {
     // TODO express-validator
     this.app.use(validator());
 
-    // TODO: format of move this error handler
+    // TODO prettier/lint formatting for below
     this.app.use(
       (
         error: any,
@@ -78,7 +76,7 @@ class App {
         if (error) {
           res.status(500).json({ error, request });
         } else {
-          next();
+          return next();
         }
       }
     );

@@ -4,6 +4,8 @@
   "prettier.singleQuote": true,
   "prettier.useTabs": false,
   "cSpell.words": [
-    "resave"
+    "resave",
+    "signin",
+    "signup"
   ]
 }

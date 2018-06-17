@@ -1,14 +1,15 @@
 import bodyParser from 'body-parser';
 import express from 'express';
-import { NextFunction, Request, Response } from 'express';
 import session from 'express-session';
 import validator from 'express-validator';
 import passport from 'passport';
 
-import * as dotenv from 'dotenv';
-dotenv.config();
+import { NextFunction, Request, Response } from 'express';
 
+import * as dotenv from 'dotenv';
+const env = dotenv.config();
 import './config/passport.js';
+
 import * as models from './models';
 import router from './routes/';
 
@@ -36,7 +37,8 @@ class App {
         );
         res.header(
           'Access-Control-Allow-Headers',
-          'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials'
+          'Origin, X-Requested-With, Content-Type, Accept, Authorization, ' +
+            'Access-Control-Allow-Credentials'
         );
         res.header('Access-Control-Allow-Credentials', 'true');
         next();

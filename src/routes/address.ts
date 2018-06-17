@@ -1,5 +1,4 @@
 import { Router } from 'express';
-const address = Router();
 
 import {
   create,
@@ -12,13 +11,15 @@ import {
 // TODO: implement auth guards
 // const { isLoggedIn } = require('../controllers/authentication');
 
-address
+const addressRoute = Router();
+
+addressRoute
   .route('/')
   // .get(isLoggedIn, getAll)
   // .post(isLoggedIn, create);
   .get(getAll)
   .post(create);
-address
+addressRoute
   .route('/:id')
   // .get(isLoggedIn, getId)
   // .patch(isLoggedIn, updateId)
@@ -27,4 +28,4 @@ address
   .patch(updateId)
   .delete(deleteId);
 
-export default address;
+export default addressRoute;

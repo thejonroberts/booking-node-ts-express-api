@@ -2,5 +2,8 @@
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "prettier.singleQuote": true,
-  "prettier.useTabs": false
+  "prettier.useTabs": false,
+  "cSpell.words": [
+    "resave"
+  ]
 }

@@ -83,7 +83,7 @@ export default new App().app;
 // app.use('/public', express.static(__dirname + '/static'));
 
 // DOCS - TODO - swagger-ui & swaager-jsonDoc
-// const swaggerUi = require('swagger-ui-express');
+// swaggerUi  require('swagger-ui-express');
 // const swaggerDocument = require('./config/swagger.json');
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // app.use('/api/v1', router);

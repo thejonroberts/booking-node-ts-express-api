@@ -1,26 +1,25 @@
-'use strict';
+import { Router } from 'express';
+const address = Router();
 
-const { Router } = require('express');
-const router = Router();
-const {
+import {
   create,
   deleteId,
   getAll,
   getId,
   updateId
-} = require('../controllers/address');
+} from '../controllers/address';
 
 // TODO: implement auth guards
 // const { isLoggedIn } = require('../controllers/authentication');
 
-router
-  .route('/addresses')
+address
+  .route('/')
   // .get(isLoggedIn, getAll)
   // .post(isLoggedIn, create);
   .get(getAll)
   .post(create);
-router
-  .route('/addresses/:id')
+address
+  .route('/:id')
   // .get(isLoggedIn, getId)
   // .patch(isLoggedIn, updateId)
   // .delete(isLoggedIn, deleteId);
@@ -28,4 +27,4 @@ router
   .patch(updateId)
   .delete(deleteId);
 
-module.exports = router;
+export default address;

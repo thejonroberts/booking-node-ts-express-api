@@ -1,5 +1,12 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import venues from './venues';
+
+import addressRoute from './address';
+import authenticationRoute from './authentication';
+import bandRoute from './band';
+import eventRoute from './event';
+import genreRoute from './genre';
+import userRoute from './user';
+import venueRoute from './venue';
 
 const router = Router();
 
@@ -17,13 +24,13 @@ router.get('/', (req: Request, res: Response, next: NextFunction) => {
   next(res.status(200).json(routes));
 });
 
-// TODO: router.use('./authentication');
-// router.use('/address');
-// router.use('/bands');
-// router.use('/events');
-// router.use('/genres');
-// router.use('/users');
-router.use('/venues', venues);
+router.use('./authentication', authenticationRoute);
+router.use('/addresses', addressRoute);
+router.use('/bands', bandRoute);
+router.use('/events', eventRoute);
+router.use('/genres', genreRoute);
+router.use('/users', userRoute);
+router.use('/venues', venueRoute);
 
 router.get('*', (req, res, next) => {
   // request at bad route

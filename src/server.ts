@@ -1,15 +1,17 @@
 'use strict';
 
-require('dotenv').config();
+import * as dotenv from 'dotenv';
+dotenv.config();
 const port = process.env.PORT || 8080;
 const host = process.env.HOST || '127.0.0.1';
 
-const express = require('express');
+import express from 'express';
 const app = express();
 // const logger = require('debug')('logger');
 
 // Attach models
-app.set('models', require('./models'));
+import * as models from './models';
+app.set('models', models);
 
 // TODO HTTP Headers
 // Enable CORS from client-side - TODO check best practices / security
@@ -26,25 +28,26 @@ app.use((req, res, next) => {
 
 // MIDDLEWARE
 
-//static assets
+// static assets
 // app.use('/public', express.static(__dirname + '/static'));
 
 // body-parser
-const bodyParser = require('body-parser');
+import bodyParser from 'body-parser';
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // SESSION / AUTH
-let session = require('express-session');
+import session from 'express-session';
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || 'keyboard cat', // TODO
     resave: true,
     saveUninitialized: true,
+    secret: process.env.SESSION_SECRET || 'keyboard cat' // TODO
   })
 );
-const passport = require('passport');
-require('./config/passport.js');
+import passport from 'passport';
+import './config/passport.js';
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
@@ -53,11 +56,11 @@ app.use((req, res, next) => {
 });
 
 // TODO express-validator
-const expressValidator = require('express-validator');
+import expressValidator from 'express-validator';
 app.use(expressValidator());
 
 // ROUTES
-const router = require('./routes/');
+import router from './routes/';
 app.use(router);
 
 // DOCS - TODO - swagger-ui & swaager-jsonDoc
@@ -88,7 +91,7 @@ app.use(router);
 
 // 4xx, if the request cannot be fulfilled because of a client error (like requesting a resource that does not exist),
 // 404
-app.get('*', function(req, res, next) {
+app.get('*', (req, res, next) => {
   // request at bad route
   setImmediate(() => {
     res.status(404);
@@ -96,7 +99,7 @@ app.get('*', function(req, res, next) {
   });
 });
 
-app.use(function(error, req, res, next) {
+app.use((error, req, res, next) => {
   if (error) {
     res.json(error);
   } else {
@@ -108,7 +111,7 @@ app.use(function(error, req, res, next) {
 if (!module.parent) {
   app.listen(port, () => {
     if (process.env.NODE_ENV === 'development') {
-      /* eslint-disable-next-line */
+      /* tslint:disable-next-line */
       console.log(`${process.env.NODE_ENV} mode on http://${host}:${port}`);
     }
   });

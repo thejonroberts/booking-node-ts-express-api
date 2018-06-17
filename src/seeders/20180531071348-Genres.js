@@ -1,15 +1,14 @@
 'use strict';
-
-const addresses = require('../data/addresses');
+const genres = require('../data/genres');
 
 module.exports = {
   /* eslint-disable no-unused-vars */
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Addresses', addresses, {});
+    return queryInterface.bulkInsert('Genres', genres, {});
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Addresses', null, {});
+    return queryInterface.bulkDelete('Genres', null, {});
   },
   /* eslint-enable no-unused-vars */
 };

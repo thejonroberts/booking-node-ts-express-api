@@ -11,17 +11,23 @@
   },
   "main": "server.js",
   "scripts": {
+    "start": "npm run serve",
+    "build": "npm run build-sass && npm run build-ts && npm run tslint && npm run copy-static-assets",
+    "serve": "node dist/src/server.js",
+    "watch-node": "nodemon dist/server.js",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"npm run watch-node\"",
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w",
     "dev": "DEBUG=express:* nodemon server.js",
     "dev-test": "NODE_ENV=testing mocha --watch --recursive test/**/*.test.js -R spec",
     "test": "nyc --reporter=html --reporter=text mocha --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "faker": "node data/generation/generate-json-data.js",
     "teardown": "node_modules/.bin/sequelize db:migrate:undo:all",
-    "build": "node_modules/.bin/sequelize db:migrate",
+    "migrate": "node_modules/.bin/sequelize db:migrate",
     "seed": "node_modules/.bin/sequelize db:seed:all",
-    "dbrb": "npm run teardown && npm run build && npm run seed",
-    "heroku-build": "npm install && npm run build",
-    "start": "node server.js"
+    "reset": "npm run teardown && npm run migrate && npm run seed",
+    "heroku-build": "npm install && npm run build"
   },
   "author": "Jon Roberts",
   "license": "ISC",
@@ -39,6 +45,15 @@
     "sequelize": "^4.37.10"
   },
   "devDependencies": {
+    "@types/bcrypt-nodejs": "0.0.30",
+    "@types/body-parser": "^1.17.0",
+    "@types/dotenv": "^4.0.3",
+    "@types/express": "^4.16.0",
+    "@types/express-session": "^1.15.10",
+    "@types/passport": "^0.4.5",
+    "@types/passport-local": "^1.0.33",
+    "@types/pg": "^7.4.9",
+    "@types/sequelize": "^4.27.21",
     "chai": "^4.1.2",
     "coveralls": "^3.0.1",
     "eslint": "^4.19.1",
@@ -49,7 +64,12 @@
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.17.5",
     "nyc": "^12.0.2",
+    "prettier": "1.13.5",
     "sequelize-cli": "^4.0.0",
-    "supertest": "^3.1.0"
+    "supertest": "^3.1.0",
+    "tslint": "^5.10.0",
+    "tslint-config-prettier": "^1.13.0",
+    "tslint-eslint-rules": "^5.3.1",
+    "typescript": "^2.9.2"
   }
 }

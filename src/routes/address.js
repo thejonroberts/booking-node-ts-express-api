@@ -7,9 +7,11 @@ const {
   deleteId,
   getAll,
   getId,
-  updateId,
+  updateId
 } = require('../controllers/address');
-const { isLoggedIn } = require('../controllers/authentication');
+
+// TODO: implement auth guards
+// const { isLoggedIn } = require('../controllers/authentication');
 
 router
   .route('/addresses')

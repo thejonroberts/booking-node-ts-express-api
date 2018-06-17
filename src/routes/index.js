@@ -11,8 +11,8 @@ router.get('/', (req, res, next) => {
       '/events',
       '/genres',
       '/users',
-      '/venues',
-    ],
+      '/venues'
+    ]
   };
   next(res.json(routes));
 });
@@ -24,5 +24,13 @@ router.use(require('./events'));
 router.use(require('./genres'));
 router.use(require('./users'));
 router.use(require('./venues'));
+
+router.get('*', (req, res, next) => {
+  // request at bad route
+  setImmediate(() => {
+    res.status(404);
+    next(new Error(`${req.path} does not exist`));
+  });
+});
 
 module.exports = router;

@@ -18,8 +18,8 @@ router.get('/', (req: Request, res: Response, next: NextFunction) => {
       '/events',
       '/genres',
       '/users',
-      '/venues'
-    ]
+      '/venues',
+    ],
   };
   next(res.status(200).json(routes));
 });

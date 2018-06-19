@@ -10,7 +10,7 @@ export function isLoggedIn(
   if (req.isAuthenticated()) {
     return next();
   }
-  return next(new Error(`User must be logged in for this request`));
+  return next(new Error(`User must be logged in for this request.`));
 }
 
 export function register(
@@ -19,12 +19,12 @@ export function register(
   next: NextFunction
 ): void {
   if (req.body.password === req.body.confirmation) {
-    passport.authenticate('local-signup', (err, user, msgObj) => {
+    passport.authenticate('local-signUp', (err, user, msgObj) => {
       if (err) {
         return next(err);
       }
       if (!user) {
-        return next(new Error(`no user`));
+        return next(new Error(`No user.`));
       }
       req.logIn(user, userError => {
         if (userError) {
@@ -40,7 +40,7 @@ export function register(
 
 export function login(req: Request, res: Response, next: NextFunction): void {
   // TODO refactor to helper with strategy arg
-  passport.authenticate('local-signin', (err, user, msgObj) => {
+  passport.authenticate('local-signIn', (err, user, msgObj) => {
     if (err) {
       return next(err);
     }
@@ -48,21 +48,23 @@ export function login(req: Request, res: Response, next: NextFunction): void {
       return next(new Error(`no user`));
     }
     // TODO: refactor to helper loginUser
+    // tslint:disable no-identical-functions
     req.logIn(user, userError => {
       if (userError) {
         return next(userError);
       }
       res.status(200).json(msgObj);
     });
+    // tslint:enable no-identical-functions
   })(req, res, next);
 }
 
 export function logout(req: Request, res: Response, next: NextFunction): void {
   req.session.destroy(err => {
     if (err) {
-      res.status(500).json({ message: 'error logging out' });
+      res.status(500).json({ message: 'Error logging out!' });
     }
     // TODO better message?
-    res.status(200).json({ message: 'logged out of current session' });
+    res.status(200).json({ message: 'Logged out of current session.' });
   });
 }

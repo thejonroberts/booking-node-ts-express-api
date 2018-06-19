@@ -4,8 +4,13 @@
   "prettier.singleQuote": true,
   "prettier.useTabs": false,
   "cSpell.words": [
+    "bandcamp",
+    "deserialize",
+    "linebreak",
     "resave",
     "signin",
-    "signup"
-  ]
+    "signup",
+    "user"
+  ],
+  "tslint.autoFixOnSave": true
 }

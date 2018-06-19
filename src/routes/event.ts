@@ -6,7 +6,7 @@ import {
   deleteId,
   getAll,
   getId,
-  updateId
+  updateId,
 } from '../controllers/event';
 
 event

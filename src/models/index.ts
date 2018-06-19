@@ -15,7 +15,7 @@ const config = configByEnv[env];
 const sequelize: any = null;
 const db = {
   Sequelize,
-  sequelize
+  sequelize,
 };
 
 const Op = Sequelize.Op;
@@ -53,7 +53,7 @@ config.operatorsAliases = {
   $regexp: Op.regexp,
   $strictLeft: Op.strictLeft,
   $strictRight: Op.strictRight,
-  $values: Op.values
+  $values: Op.values,
 };
 
 if (config.use_env_variable) {

@@ -29,12 +29,12 @@ export function getId(req: Request, res: Response, next: NextFunction): void {
   Venue.findById(req.params.id, {
     include: [
       {
-        model: Event
+        model: Event,
       },
       {
-        model: User
-      }
-    ]
+        model: User,
+      },
+    ],
   })
     .then(data => {
       res.status(200).json(data);

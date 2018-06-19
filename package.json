@@ -11,8 +11,9 @@
   },
   "main": "server.js",
   "scripts": {
+    "lint": "tslint --project .",
     "start": "npm run serve",
-    "build": "npm run build-sass && npm run build-ts && npm run tslint && npm run copy-static-assets",
+    "build": "npm run build-ts && npm run tslint && npm run copy-static-assets",
     "serve": "node dist/server.js",
     "watch-node": "nodemon dist/server.js",
     "watch": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"npm run watch-node\"",
@@ -27,7 +28,8 @@
     "migrate": "node_modules/.bin/sequelize db:migrate",
     "seed": "node_modules/.bin/sequelize db:seed:all",
     "reset": "npm run teardown && npm run migrate && npm run seed",
-    "heroku-build": "npm install && npm run build"
+    "heroku-build": "npm install && npm run build",
+    "tslint-check": "tslint-config-prettier-check ./tslint.json"
   },
   "author": "Jon Roberts",
   "license": "ISC",
@@ -56,6 +58,12 @@
     "@types/sequelize": "^4.27.21",
     "chai": "^4.1.2",
     "coveralls": "^3.0.1",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
     "faker": "^4.1.0",
     "markdownlint": "^0.10.0",
     "mocha": "^5.2.0",

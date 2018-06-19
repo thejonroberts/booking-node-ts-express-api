@@ -5,7 +5,7 @@ import {
   deleteId,
   getAll,
   getId,
-  updateId
+  updateId,
 } from '../controllers/address';
 
 // TODO: implement auth guards

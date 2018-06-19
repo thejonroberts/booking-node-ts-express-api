@@ -50,7 +50,7 @@ class App {
       session({
         resave: true,
         saveUninitialized: true,
-        secret: process.env.SESSION_SECRET || 'keyboard cat'
+        secret: process.env.SESSION_SECRET || 'keyboard cat',
       })
     );
 

@@ -2,12 +2,11 @@
 
 const bCrypt = require('bcrypt-nodejs');
 const passport = require('passport');
-// initialize the passport-local strategy
 const { Strategy } = require('passport-local');
 let User = null;
 
+// REGISTRATION
 const RegistrationStrategy = new Strategy(
-  // passport options
   {
     usernameField: 'email',
     passwordField: 'password',
@@ -21,13 +20,11 @@ const RegistrationStrategy = new Strategy(
       return bCrypt.hashSync(password, bCrypt.genSaltSync(8));
     };
 
-    // using the Sequelize user model we initialized earlier as User, we check to see if the user already exists, and if not we add them.
     User.findOne({
       where: { email }
     }).then(user => {
       if (user) {
         return done(null, false, {
-          // TODO better message / info here
           message: 'That email is already taken'
         });
       } else {
@@ -43,11 +40,15 @@ const RegistrationStrategy = new Strategy(
 
         User.create(data).then((newUser, created) => {
           if (!newUser) {
-            return done(null, false);
+            return done(null, false, {
+              message: 'Error creating new user'
+            });
           }
           if (newUser) {
-            console.log('newUser', newUser);
-            return done(null, newUser);
+            return done(null, newUser, {
+              // TODO: logging?
+              created
+            });
           }
         });
       }
@@ -55,20 +56,19 @@ const RegistrationStrategy = new Strategy(
   }
 );
 
-// login authentication ****************************************
 //LOCAL SIGNIN
 const LoginStrategy = new Strategy(
   {
-    // by default, local strategy uses username and password, we will override with email
-    usernameField: 'email',
+    // TODO: change to username login
+    // by default, local strategy uses username, we will override with email
+    passReqToCallback: true, // pass back the entire request to the callback
     passwordField: 'password',
-    passReqToCallback: true // allows us to pass back the entire request to the callback
+    usernameField: 'email'
   },
   (req, email, password, done) => {
     User = req.app.get('models').User;
-    const isValidPassword = (userpass, password) => {
-      // hashes the passed-in password and then compares it to the hashed password fetched from the db
-      return bCrypt.compareSync(password, userpass);
+    const isValidPassword = (userPass, password) => {
+      return bCrypt.compareSync(password, userPass);
     };
 
     User.findOne({ where: { email } })
@@ -77,7 +77,7 @@ const LoginStrategy = new Strategy(
           return done(null, false, {
             // TODO more info ?
             message:
-              "Can't find a user with those credentials. Please try again"
+              'Can\'t find a user with those credentials. Please try again'
           });
         }
         if (req.body.username != user.username) {
@@ -90,8 +90,8 @@ const LoginStrategy = new Strategy(
             message: 'Incorrect password.'
           });
         }
-        const userinfo = user.get();
-        return done(null, userinfo);
+        const userInfo = user.get();
+        return done(null, userInfo);
       })
       .catch(err => {
         return done(null, false, {
@@ -103,19 +103,12 @@ const LoginStrategy = new Strategy(
   }
 );
 
-//serialize. In this function, we will be saving the user id to the session in
-// req.session.passport.user
+// Save the user id to the session in req.session.passport.user
 passport.serializeUser((user, done) => {
-  console.log('hello, serialize');
-
-  // This saves the whole user obj into the session cookie,
-  // but typically you will see just user.id passed in.
-  done(null, user);
+  // TODO: need other user info persisted?
+  done(null, user.id);
 });
 
-// deserialize user
-// We use Sequelize's findById to get the user. Then we use the Sequelize getter
-// function, user.get(), to pass a reference to the user to the 'done' function.
 passport.deserializeUser(({ id }, done) => {
   User.findById(id).then(user => {
     if (user) {
@@ -125,10 +118,8 @@ passport.deserializeUser(({ id }, done) => {
     }
   });
 });
-
-// Take the new strategies we just created and use them as middleware, so the
-// http requests get piped through them. A POST to register or login will trigger
-// a strategy, because we will call passport.authenticate in the auth ctrl.
-// The first argument is optional and it sets the name of the strategy.
-passport.use('local-signup', RegistrationStrategy);
-passport.use('local-signin', LoginStrategy);
+/**
+ * NOTE: sets strategy names used in authentication controller
+ */
+passport.use('local-signUp', RegistrationStrategy);
+passport.use('local-signIn', LoginStrategy);

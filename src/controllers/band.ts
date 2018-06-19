@@ -29,12 +29,12 @@ export function getId(req: Request, res: Response, next: NextFunction): void {
   Band.findById(req.params.id, {
     include: [
       {
-        model: User
+        model: User,
       },
       {
-        model: Event
-      }
-    ]
+        model: Event,
+      },
+    ],
   })
     .then(data => {
       res.status(200).json(data);

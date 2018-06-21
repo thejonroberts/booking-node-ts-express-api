@@ -41,7 +41,12 @@ export function updateId(
   next: NextFunction
 ): void {
   const { Address } = req.app.get('models');
-  Address.update(req.body, { returning: true, where: { id: req.params.id } })
+  Address.update(req.body, {
+    returning: true,
+    where: {
+      id: req.params.id,
+    },
+  })
     .then(response => {
       res.status(200).json(response);
     })
@@ -56,7 +61,10 @@ export function deleteId(
   next: NextFunction
 ): void {
   const { Address } = req.app.get('models');
-  Address.destroy({ returning: true, where: { id: req.params.id } })
+  Address.destroy({
+    returning: true,
+    where: { id: req.params.id },
+  })
     .then(response => {
       res.status(200).json(response);
     })

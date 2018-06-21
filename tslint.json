@@ -1,5 +1,6 @@
 {
   "defaultSeverity": "error",
+  "rulesDirectory": ["tslint-plugin-prettier"],
   "extends": [
     "tslint:latest",
     "tslint-eslint-rules",
@@ -7,21 +8,19 @@
     "tslint-config-prettier"
   ],
   "rules": {
-    "max-line-length": [true, 100],
-    "trailing-comma": [
+    "no-unused-variable": false,
+    "prettier": [
       true,
       {
-        "multiline": {
-          "objects": "always",
-          "arrays": "always",
-          "functions": "never",
-          "typeLiterals": "always"
-        },
-        "singleline": "never",
-        "esSpecCompliant": true
+        "printWidth": 80,
+        "tabWidth": 2,
+        "singleQuote": true,
+        "trailingComma": {
+          "array": true,
+          "object": true,
+          "function": false
+        }
       }
-    ],
-    "no-unused-variable": false
-  },
-  "rulesDirectory": []
+    ]
+  }
 }

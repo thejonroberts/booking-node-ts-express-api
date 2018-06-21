@@ -10,7 +10,7 @@ const RegistrationStrategy = new Strategy(
   {
     usernameField: 'email',
     passwordField: 'password',
-    passReqToCallback: true
+    passReqToCallback: true,
   },
   // arg2 callback, handle storing a user's details.
   (req, email, password, done) => {
@@ -21,11 +21,11 @@ const RegistrationStrategy = new Strategy(
     };
 
     User.findOne({
-      where: { email }
+      where: { email },
     }).then(user => {
       if (user) {
         return done(null, false, {
-          message: 'That email is already taken'
+          message: 'That email is already taken',
         });
       } else {
         const userPassword = generateHash(password);
@@ -35,19 +35,19 @@ const RegistrationStrategy = new Strategy(
           username: req.body.username,
           firstName: req.body.firstName,
           lastName: req.body.lastName,
-          phoneNumber: req.body.phoneNumber
+          phoneNumber: req.body.phoneNumber,
         };
 
         User.create(data).then((newUser, created) => {
           if (!newUser) {
             return done(null, false, {
-              message: 'Error creating new user'
+              message: 'Error creating new user',
             });
           }
           if (newUser) {
             return done(null, newUser, {
               // TODO: logging?
-              created
+              created,
             });
           }
         });
@@ -63,7 +63,7 @@ const LoginStrategy = new Strategy(
     // by default, local strategy uses username, we will override with email
     passReqToCallback: true, // pass back the entire request to the callback
     passwordField: 'password',
-    usernameField: 'email'
+    usernameField: 'email',
   },
   (req, email, password, done) => {
     User = req.app.get('models').User;
@@ -77,17 +77,17 @@ const LoginStrategy = new Strategy(
           return done(null, false, {
             // TODO more info ?
             message:
-              'Can\'t find a user with those credentials. Please try again'
+              'Can\'t find a user with those credentials. Please try again',
           });
         }
         if (req.body.username != user.username) {
           return done(null, false, {
-            message: 'Wrong username. Please try again'
+            message: 'Wrong username. Please try again',
           });
         }
         if (!isValidPassword(user.password, password)) {
           return done(null, false, {
-            message: 'Incorrect password.'
+            message: 'Incorrect password.',
           });
         }
         const userInfo = user.get();
@@ -97,7 +97,7 @@ const LoginStrategy = new Strategy(
         return done(null, false, {
           // TODO:
           // error: err,
-          message: 'Something went wrong with your sign in'
+          message: 'Something went wrong with your sign in',
         });
       });
   }

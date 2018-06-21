@@ -27,14 +27,7 @@ export function create(req: Request, res: Response, next: NextFunction): void {
 export function getId(req: Request, res: Response, next: NextFunction): void {
   const { Band, User, Venue } = req.app.get('models');
   User.findById(req.params.id, {
-    include: [
-      {
-        model: Band,
-      },
-      {
-        model: Venue,
-      },
-    ],
+    include: [{ model: Band }, { model: Venue }],
   })
     .then(data => {
       res.status(200).json(data);
@@ -50,7 +43,10 @@ export function updateId(
   next: NextFunction
 ): void {
   const { User } = req.app.get('models');
-  User.update(req.body, { returning: true, where: { id: req.params.id } })
+  User.update(req.body, {
+    returning: true,
+    where: { id: req.params.id },
+  })
     .then(response => {
       res.status(200).json(response);
     })
@@ -65,7 +61,10 @@ export function deleteId(
   next: NextFunction
 ): void {
   const { User } = req.app.get('models');
-  User.destroy({ returning: true, where: { id: req.params.id } })
+  User.destroy({
+    returning: true,
+    where: { id: req.params.id },
+  })
     .then(response => {
       res.status(200).json(response);
     })

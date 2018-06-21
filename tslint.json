@@ -1,26 +1,38 @@
 {
   "defaultSeverity": "error",
-  "rulesDirectory": ["tslint-plugin-prettier"],
-  "extends": [
-    "tslint:latest",
-    "tslint-eslint-rules",
-    "tslint-sonarts",
-    "tslint-config-prettier"
-  ],
+  "extends": ["tslint:latest", "tslint-eslint-rules", "tslint-sonarts"],
+  "checkJs": true,
   "rules": {
     "no-unused-variable": false,
-    "prettier": [
+    "trailing-comma": [
       true,
       {
-        "printWidth": 80,
-        "tabWidth": 2,
-        "singleQuote": true,
-        "trailingComma": {
-          "array": true,
-          "object": true,
-          "function": false
-        }
+        "multiline": {
+          "objects": "always",
+          "arrays": "always",
+          "functions": "never",
+          "typeLiterals": "always"
+        },
+        "esSpecCompliant": true
       }
-    ]
+    ],
+    "quotemark": [true, "single", "avoid-escape", "avoid-template"],
+    "no-constant-condition": [true, "warn"],
+    "indent": [true, "spaces", 2],
+    "linebreak-style": [true, "unix"],
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "no-trailing-spaces": true,
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never"
+      }
+    ],
+    "arrow-parens": false
   }
 }

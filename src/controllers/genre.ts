@@ -50,7 +50,10 @@ export function updateId(
   next: NextFunction
 ): void {
   const { Genre } = req.app.get('models');
-  Genre.update(req.body, { returning: true, where: { id: req.params.id } })
+  Genre.update(req.body, {
+    returning: true,
+    where: { id: req.params.id },
+  })
     .then(response => {
       res.status(200).json(response);
     })
@@ -65,7 +68,10 @@ export function deleteId(
   next: NextFunction
 ): void {
   const { Genre } = req.app.get('models');
-  Genre.destroy({ returning: true, where: { id: req.params.id } })
+  Genre.destroy({
+    returning: true,
+    where: { id: req.params.id },
+  })
     .then(response => {
       res.status(200).json(response);
     })

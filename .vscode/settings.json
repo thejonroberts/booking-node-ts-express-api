@@ -1,7 +1,6 @@
 {
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
-  "prettier.singleQuote": true,
   "prettier.useTabs": false,
   "cSpell.words": [
     "bandcamp",
@@ -12,5 +11,11 @@
     "signup",
     "user"
   ],
-  "tslint.autoFixOnSave": true
+  "tslint.autoFixOnSave": true,
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": false,
+	"eslint.enable": false,
+  "eslint.autoFixOnSave": false,
+  "tslint.jsEnable": true,
+
 }

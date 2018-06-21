@@ -8,16 +8,16 @@ let User = null;
 // REGISTRATION
 const RegistrationStrategy = new Strategy(
   {
-    usernameField: 'email',
-    passwordField: 'password',
     passReqToCallback: true,
+    passwordField: 'password',
+    usernameField: 'email',
   },
   // arg2 callback, handle storing a user's details.
   (req, email, password, done) => {
     User = req.app.get('models').User;
 
-    const generateHash = password => {
-      return bCrypt.hashSync(password, bCrypt.genSaltSync(8));
+    const generateHash = entered => {
+      return bCrypt.hashSync(entered, bCrypt.genSaltSync(8));
     };
 
     User.findOne({
@@ -31,11 +31,11 @@ const RegistrationStrategy = new Strategy(
         const userPassword = generateHash(password);
         const data = {
           email,
-          password: userPassword,
-          username: req.body.username,
           firstName: req.body.firstName,
           lastName: req.body.lastName,
+          password: userPassword,
           phoneNumber: req.body.phoneNumber,
+          username: req.body.username,
         };
 
         User.create(data).then((newUser, created) => {
@@ -67,8 +67,8 @@ const LoginStrategy = new Strategy(
   },
   (req, email, password, done) => {
     User = req.app.get('models').User;
-    const isValidPassword = (userPass, password) => {
-      return bCrypt.compareSync(password, userPass);
+    const isValidPassword = (entered, stored) => {
+      return bCrypt.compareSync(stored, entered);
     };
 
     User.findOne({ where: { email } })
@@ -80,7 +80,7 @@ const LoginStrategy = new Strategy(
               'Can\'t find a user with those credentials. Please try again',
           });
         }
-        if (req.body.username != user.username) {
+        if (req.body.username !== user.username) {
           return done(null, false, {
             message: 'Wrong username. Please try again',
           });

@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
     },
     {
-      timestamps: true,
       paranoid: true,
+      timestamps: true,
     }
   );
 
@@ -17,9 +17,9 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Genre.belongsToMany(models.Venue, {
-      through: 'VenuesGenres',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
+      through: 'VenuesGenres',
     });
   };
   return Genre;

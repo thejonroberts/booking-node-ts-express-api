@@ -3,15 +3,15 @@ module.exports = (sequelize, DataTypes) => {
   let Band = sequelize.define(
     'Band',
     {
-      name: DataTypes.STRING,
-      bandcamp: DataTypes.STRING,
-      website: DataTypes.STRING,
-      label: DataTypes.STRING,
       GenreId: DataTypes.INTEGER,
+      bandcamp: DataTypes.STRING,
+      label: DataTypes.STRING,
+      name: DataTypes.STRING,
+      website: DataTypes.STRING,
     },
     {
-      timestamps: true,
       paranoid: true,
+      timestamps: true,
     }
   );
   Band.associate = function(models) {
@@ -20,15 +20,15 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Band.belongsToMany(models.User, {
-      through: 'UsersBands',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
+      through: 'UsersBands',
     });
 
     Band.belongsToMany(models.Event, {
-      through: 'EventsBands',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
+      through: 'EventsBands',
     });
   };
 

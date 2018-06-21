@@ -3,17 +3,17 @@ module.exports = (sequelize, DataTypes) => {
   let Address = sequelize.define(
     'Address',
     {
+      city: DataTypes.STRING,
+      placeId: DataTypes.INTEGER,
+      stateCode: DataTypes.STRING,
       street: DataTypes.STRING,
       streetTwo: DataTypes.STRING,
-      city: DataTypes.STRING,
-      stateCode: DataTypes.STRING,
-      zipCode: DataTypes.STRING,
       timeZone: DataTypes.STRING,
-      placeId: DataTypes.INTEGER,
+      zipCode: DataTypes.STRING,
     },
     {
-      timestamps: true,
       paranoid: true,
+      timestamps: true,
     }
   );
   Address.associate = function(models) {

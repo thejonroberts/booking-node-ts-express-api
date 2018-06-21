@@ -4,6 +4,9 @@ module.exports = {
     dialect: 'postgres',
     host: '127.0.0.1',
   },
+  production: {
+    use_env_variable: 'DATABASE_URL',
+  },
   test: {
     database: 'travis_ci_test',
     dialect: 'postgres',
@@ -17,8 +20,5 @@ module.exports = {
     dialect: 'postgres',
     host: '127.0.0.1',
     port: process.env.TEST_DB_PORT || 5432,
-  },
-  production: {
-    use_env_variable: 'DATABASE_URL',
   },
 };

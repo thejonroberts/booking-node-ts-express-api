@@ -3,18 +3,18 @@ module.exports = (sequelize, DataTypes) => {
   let User = sequelize.define(
     'User',
     {
-      firstName: DataTypes.STRING,
-      lastName: DataTypes.STRING,
+      AddressId: DataTypes.INTEGER,
       email: DataTypes.STRING,
-      username: DataTypes.TEXT,
+      firstName: DataTypes.STRING,
+      lastLoginDate: DataTypes.DATE,
+      lastName: DataTypes.STRING,
       password: DataTypes.STRING,
       phoneNumber: DataTypes.STRING,
-      lastLoginDate: DataTypes.DATE,
-      AddressId: DataTypes.INTEGER,
+      username: DataTypes.TEXT,
     },
     {
-      timestamps: true,
       paranoid: true,
+      timestamps: true,
     }
   );
 
@@ -24,15 +24,15 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     User.belongsToMany(models.Band, {
-      through: 'UsersBands',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
+      through: 'UsersBands',
     });
 
     User.belongsToMany(models.Venue, {
-      through: 'UsersVenues',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
+      through: 'UsersVenues',
     });
   };
   return User;

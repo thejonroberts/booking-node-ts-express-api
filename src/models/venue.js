@@ -3,20 +3,20 @@ module.exports = (sequelize, DataTypes) => {
   let Venue = sequelize.define(
     'Venue',
     {
-      name: DataTypes.STRING,
       AddressId: DataTypes.INTEGER,
+      name: DataTypes.STRING,
     },
     {
-      timestamps: true,
       paranoid: true,
+      timestamps: true,
     }
   );
 
   Venue.associate = function(models) {
     Venue.belongsToMany(models.Genre, {
-      through: 'VenuesGenres',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
+      through: 'VenuesGenres',
     });
 
     Venue.hasMany(models.Event, {
@@ -28,9 +28,9 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Venue.belongsToMany(models.User, {
-      through: 'UsersVenues',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
+      through: 'UsersVenues',
     });
   };
   return Venue;

@@ -11,7 +11,7 @@
   },
   "main": "server.js",
   "scripts": {
-    "lint": "node_modules/.bin/tslint --project . -c tslint.json",
+    "lint": "node_modules/.bin/tslint --project . --fix",
     "start": "npm run serve",
     "serve": "node dist/server.js",
     "watch-node": "nodemon dist/server.js",

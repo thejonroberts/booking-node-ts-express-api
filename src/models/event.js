@@ -3,15 +3,15 @@ module.exports = (sequelize, DataTypes) => {
   let Event = sequelize.define(
     'Event',
     {
-      startsAt: DataTypes.DATE,
-      endsAt: DataTypes.DATE,
-      title: DataTypes.STRING,
-      description: DataTypes.STRING,
       VenueId: DataTypes.INTEGER,
+      description: DataTypes.STRING,
+      endsAt: DataTypes.DATE,
+      startsAt: DataTypes.DATE,
+      title: DataTypes.STRING,
     },
     {
-      timestamps: true,
       paranoid: true,
+      timestamps: true,
     }
   );
   Event.associate = function(models) {
@@ -20,9 +20,9 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Event.belongsToMany(models.Band, {
-      through: 'EventsBands',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
+      through: 'EventsBands',
     });
   };
 

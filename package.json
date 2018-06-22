@@ -13,7 +13,7 @@
   },
   "main": "server.js",
   "scripts": {
-    "heroku": "npm install && npm run build",
+    "heroku": "npm install && npm run build-ts",
     "start": "npm run serve",
     "watch": "concurrently -k -p \"{name}:\" -n \"TS,Node\" -c \"yellow.bold,cyan.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
     "serve": "node dist/server.js",
@@ -25,17 +25,16 @@
     "lint": "node_modules/.bin/tslint --project . --fix -t stylish",
     "watch-test": "mocha --watch --reporter spec --compilers ts:ts-node/register 'test/**/*.test.ts'",
     "test": "nyc --reporter=html --reporter=text mocha --compilers ts:ts-node/register --recursive test/**/*.test.ts --exit",
-    "dev-test": "NODE_ENV=testing mocha --watch --recursive test/**/*.test.js -R spec",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "teardown": "node_modules/.bin/sequelize db:migrate:undo:all",
     "migrate": "node_modules/.bin/sequelize db:migrate",
     "seed": "node_modules/.bin/sequelize db:seed:all",
-    "reset": "npm run teardown && npm run migrate && npm run seed",
-    "faker": "node data/generation/generate-json-data.js"
+    "reset": "npm run faker && npm run teardown && npm run migrate && npm run seed",
+    "faker": "node db/data/generation/generate-json-data.js"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm run test"
+      "pre-push": "npm run lint && npm run test"
     }
   },
   "dependencies": {

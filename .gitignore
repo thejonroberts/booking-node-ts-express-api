@@ -60,6 +60,6 @@ Thumbs.db
 # generated data #
 ##################
 
-/data/*.json
+/db/data/*.json
 /coverage/**
 **/.nyc_output

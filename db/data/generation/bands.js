@@ -24,6 +24,6 @@ for (let i = 0; i < numBands; i++) {
   });
 }
 const bandsJson = JSON.stringify(bands);
-fs.writeFile('./data/bands.json', bandsJson, err => {
+fs.writeFile('./db/data/bands.json', bandsJson, err => {
   if (err) throw err;
 });

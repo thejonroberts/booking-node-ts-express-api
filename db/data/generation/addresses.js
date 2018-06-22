@@ -28,6 +28,6 @@ for (let i = 0; i < numAddresses; i++) {
   });
 }
 const usersJson = JSON.stringify(addresses);
-fs.writeFile('./data/addresses.json', usersJson, err => {
-  if (err) throw err;
+fs.writeFile('./db/data/addresses.json', usersJson, err => {
+  if (err) { throw err; }
 });

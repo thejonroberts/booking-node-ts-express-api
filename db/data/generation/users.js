@@ -37,6 +37,6 @@ for (let i = 0; i < numUsers; i++) {
   });
 }
 const usersJson = JSON.stringify(users);
-fs.writeFile('./data/users.json', usersJson, err => {
+fs.writeFile('./db/data/users.json', usersJson, err => {
   if (err) throw err;
 });

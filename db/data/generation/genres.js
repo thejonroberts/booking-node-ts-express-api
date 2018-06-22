@@ -20,6 +20,6 @@ for (let i = 0; i < seedGenres.length; i++) {
   });
 }
 const genresJson = JSON.stringify(genres);
-fs.writeFile('./data/genres.json', genresJson, err => {
+fs.writeFile('./db/data/genres.json', genresJson, err => {
   if (err) throw err;
 });

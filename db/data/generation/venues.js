@@ -18,6 +18,6 @@ for (let i = 0; i < numVenues; i++) {
   });
 }
 const venuesJson = JSON.stringify(venues);
-fs.writeFile('./data/venues.json', venuesJson, err => {
+fs.writeFile('./db/data/venues.json', venuesJson, err => {
   if (err) throw err;
 });

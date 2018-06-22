@@ -1,15 +1,15 @@
-import path from 'path';
+const path = require('path');
 
 if (process.env !== 'production') {
   module.exports = {
-    'config': path.resolve('./config', 'config.js'),
+    'config': path.resolve('./src/config', 'config.js'),
     'migrations-path': path.resolve('./db/migrations'),
     'models-path': path.resolve('./dist/models'),
     'seeders-path': path.resolve('./db/seeders'),
   };
 }
 module.exports = {
-  'config': path.resolve('./config', 'config.js'),
+  'config': path.resolve('./src/config', 'config.js'),
   'migrations-path': path.resolve('./db/migrations'),
   'models-path': path.resolve('./dist/models'),
   'seeders-path': path.resolve('./db/seeders'),

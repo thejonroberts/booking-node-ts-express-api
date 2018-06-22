@@ -30,6 +30,6 @@ for (let i = 0; i < numEvents; i++) {
   });
 }
 const eventsJson = JSON.stringify(events);
-fs.writeFile('./data/events.json', eventsJson, err => {
+fs.writeFile('./db/data/events.json', eventsJson, err => {
   if (err) throw err;
 });

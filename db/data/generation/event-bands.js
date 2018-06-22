@@ -25,6 +25,6 @@ for (let k = 1; k <= numEvents; k++) {
   }
 }
 const eventBandsJson = JSON.stringify(eventBands);
-fs.writeFile('./data/event-bands.json', eventBandsJson, err => {
+fs.writeFile('./db/data/event-bands.json', eventBandsJson, err => {
   if (err) throw err;
 });

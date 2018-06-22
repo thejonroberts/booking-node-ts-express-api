@@ -57,7 +57,6 @@ config.operatorsAliases = {
 };
 
 if (config.use_env_variable) {
-  /* eslint-disable no-var, no-redeclare */
   db.sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
   db.sequelize = new Sequelize(
@@ -66,7 +65,6 @@ if (config.use_env_variable) {
     config.password,
     config
   );
-  /* eslint-enable no-var, no-redeclare*/
 }
 
 fs.readdirSync(__dirname)

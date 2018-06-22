@@ -25,6 +25,6 @@ for (let k = 1; k <= numVenues; k++) {
   }
 }
 const UsersVenuesJson = JSON.stringify(UsersVenues);
-fs.writeFile('./data/users-venues.json', UsersVenuesJson, err => {
+fs.writeFile('./db/data/users-venues.json', UsersVenuesJson, err => {
   if (err) throw err;
 });

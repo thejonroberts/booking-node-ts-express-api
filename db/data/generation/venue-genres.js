@@ -25,6 +25,6 @@ for (let k = 1; k <= numVenues; k++) {
   }
 }
 const venueGenresJson = JSON.stringify(venueGenres);
-fs.writeFile('./data/venue-genres.json', venueGenresJson, err => {
+fs.writeFile('./db/data/venue-genres.json', venueGenresJson, err => {
   if (err) throw err;
 });

@@ -9,8 +9,8 @@ import user from './user';
 import venue from './venue';
 
 const router = Router();
-
-router.get('/', (req: Request, res: Response, next: NextFunction) => {
+// TODO - convert req toLowerCase() ?
+router.get('/endpoints', (req: Request, res: Response, next: NextFunction) => {
   const routes = {
     endpoints: [
       '/addresses',
@@ -33,11 +33,9 @@ router.use('/users', user);
 router.use('/venues', venue);
 
 router.get('*', (req, res, next) => {
-  // request at bad route
-  setImmediate(() => {
-    res.status(404);
-    next(new Error(`${req.path} does not exist`));
-  });
+  res.status(404);
+  // errorHander
+  next(`${req.path} does not exist. See /endpoints`);
 });
 
 export default router;

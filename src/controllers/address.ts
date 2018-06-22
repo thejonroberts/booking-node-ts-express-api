@@ -48,8 +48,11 @@ export function updateId(
     },
   })
     .then(response => {
-      res.status(200).json(response);
+      res
+      .status(200)
+      .json(response);
     })
+
     .catch(err => {
       next(err);
     });

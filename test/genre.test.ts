@@ -1,14 +1,20 @@
-const { request, expect } = require('./setup');
+// tslint:disable no-implicit-dependencies
+import * as chai from 'chai';
+import request from 'supertest';
+import app from '../src/server';
 
-describe('GET /genres', function() {
-  it('responds with json array', function(done) {
-    request
+const expect = chai.expect;
+const accept = 'application/json';
+
+describe('GET /genres', () => {
+  it('responds with json array', done => {
+    request(app)
       .get('/genres')
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .expect('Content-Type', /json/)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body).to.be.an('array');
         done();
       });
@@ -17,19 +23,19 @@ describe('GET /genres', function() {
 
 let createdId;
 
-describe('POST /genres', function() {
-  it('responds with created genre', function(done) {
+describe('POST /genres', () => {
+  it('responds with created genre', done => {
     const newGenre = {
       name: 'Jazz Fusion',
     };
 
-    request
+    request(app)
       .post('/genres')
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .send(newGenre)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body).to.be.an('object');
         createdId = parseInt(res.body.id, 10);
         expect(res.body.name).to.equal(newGenre.name);
@@ -42,43 +48,43 @@ const genreUpdate = {
   name: 'Jazz Scat',
 };
 
-describe('PATCH /genres', function() {
-  it('updates the given genre id', function(done) {
-    request
+describe('PATCH /genres', () => {
+  it('updates the given genre id', done => {
+    request(app)
       .patch(`/genres/${createdId}`)
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .send(genreUpdate)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body[1][0]).to.be.an('object');
         expect(res.body[1][0].name).to.equal(genreUpdate.name);
         done();
       });
   });
 
-  it('returns 0 rows updated for non-existent id', function(done) {
-    request
+  it('returns 0 rows updated for non-existent id', done => {
+    request(app)
       .patch(`/genres/${createdId + 10}`)
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .send(genreUpdate)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body[0]).to.be.equal(0);
         done();
       });
   });
 });
 
-describe('DELETE /genres', function() {
-  it('deletes the given genre id', function(done) {
-    request
+describe('DELETE /genres', () => {
+  it('deletes the given genre id', done => {
+    request(app)
       .delete(`/genres/${createdId}`)
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body[0]).to.be.an('object');
         expect(res.body[0].name).to.equal(genreUpdate.name);
         expect(res.body[0].deletedAt).to.be.a('string');

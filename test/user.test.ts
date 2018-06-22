@@ -1,14 +1,21 @@
-const { request, expect } = require('./setup');
+// tslint:disable no-implicit-dependencies
+// tslint:disable no-hardcoded-credentials
+import * as chai from 'chai';
+import request from 'supertest';
+import app from '../src/server';
 
-describe('GET /users', function() {
-  it('responds with json array', function(done) {
-    request
+const expect = chai.expect;
+const accept = 'application/json';
+
+describe('GET /users', () => {
+  it('responds with json array', done => {
+    request(app)
       .get('/users')
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .expect('Content-Type', /json/)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body).to.be.an('array');
         done();
       });
@@ -17,26 +24,26 @@ describe('GET /users', function() {
 
 let createdId;
 
-describe('POST /users', function() {
-  it('responds with created user', function(done) {
+describe('POST /users', () => {
+  it('responds with created user', done => {
     const newUser = {
-      firstName: 'Josh',
-      lastName: 'Test',
+      AddressId: 1,
       email: 'josh@josh.com',
-      username: 'joshrips',
+      firstName: 'Josh',
+      lastLoginDate: new Date('December 17, 2016 02:00:00').toISOString(),
+      lastName: 'Test',
       password: 'insecure',
       phoneNumber: '5555555555',
-      lastLoginDate: new Date('December 17, 2016 02:00:00').toISOString(),
-      AddressId: 1,
+      username: 'joshrips',
     };
 
-    request
+    request(app)
       .post('/users')
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .send(newUser)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body).to.be.an('object');
         createdId = parseInt(res.body.id, 10);
         expect(res.body.firstName).to.equal(newUser.firstName);
@@ -53,25 +60,25 @@ describe('POST /users', function() {
 });
 
 const userUpdate = {
-  firstName: 'Josh',
-  lastName: 'Test',
+  AddressId: 2,
   email: 'josh-new-email@josh.com',
-  username: 'joshrips',
+  firstName: 'Josh',
+  lastLoginDate: new Date().toISOString(),
+  lastName: 'Test',
   password: 'worse',
   phoneNumber: '7777777777',
-  lastLoginDate: new Date().toISOString(),
-  AddressId: 2,
+  username: 'joshrips',
 };
 
-describe('PATCH /users', function() {
-  it('updates the given user id', function(done) {
-    request
+describe('PATCH /users', () => {
+  it('updates the given user id', done => {
+    request(app)
       .patch(`/users/${createdId}`)
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .send(userUpdate)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body[1][0]).to.be.an('object');
         expect(res.body[1][0].firstName).to.equal(userUpdate.firstName);
         expect(res.body[1][0].lastName).to.equal(userUpdate.lastName);
@@ -85,28 +92,28 @@ describe('PATCH /users', function() {
       });
   });
 
-  it('returns 0 rows updated for non-existent id', function(done) {
-    request
+  it('returns 0 rows updated for non-existent id', done => {
+    request(app)
       .patch(`/users/${createdId + 10}`)
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .send(userUpdate)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body[0]).to.be.equal(0);
         done();
       });
   });
 });
 
-describe('DELETE /users', function() {
-  it('deletes the given user id', function(done) {
-    request
+describe('DELETE /users', () => {
+  it('deletes the given user id', done => {
+    request(app)
       .delete(`/users/${createdId}`)
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body[0]).to.be.an('object');
         expect(res.body[0].firstName).to.equal(userUpdate.firstName);
         expect(res.body[0].lastName).to.equal(userUpdate.lastName);

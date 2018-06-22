@@ -1,14 +1,20 @@
-const { request, expect } = require('./setup');
+// tslint:disable no-implicit-dependencies
+import * as chai from 'chai';
+import request from 'supertest';
+import app from '../src/server';
 
-describe('GET /bands', function() {
-  it('responds with json array', function(done) {
-    request
+const expect = chai.expect;
+const accept = 'application/json';
+
+describe('GET /bands', () => {
+  it('responds with json array', done => {
+    request(app)
       .get('/bands')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body).to.be.an('array');
         done();
       });
@@ -17,23 +23,23 @@ describe('GET /bands', function() {
 
 let createdId;
 
-describe('POST /bands', function() {
-  it('responds with created band', function(done) {
+describe('POST /bands', () => {
+  it('responds with created band', done => {
     const newBand = {
-      name: 'bad test band',
-      bandcamp: 'badtestband.bandcamp.com',
-      website: 'www.badtestband.com',
-      label: 'in the red',
       GenreId: 1,
+      bandcamp: 'badtestband.bandcamp.com',
+      label: 'in the red',
+      name: 'bad test band',
+      website: 'www.badtestband.com',
     };
 
-    request
+    request(app)
       .post('/bands')
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .send(newBand)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body).to.be.an('object');
         createdId = parseInt(res.body.id, 10);
         expect(res.body.name).to.equal(newBand.name);
@@ -47,22 +53,22 @@ describe('POST /bands', function() {
 });
 
 const bandUpdate = {
-  name: 'bad test band',
-  bandcamp: 'badtestband.bandcamp.com',
-  website: 'www.badtestband.com',
-  label: 'in the red',
   GenreId: 2,
+  bandcamp: 'badtestband.bandcamp.com',
+  label: 'in the red',
+  name: 'bad test band',
+  website: 'www.badtestband.com',
 };
 
-describe('PATCH /bands', function() {
-  it('updates the given band id', function(done) {
-    request
+describe('PATCH /bands', () => {
+  it('updates the given band id', done => {
+    request(app)
       .patch(`/bands/${createdId}`)
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .send(bandUpdate)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body[1][0]).to.be.an('object');
         expect(res.body[1][0].name).to.equal(bandUpdate.name);
         expect(res.body[1][0].bandcamp).to.equal(bandUpdate.bandcamp);
@@ -73,28 +79,28 @@ describe('PATCH /bands', function() {
       });
   });
 
-  it('returns 0 rows updated for non-existent id', function(done) {
-    request
+  it('returns 0 rows updated for non-existent id', done => {
+    request(app)
       .patch(`/bands/${createdId + 10}`)
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .send(bandUpdate)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body[0]).to.be.equal(0);
         done();
       });
   });
 });
 
-describe('DELETE /bands', function() {
-  it('deletes the given band id', function(done) {
-    request
+describe('DELETE /bands', () => {
+  it('deletes the given band id', done => {
+    request(app)
       .delete(`/bands/${createdId}`)
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body[0]).to.be.an('object');
         expect(res.body[0].name).to.equal(bandUpdate.name);
         expect(res.body[0].bandcamp).to.equal(bandUpdate.bandcamp);

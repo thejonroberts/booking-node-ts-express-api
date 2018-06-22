@@ -1,2 +1,2 @@
 build: npm run heroku
-web: npm run start
+web: npm run serve

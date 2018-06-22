@@ -1,14 +1,20 @@
-const { request, expect } = require('./setup');
+// tslint:disable no-implicit-dependencies
+import * as chai from 'chai';
+import request from 'supertest';
+import app from '../src/server';
 
-describe('GET /events', function() {
-  it('responds with json array', function(done) {
-    request
+const expect = chai.expect;
+const accept = 'application/json';
+
+describe('GET /events', () => {
+  it('responds with json array', done => {
+    request(app)
       .get('/events')
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .expect('Content-Type', /json/)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body).to.be.an('array');
         done();
       });
@@ -17,23 +23,23 @@ describe('GET /events', function() {
 
 let createdId;
 
-describe('POST /events', function() {
-  it('responds with created event', function(done) {
+describe('POST /events', () => {
+  it('responds with created event', done => {
     const newEvent = {
-      startsAt: new Date('December 17, 2016 02:00:00').toISOString(),
-      endsAt: new Date('December 17, 2016 23:59:00').toISOString(),
-      title: 'Hootenanny',
-      description: 'A smasher',
       VenueId: 1,
+      description: 'A smasher',
+      endsAt: new Date('December 17, 2016 23:59:00').toISOString(),
+      startsAt: new Date('December 17, 2016 02:00:00').toISOString(),
+      title: 'Hootenanny',
     };
 
-    request
+    request(app)
       .post('/events')
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .send(newEvent)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body).to.be.an('object');
         createdId = parseInt(res.body.id, 10);
         expect(res.body.startsAt).to.equal(newEvent.startsAt);
@@ -47,22 +53,22 @@ describe('POST /events', function() {
 });
 
 const eventUpdate = {
-  startsAt: new Date('January 17, 2020 02:00:00').toISOString(),
-  endsAt: new Date('January 17, 2020 23:59:00').toISOString(),
-  title: 'Champagne Jam',
-  description: 'A hootin tootin good time',
   VenueId: 2,
+  description: 'A hootin tootin good time',
+  endsAt: new Date('January 17, 2020 23:59:00').toISOString(),
+  startsAt: new Date('January 17, 2020 02:00:00').toISOString(),
+  title: 'Champagne Jam',
 };
 
-describe('PATCH /events', function() {
-  it('updates the given event id', function(done) {
-    request
+describe('PATCH /events', () => {
+  it('updates the given event id', done => {
+    request(app)
       .patch(`/events/${createdId}`)
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .send(eventUpdate)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body[1][0]).to.be.an('object');
         expect(res.body[1][0].startsAt).to.equal(eventUpdate.startsAt);
         expect(res.body[1][0].endsAt).to.equal(eventUpdate.endsAt);
@@ -73,28 +79,28 @@ describe('PATCH /events', function() {
       });
   });
 
-  it('returns 0 rows updated for non-existent id', function(done) {
-    request
+  it('returns 0 rows updated for non-existent id', done => {
+    request(app)
       .patch(`/events/${createdId + 10}`)
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .send(eventUpdate)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body[0]).to.be.equal(0);
         done();
       });
   });
 });
 
-describe('DELETE /events', function() {
-  it('deletes the given event id', function(done) {
-    request
+describe('DELETE /events', () => {
+  it('deletes the given event id', done => {
+    request(app)
       .delete(`/events/${createdId}`)
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body[0]).to.be.an('object');
         expect(res.body[0].startsAt).to.equal(eventUpdate.startsAt);
         expect(res.body[0].endsAt).to.equal(eventUpdate.endsAt);

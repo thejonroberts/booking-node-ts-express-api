@@ -1,7 +1,7 @@
 import { Router } from 'express';
 const authentication = Router();
 
-import { login, logout, register } from '../controllers/authentication.js';
+import { login, logout, register } from '../controllers/authentication';
 
 authentication.post('/register', register);
 authentication.post('/login', login);

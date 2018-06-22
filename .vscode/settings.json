@@ -3,6 +3,7 @@
   "files.trimTrailingWhitespace": true,
   "prettier.useTabs": false,
   "cSpell.words": [
+    "badtestband",
     "bandcamp",
     "deserialize",
     "linebreak",

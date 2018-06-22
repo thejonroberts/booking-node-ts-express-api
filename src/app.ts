@@ -9,18 +9,19 @@ const env = dotenv.config();
 import './config/passport.js';
 
 import * as models from './models';
-import router from './routes/';
+import router from './routes';
 
 class App {
   public app: Application;
 
   constructor() {
     this.app = express();
-    this.config();
+    this.middleware();
     this.routes();
+    this.errors();
   }
 
-  private config(): void {
+  private middleware(): void {
     this.app.set('port', process.env.PORT || 3000);
     this.app.set('host', process.env.HOST || '127.0.0.1');
     this.app.set('models', models);
@@ -65,41 +66,30 @@ class App {
     // TODO express-validator
     this.app.use(validator());
 
-    // TODO prettier/lint formatting for below
-    this.app.use(
-      (
-        error: any,
-        request: Request,
-        res: Response,
-        next: NextFunction
-      ): void => {
-        if (error) {
-          res.status(500).json({ error, request });
-        } else {
-          return next();
-        }
-      }
-    );
   }
 
   private routes(): void {
     this.app.use(router);
   }
+
+  private errors(): void {
+    // TODO error handlers / logging
+    // http://thecodebarbarian.com/80-20-guide-to-express-error-handling.html
+    this.app.use(
+      (error: any, request: Request, res: Response, next: NextFunction): void => {
+        if (error) {
+          res.send({ error });
+        } else {
+          return next();
+        }
+     });
+  }
 }
 
 export default new App().app;
-
-// TODO: more middleware:
-// const logger = require('debug')('logger');
-
-// static assets
-// app.use('/public', express.static(__dirname + '/static'));
 
 // DOCS - TODO - swagger-ui & swagger-jsonDoc
 // swaggerUi  require('swagger-ui-express');
 // const swaggerDocument = require('./config/swagger.json');
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // app.use('/api/v1', router);
-
-// TODO error handlers
-// http://thecodebarbarian.com/80-20-guide-to-express-error-handling.html

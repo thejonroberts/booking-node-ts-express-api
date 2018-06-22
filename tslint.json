@@ -1,45 +1,47 @@
 {
-    "defaultSeverity": "error",
-    "extends": ["tslint:latest", "tslint-eslint-rules", "tslint-sonarts"],
-    "checkJs": true,
-    "rules": {
-      "no-unused-variable": false,
-      "trailing-comma": [
-        true,
-        {
-          "multiline": {
-            "objects": "always",
-            "arrays": "always",
-            "functions": "never",
-            "typeLiterals": "always"
-          },
-          "esSpecCompliant": true
-        }
-      ],
-      "arrow-parens": [true, "ban-single-arg-parens"],
-      "quotemark": [true, "single"],
-      "indent": [true, "spaces", 2],
-      "semicolon": [true, "always"],
-      "no-trailing-whitespace": true
-    },
-    "jsRules": {
-      "no-unused-variable": false,
-      "trailing-comma": [
-        true,
-        {
-          "multiline": {
-            "objects": "always",
-            "arrays": "always",
-            "functions": "never",
-            "typeLiterals": "always"
-          },
-          "esSpecCompliant": true
-        }
-      ],
-      "arrow-parens": [true, "ban-single-arg-parens"],
-      "quotemark": [true, "single"],
-      "indent": [true, "spaces", 2],
-      "semicolon": [true, "always"],
-      "no-trailing-whitespace": true
-    }
+  "defaultSeverity": "error",
+  "extends": ["tslint:latest", "tslint-eslint-rules", "tslint-sonarts"],
+  "checkJs": true,
+  "rules": {
+    "no-unused-variable": false,
+    "trailing-comma": [
+      true,
+      {
+        "multiline": {
+          "objects": "always",
+          "arrays": "always",
+          "functions": "never",
+          "typeLiterals": "always"
+        },
+        "esSpecCompliant": true
+      }
+    ],
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "quotemark": [true, "single"],
+    "indent": [true, "spaces", 2],
+    "semicolon": [true, "always"],
+    "no-trailing-whitespace": true,
+    "linebreak-style": [true, "LF"]
+  },
+  "jsRules": {
+    "no-unused-variable": false,
+    "trailing-comma": [
+      true,
+      {
+        "multiline": {
+          "objects": "always",
+          "arrays": "always",
+          "functions": "never",
+          "typeLiterals": "always"
+        },
+        "esSpecCompliant": true
+      }
+    ],
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "quotemark": [true, "single"],
+    "indent": [true, "spaces", 2],
+    "semicolon": [true, "always"],
+    "no-trailing-whitespace": true,
+    "linebreak-style": [true, "LF"]
+  }
 }

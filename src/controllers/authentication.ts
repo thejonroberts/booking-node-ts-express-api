@@ -26,12 +26,14 @@ export function register(
       if (!user) {
         return next(new Error(`No user.`));
       }
+    // tslint:disable no-identical-functions
       req.logIn(user, userError => {
         if (userError) {
           return next(userError);
         }
         res.status(200).json(msgObj);
       });
+    // tslint:enable no-identical-functions
     })(req, res, next);
   } else {
     return next(new Error(`Password & password confirmation do not match'`));

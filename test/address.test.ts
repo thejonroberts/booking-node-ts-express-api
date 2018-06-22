@@ -1,14 +1,20 @@
-const { request, expect } = require('./setup');
+// tslint:disable no-implicit-dependencies
+import * as chai from 'chai';
+import request from 'supertest';
+import app from '../src/server';
 
-describe('GET /addresses', function() {
-  it('responds with json array', function(done) {
-    request
+const expect = chai.expect;
+const accept = 'application/json';
+
+describe('GET /addresses', () => {
+  it('responds with json array', done => {
+    request(app)
       .get('/addresses')
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .expect('Content-Type', /json/)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) {return done(err); }
         expect(res.body).to.be.an('array');
         done();
       });
@@ -17,25 +23,25 @@ describe('GET /addresses', function() {
 
 let createdId;
 
-describe('POST /addresses', function() {
-  it('responds with created address', function(done) {
+describe('POST /addresses', () => {
+  it('responds with created address', done => {
     const newAddress = {
+      city: 'Nashville',
+      placeId: null,
+      stateCode: 'TN',
       street: '3000 Test St',
       streetTwo: null,
-      city: 'Nashville',
-      stateCode: 'TN',
-      zipCode: '37216',
       timeZone: 'America/Chicago',
-      placeId: null,
+      zipCode: '37216',
     };
 
-    request
+    request(app)
       .post('/addresses')
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .send(newAddress)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body).to.be.an('object');
         createdId = parseInt(res.body.id, 10);
         expect(res.body.street).to.equal(newAddress.street);
@@ -51,24 +57,24 @@ describe('POST /addresses', function() {
 });
 
 const addressUpdate = {
+  city: 'Memphis',
+  placeId: 56,
+  stateCode: 'TX',
   street: '3000 Again St',
   streetTwo: 'Apt 120',
-  city: 'Memphis',
-  stateCode: 'TX',
-  zipCode: '55555',
   timeZone: 'America/Houston',
-  placeId: 56,
+  zipCode: '55555',
 };
 
-describe('PATCH /addresses', function() {
-  it('updates the given address id', function(done) {
-    request
+describe('PATCH /addresses', () => {
+  it('updates the given address id', done => {
+    request(app)
       .patch(`/addresses/${createdId}`)
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .send(addressUpdate)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body[1][0]).to.be.an('object');
         expect(res.body[1][0].street).to.equal(addressUpdate.street);
         expect(res.body[1][0].streetTwo).to.equal(addressUpdate.streetTwo);
@@ -81,28 +87,28 @@ describe('PATCH /addresses', function() {
       });
   });
 
-  it('returns 0 rows updated for non-existent id', function(done) {
-    request
+  it('returns 0 rows updated for non-existent id', done => {
+    request(app)
       .patch(`/addresses/${createdId + 10}`)
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .send(addressUpdate)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body[0]).to.be.equal(0);
         done();
       });
   });
 });
 
-describe('DELETE /addresses', function() {
-  it('deletes the given address id', function(done) {
-    request
+describe('DELETE /addresses', () => {
+  it('deletes the given address id', done => {
+    request(app)
       .delete(`/addresses/${createdId}`)
-      .set('Accept', 'application/json')
+      .set('Accept', accept)
       .expect(200)
-      .end(function(err, res) {
-        if (err) return done(err);
+      .end((err, res) => {
+        if (err) { return done(err); }
         expect(res.body[0]).to.be.an('object');
         expect(res.body[0].street).to.equal(addressUpdate.street);
         expect(res.body[0].streetTwo).to.equal(addressUpdate.streetTwo);

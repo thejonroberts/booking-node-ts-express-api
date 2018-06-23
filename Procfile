@@ -1,2 +1,2 @@
-build: npm run heroku-build
-web: npm run heroku-web
+build: node_modules/.bin/tsc
+web: node ./dist/server.js"

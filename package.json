@@ -14,6 +14,7 @@
   },
   "main": "dist/server.js",
   "scripts": {
+    "postinstall": "npm run build",
     "start": "node ./dist/server.js",
     "watch": "concurrently -k -p \"{name}:\" -n \"TS,Node\" -c \"yellow.bold,cyan.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
     "watch-node": "nodemon dist/server.js",

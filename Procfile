@@ -1,2 +1,3 @@
-build: npm run heroku
-web: npm run serve
+postinstall: npm run build
+web: npm run start
+release: npm run migrate

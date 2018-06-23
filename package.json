@@ -16,7 +16,7 @@
   "scripts": {
     "heroku-build": "npm run build-ts",
     "heroku-release": "npm run migrate",
-    "heroku-run": "npm run serve",
+    "heroku-web": "npm run serve",
     "start": "npm run serve",
     "watch": "concurrently -k -p \"{name}:\" -n \"TS,Node\" -c \"yellow.bold,cyan.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
     "serve": "node dist/server.js",

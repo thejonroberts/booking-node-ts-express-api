@@ -30,6 +30,11 @@
     "reset": "npm run faker && npm run teardown && npm run migrate && npm run seed",
     "faker": "node db/data/generation/generate-json-data.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint && npm run test"
+    }
+  },
   "dependencies": {
     "@types/bcrypt-nodejs": "0.0.30",
     "@types/body-parser": "^1.17.0",

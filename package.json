@@ -14,7 +14,6 @@
   },
   "main": "dist/server.js",
   "scripts": {
-    "postinstall": "npm run build",
     "start": "node ./dist/server.js",
     "watch": "concurrently -k -p \"{name}:\" -n \"TS,Node\" -c \"yellow.bold,cyan.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
     "watch-node": "nodemon dist/server.js",
@@ -36,6 +35,19 @@
     }
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.3",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.2.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.37.10"
+  },
+  "devDependencies": {
     "@types/bcrypt-nodejs": "0.0.30",
     "@types/body-parser": "^1.17.0",
     "@types/chai": "^4.1.4",
@@ -48,21 +60,6 @@
     "@types/pg": "^7.4.9",
     "@types/sequelize": "^4.27.21",
     "@types/supertest": "^2.0.4",
-    "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.18.3",
-    "dotenv": "^5.0.1",
-    "express": "^4.16.3",
-    "express-session": "^1.15.6",
-    "express-validator": "^5.2.0",
-    "passport": "^0.4.0",
-    "passport-local": "^1.0.0",
-    "pg": "^7.4.3",
-    "pg-hstore": "^2.3.2",
-    "sequelize": "^4.37.10",
-    "sequelize-cli": "^4.0.0",
-    "typescript": "^2.9.2"
-  },
-  "devDependencies": {
     "chai": "^4.1.2",
     "concurrently": "^3.6.0",
     "coveralls": "^3.0.1",
@@ -78,6 +75,7 @@
     "ts-node": "^6.1.2",
     "tslint": "^5.10.0",
     "tslint-eslint-rules": "^5.3.1",
-    "tslint-sonarts": "^1.7.0"
+    "tslint-sonarts": "^1.7.0",
+    "typescript": "^2.9.2"
   }
 }

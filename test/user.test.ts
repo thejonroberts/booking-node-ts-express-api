@@ -2,7 +2,7 @@
 // tslint:disable no-hardcoded-credentials
 import * as chai from 'chai';
 import request from 'supertest';
-import app from '../src/server';
+import app from '../dist/server';
 
 const expect = chai.expect;
 const accept = 'application/json';

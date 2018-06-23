@@ -11,10 +11,11 @@
     /* Specify library files to be included in the compilation. */
     // "lib": [],
 
-    /* TODO: false??? Allow javascript files to be compiled. */
+    /* Allow javascript files to be compiled. */
     "allowJs": true,
 
-    /* Report errors in .js files. */
+    /* TODO:
+     * Report errors in .js files. */
     // "checkJs": true
 
     /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
@@ -29,7 +30,8 @@
     /* Generates corresponding '.map' file. */
     // "sourceMap": true,
 
-    /* TODO: webpack??? Concatenate and emit output to single file. */
+    /* TODO:
+     * Concatenate and emit output to single file. */
     // "outFile": "./",
 
     /* Redirect output structure to the directory. */
@@ -47,7 +49,8 @@
     /* Do not emit outputs. */
     // "noEmit": true,
 
-    /* TODO: best practices - Import emit helpers from 'tslib'. */
+    /* TODO: ???
+     * Import emit helpers from 'tslib'. */
     // "importHelpers": true,
 
     /* Provide full support for iterables in 'for-of', spread, and destructuring when targeting 'ES5' or 'ES3'. */
@@ -61,7 +64,8 @@
     /* Enable all strict type-checking options. */
     // "strict": true
 
-    /* TODO: Raise error on expressions and declarations with an implied 'any' type. */
+    /* TODO:
+     * Raise error on expressions and declarations with an implied 'any' type. */
     // "noImplicitAny": true,
 
     /* Enable strict null checks. */
@@ -73,7 +77,8 @@
     /* Enable strict checking of property initialization in classes. */
     // "strictPropertyInitialization": true,
 
-    /* Raise error on 'this' expressions with an implied 'any' type. */
+    /* TODO:
+     * Raise error on 'this' expressions with an implied 'any' type. */
     // "noImplicitThis": true,
 
     /* Parse in strict mode and emit "use strict" for each source file. */
@@ -81,13 +86,16 @@
 
     /* Additional Checks */
 
-    /* Report errors on unused locals. */
+    /* TODO:
+     * Report errors on unused locals. */
     // "noUnusedLocals": true,
 
-    /* Report errors on unused parameters. */
+    /* TODO:
+     * Report errors on unused parameters. */
     // "noUnusedParameters": true,
 
-    /* Report error when not all code paths in function return a value. */
+    /* TODO:
+     * Report error when not all code paths in function return a value. */
     // "noImplicitReturns": true,
 
     /* Report errors for fallthrough cases in switch statement. */

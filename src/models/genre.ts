@@ -1,9 +1,10 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
-  let Genre = sequelize.define(
+import { DataTypes, Sequelize } from 'sequelize';
+
+module.exports = (sequelize: Sequelize, dataTypes: DataTypes) => {
+  const Genre = sequelize.define(
     'Genre',
     {
-      name: DataTypes.STRING,
+      name: dataTypes.STRING,
     },
     {
       paranoid: true,
@@ -11,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Genre.associate = function(models) {
+  Genre.associate = models => {
     Genre.hasMany(models.Band, {
       foreignKey: 'GenreId',
     });

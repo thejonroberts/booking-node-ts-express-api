@@ -1,20 +1,21 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
-  let Band = sequelize.define(
+import { DataTypes, Sequelize } from 'sequelize';
+
+module.exports = (sequelize: Sequelize, dataTypes: DataTypes) => {
+  const Band = sequelize.define(
     'Band',
     {
-      GenreId: DataTypes.INTEGER,
-      bandcamp: DataTypes.STRING,
-      label: DataTypes.STRING,
-      name: DataTypes.STRING,
-      website: DataTypes.STRING,
+      GenreId: dataTypes.INTEGER,
+      bandcamp: dataTypes.STRING,
+      label: dataTypes.STRING,
+      name: dataTypes.STRING,
+      website: dataTypes.STRING,
     },
     {
       paranoid: true,
       timestamps: true,
     }
   );
-  Band.associate = function(models) {
+  Band.associate = models => {
     Band.belongsTo(models.Genre, {
       foreignKey: 'GenreId',
     });

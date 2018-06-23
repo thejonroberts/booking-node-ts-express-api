@@ -54,7 +54,7 @@ Thumbs.db
 # environment/config #
 ######################
 
-.env
+.env**
 /config/config.json
 
 # generated data #

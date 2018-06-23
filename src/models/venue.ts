@@ -1,10 +1,10 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
-  let Venue = sequelize.define(
+import { DataTypes, Sequelize } from 'sequelize';
+module.exports = (sequelize: Sequelize, dataTypes: DataTypes) => {
+  const Venue = sequelize.define(
     'Venue',
     {
-      AddressId: DataTypes.INTEGER,
-      name: DataTypes.STRING,
+      AddressId: dataTypes.INTEGER,
+      name: dataTypes.STRING,
     },
     {
       paranoid: true,
@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Venue.associate = function(models) {
+  Venue.associate = models => {
     Venue.belongsToMany(models.Genre, {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',

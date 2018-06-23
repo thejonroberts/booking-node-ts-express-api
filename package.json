@@ -16,11 +16,11 @@
   "scripts": {
     "postinstall": "npm run build",
     "start": "node ./dist/server.js",
-    "watch": "concurrently -k -p \"{name}:\" -n \"TS,Node\" -c \"yellow.bold,cyan.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
-    "watch-node": "nodemon dist/server.js",
     "build": "./node_modules/.bin/tsc",
-    "watch-ts": "tsc -w",
     "lint": "node_modules/.bin/tslint --project . --fix -t stylish",
+    "watch": "concurrently -k -p \"{name}:\" -n \"TS,Node\" -c \"yellow.bold,cyan.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
+    "watch-ts": "tsc -w",
+    "watch-node": "nodemon dist/server.js",
     "watch-test": "mocha --watch --reporter spec --compilers ts:ts-node/register 'test/**/*.test.ts'",
     "test": "nyc --reporter=html --reporter=text mocha --compilers ts:ts-node/register --recursive test/**/*.test.ts --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
@@ -43,7 +43,6 @@
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.37.10",
     "sequelize-cli": "^4.0.0"
-
   },
   "devDependencies": {
     "@types/bcrypt-nodejs": "0.0.30",

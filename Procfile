@@ -1,3 +1,3 @@
-build: node_modules/.bin/tsc
-web: node ./dist/server.js
+postinstall: npm run build
+web: npm run start
 release: npm run migrate

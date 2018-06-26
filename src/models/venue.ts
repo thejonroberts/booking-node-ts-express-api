@@ -1,16 +1,20 @@
-import { DataTypes, Sequelize } from 'sequelize';
-module.exports = (sequelize: Sequelize, dataTypes: DataTypes) => {
-  const Venue = sequelize.define(
-    'Venue',
-    {
-      AddressId: dataTypes.INTEGER,
-      name: dataTypes.STRING,
-    },
-    {
-      paranoid: true,
-      timestamps: true,
-    }
-  );
+import * as Sequelize from 'sequelize';
+
+interface IVenueAttributes {
+  AddressId?: number;
+  name?: string;
+}
+
+type VenueInstance = Sequelize.Instance<IVenueAttributes> & IVenueAttributes;
+
+export default (sequelize: Sequelize.Sequelize) => {
+
+  const attributes: SequelizeAttributes<IVenueAttributes> = {
+    AddressId: Sequelize.INTEGER,
+    name: Sequelize.STRING,
+  };
+
+  const Venue = sequelize.define<VenueInstance, IVenueAttributes>('Venue', attributes);
 
   Venue.associate = models => {
     Venue.belongsToMany(models.Genre, {
@@ -33,5 +37,6 @@ module.exports = (sequelize: Sequelize, dataTypes: DataTypes) => {
       through: 'UsersVenues',
     });
   };
+
   return Venue;
 };

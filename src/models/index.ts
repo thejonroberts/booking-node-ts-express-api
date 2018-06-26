@@ -8,47 +8,24 @@ const config = configByEnv[env];
 
 import AddressFactory from '../models/address';
 import BandFactory from '../models/band';
-// import Event from '../models/event';
-// import Genre from '../models/genre';
+import EventFactory from '../models/event';
+import GenreFactory from '../models/genre';
 import UserFactory from '../models/user';
-// import Venue from '../models/venue';
+import VenueFactory from '../models/venue';
 
-const Op = Sequelize.Op;
 const operatorsAliases = {
-  // $adjacent: Op.adjacent,
-  // $all: Op.all,
-  $and: Op.and,
-  // $any: Op.any,
-  // $between: Op.between,
-  // $col: Op.col,
-  // $contained: Op.contained,
-  // $contains: Op.contains,
-  $eq: Op.eq,
-  $gt: Op.gt,
-  $gte: Op.gte,
-  $iLike: Op.iLike,
-  // $iRegexp: Op.iRegexp,
-  $in: Op.in,
-  $is: Op.is,
-  $like: Op.like,
-  $lt: Op.lt,
-  $lte: Op.lte,
-  $ne: Op.ne,
-  // $noExtendLeft: Op.noExtendLeft,
-  // $noExtendRight: Op.noExtendRight,
-  // $not: Op.not,
-  // $notBetween: Op.notBetween,
-  // $notILike: Op.notILike,
-  // $notIRegexp: Op.notIRegexp,
-  // $notIn: Op.notIn,
-  // $notLike: Op.notLike,
-  // $notRegexp: Op.notRegexp,
-  $or: Op.or,
-  // $overlap: Op.overlap,
-  // $regexp: Op.regexp,
-  // $strictLeft: Op.strictLeft,
-  // $strictRight: Op.strictRight,
-  // $values: Op.values,
+  $and: Sequelize.Op.and,
+  $eq: Sequelize.Op.eq,
+  $gt: Sequelize.Op.gt,
+  $gte: Sequelize.Op.gte,
+  $iLike: Sequelize.Op.iLike,
+  $in: Sequelize.Op.in,
+  $is: Sequelize.Op.is,
+  $like: Sequelize.Op.like,
+  $lt: Sequelize.Op.lt,
+  $lte: Sequelize.Op.lte,
+  $ne: Sequelize.Op.ne,
+  $or: Sequelize.Op.or,
 };
 
 const define = {
@@ -60,9 +37,12 @@ const sequelize = new Sequelize(config.url || process.env.DATABASE_CONNECTION_UR
 
 const db = {
   Address: AddressFactory(sequelize),
-  // Band: BandFactory(sequelize),
+  Band: BandFactory(sequelize),
+  Event: EventFactory(sequelize),
+  Genre: GenreFactory(sequelize),
   Sequelize,
   User: UserFactory(sequelize),
+  Venue: VenueFactory(sequelize),
   sequelize,
 };
 

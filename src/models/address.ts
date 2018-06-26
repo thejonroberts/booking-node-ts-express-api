@@ -32,9 +32,9 @@ export default (sequelize: Sequelize.Sequelize) => {
       foreignKey: 'AddressId',
     });
 
-    // Address.hasMany(models.Venue, {
-    //   foreignKey: 'AddressId',
-    // });
+    Address.hasMany(models.Venue, {
+      foreignKey: 'AddressId',
+    });
   };
 
   return Address;

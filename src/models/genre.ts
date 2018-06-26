@@ -1,16 +1,18 @@
-import { DataTypes, Sequelize } from 'sequelize';
+import * as Sequelize from 'sequelize';
 
-module.exports = (sequelize: Sequelize, dataTypes: DataTypes) => {
-  const Genre = sequelize.define(
-    'Genre',
-    {
-      name: dataTypes.STRING,
-    },
-    {
-      paranoid: true,
-      timestamps: true,
-    }
-  );
+interface IGenreAttributes {
+  name?: string;
+}
+
+type GenreInstance = Sequelize.Instance<IGenreAttributes> & IGenreAttributes;
+
+export default (sequelize: Sequelize.Sequelize) => {
+
+  const attributes: SequelizeAttributes<IGenreAttributes> = {
+    name: Sequelize.STRING,
+  };
+
+  const Genre = sequelize.define<GenreInstance, IGenreAttributes>('Genre', attributes);
 
   Genre.associate = models => {
     Genre.hasMany(models.Band, {
@@ -23,5 +25,6 @@ module.exports = (sequelize: Sequelize, dataTypes: DataTypes) => {
       through: 'VenuesGenres',
     });
   };
+
   return Genre;
 };

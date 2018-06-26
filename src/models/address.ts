@@ -1,30 +1,41 @@
-import { DataTypes, Sequelize } from 'sequelize';
+import * as Sequelize from 'sequelize';
 
-module.exports = (sequelize: Sequelize, dataTypes: DataTypes) => {
-  const Address = sequelize.define(
-    'Address',
-    {
-      city: dataTypes.STRING,
-      placeId: dataTypes.INTEGER,
-      stateCode: dataTypes.STRING,
-      street: dataTypes.STRING,
-      streetTwo: dataTypes.STRING,
-      timeZone: dataTypes.STRING,
-      zipCode: dataTypes.STRING,
-    },
-    {
-      paranoid: true,
-      timestamps: true,
-    }
-  );
+interface IAddressAttributes {
+  id?: string;
+  city?: string;
+  placeId?: number;
+  stateCode?: string;
+  street?: string;
+  streetTwo?: string;
+  timeZone?: string;
+  zipCode?: number;
+}
+
+type AddressInstance = Sequelize.Instance<IAddressAttributes> & IAddressAttributes;
+
+export default (sequelize: Sequelize.Sequelize) => {
+
+  const attributes: SequelizeAttributes<IAddressAttributes> = {
+    city: Sequelize.STRING,
+    placeId: Sequelize.INTEGER,
+    stateCode: Sequelize.STRING,
+    street: Sequelize.STRING,
+    streetTwo: Sequelize.STRING,
+    timeZone: Sequelize.STRING,
+    zipCode: Sequelize.STRING,
+  };
+
+  const Address = sequelize.define<AddressInstance, IAddressAttributes>('Address', attributes);
+
   Address.associate = models => {
     Address.hasMany(models.User, {
       foreignKey: 'AddressId',
     });
 
-    Address.hasMany(models.Venue, {
-      foreignKey: 'AddressId',
-    });
+    // Address.hasMany(models.Venue, {
+    //   foreignKey: 'AddressId',
+    // });
   };
+
   return Address;
 };

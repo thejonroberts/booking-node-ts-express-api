@@ -4,6 +4,7 @@
   "checkJs": true,
   "rules": {
     "no-unused-variable": false,
+    "no-commented-code": false,
     "trailing-comma": [
       true,
       {
@@ -17,7 +18,7 @@
       }
     ],
     "arrow-parens": [true, "ban-single-arg-parens"],
-    "quotemark": [true, "single"],
+    "quotemark": [true, "single", "avoid-escape"],
     "indent": [true, "spaces", 2],
     "semicolon": [true, "always"],
     "no-trailing-whitespace": true,

@@ -8,8 +8,8 @@ const config = configByEnv[env];
 
 import AddressFactory from '../models/address';
 import BandFactory from '../models/band';
-import ShowFactory from '../models/show';
 import GenreFactory from '../models/genre';
+import ShowFactory from '../models/show';
 import UserFactory from '../models/user';
 import VenueFactory from '../models/venue';
 
@@ -38,9 +38,9 @@ const sequelize = new Sequelize(config.url || process.env.DATABASE_CONNECTION_UR
 const db = {
   Address: AddressFactory(sequelize),
   Band: BandFactory(sequelize),
-  Show: ShowFactory(sequelize),
   Genre: GenreFactory(sequelize),
   Sequelize,
+  Show: ShowFactory(sequelize),
   User: UserFactory(sequelize),
   Venue: VenueFactory(sequelize),
   sequelize,

@@ -3,8 +3,8 @@ import { NextFunction, Request, Response, Router } from 'express';
 import address from './address';
 import authentication from './authentication';
 import band from './band';
-import show from './show';
 import genre from './genre';
+import show from './show';
 import user from './user';
 import venue from './venue';
 

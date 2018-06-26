@@ -33,10 +33,10 @@ export default (sequelize: Sequelize.Sequelize) => {
         through: 'UsersBands',
       });
 
-    Band.belongsToMany(models.Event, {
+    Band.belongsToMany(models.Show, {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
-      through: 'EventsBands',
+      through: 'ShowsBands',
     });
   };
 

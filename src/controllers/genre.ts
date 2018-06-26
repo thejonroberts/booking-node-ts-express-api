@@ -25,15 +25,15 @@ export function create(req: Request, res: Response, next: NextFunction): void {
 }
 
 export function getId(req: Request, res: Response, next: NextFunction): void {
-  const { Band, Event, Genre } = req.app.get('models');
+  const { Band, Show, Genre } = req.app.get('models');
   Genre.findById(req.params.id, {
     include: [
       {
         model: Band,
       },
-      {
-        model: Event,
-      },
+      // {
+      //   model: Show,
+      // },
     ],
   })
     .then(data => {

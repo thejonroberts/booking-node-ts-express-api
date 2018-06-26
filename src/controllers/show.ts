@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 
 export function getAll(req: Request, res: Response, next: NextFunction): void {
-  const { Event } = req.app.get('models');
-  Event.findAll()
+  const { Show } = req.app.get('models');
+  Show.findAll()
     .then(data => {
       res.status(200).json(data);
     })
@@ -12,9 +12,9 @@ export function getAll(req: Request, res: Response, next: NextFunction): void {
 }
 
 export function create(req: Request, res: Response, next: NextFunction): void {
-  const { Event } = req.app.get('models');
-  const event = new Event(req.body);
-  event
+  const { Show } = req.app.get('models');
+  const show = new Show(req.body);
+  show
     .save()
     .then(response => {
       res.status(200).json(response);
@@ -25,8 +25,8 @@ export function create(req: Request, res: Response, next: NextFunction): void {
 }
 
 export function getId(req: Request, res: Response, next: NextFunction): void {
-  const { Band, Event, Venue } = req.app.get('models');
-  Event.findById(req.params.id, {
+  const { Band, Show, Venue } = req.app.get('models');
+  Show.findById(req.params.id, {
     include: [{ model: Band }, { model: Venue }],
   })
     .then(data => {
@@ -42,8 +42,8 @@ export function updateId(
   res: Response,
   next: NextFunction
 ): void {
-  const { Event } = req.app.get('models');
-  Event.update(req.body, {
+  const { Show } = req.app.get('models');
+  Show.update(req.body, {
     returning: true,
     where: { id: req.params.id },
   })
@@ -60,8 +60,8 @@ export function deleteId(
   res: Response,
   next: NextFunction
 ): void {
-  const { Event } = req.app.get('models');
-  Event.destroy({
+  const { Show } = req.app.get('models');
+  Show.destroy({
     returning: true,
     where: { id: req.params.id },
   })

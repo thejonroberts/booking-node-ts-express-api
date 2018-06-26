@@ -2,18 +2,18 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('EventsBands', {
+    return queryInterface.createTable('ShowsBands', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      EventId: {
+      ShowId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Events',
+          model: 'Shows',
           key: 'id',
         },
         onUpdate: 'CASCADE',
@@ -44,6 +44,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('EventsBands');
+    return queryInterface.dropTable('ShowsBands');
   },
 };

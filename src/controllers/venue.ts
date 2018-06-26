@@ -25,9 +25,9 @@ export function create(req: Request, res: Response, next: NextFunction): void {
 }
 
 export function getId(req: Request, res: Response, next: NextFunction): void {
-  const { Event, User, Venue } = req.app.get('models');
+  const { Show, User, Venue } = req.app.get('models');
   Venue.findById(req.params.id, {
-    include: [{ model: Event }, { model: User }],
+    include: [{ model: Show }, { model: User }],
   })
     .then(data => {
       res.status(200).json(data);

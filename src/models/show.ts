@@ -1,6 +1,6 @@
 import * as Sequelize from 'sequelize';
 
-interface IEventAttributes {
+interface IShowAttributes {
   VenueId?: number;
   description?: string;
   endsAt?: string;
@@ -8,11 +8,11 @@ interface IEventAttributes {
   title?: string;
 }
 
-type EventInstance = Sequelize.Instance<IEventAttributes> & IEventAttributes;
+type ShowInstance = Sequelize.Instance<IShowAttributes> & IShowAttributes;
 
 export default (sequelize: Sequelize.Sequelize) => {
 
-  const attributes: SequelizeAttributes<IEventAttributes> = {
+  const attributes: SequelizeAttributes<IShowAttributes> = {
     VenueId: Sequelize.INTEGER,
     description: Sequelize.STRING,
     endsAt: Sequelize.DATE,
@@ -20,20 +20,20 @@ export default (sequelize: Sequelize.Sequelize) => {
     title: Sequelize.STRING,
   };
 
-  const Event = sequelize.define<EventInstance, IEventAttributes>('Event', attributes);
+  const Show = sequelize.define<ShowInstance, IShowAttributes>('Show', attributes);
 
-  Event.associate = models => {
+  Show.associate = models => {
     // TODO: this isn't working
-    Event.belongsTo(models.Venue, {
+    Show.belongsTo(models.Venue, {
       foreignKey: 'VenueId',
     });
 
-    Event.belongsToMany(models.Band, {
+    Show.belongsToMany(models.Band, {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
-      through: 'EventsBands',
+      through: 'ShowsBands',
     });
   };
 
-  return Event;
+  return Show;
 };

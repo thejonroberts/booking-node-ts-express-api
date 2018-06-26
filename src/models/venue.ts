@@ -17,18 +17,18 @@ export default (sequelize: Sequelize.Sequelize) => {
   const Venue = sequelize.define<VenueInstance, IVenueAttributes>('Venue', attributes);
 
   Venue.associate = models => {
-    Venue.belongsToMany(models.Genre, {
-      onDelete: 'CASCADE',
-      onUpdate: 'CASCADE',
-      through: 'VenuesGenres',
-    });
-
-    Venue.hasMany(models.Event, {
+    Venue.hasMany(models.Show, {
       foreignKey: 'VenueId',
     });
 
     Venue.belongsTo(models.Address, {
       foreignKey: 'AddressId',
+    });
+
+    Venue.belongsToMany(models.Genre, {
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+      through: 'VenuesGenres',
     });
 
     Venue.belongsToMany(models.User, {

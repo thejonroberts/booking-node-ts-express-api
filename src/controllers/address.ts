@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
+// TODO: http://docs.sequelizejs.com/manual/tutorial/models-definition.html#validations
+
 export function getAll(req: Request, res: Response, next: NextFunction): void {
   const { Address } = req.app.get('models');
   Address.findAll()
@@ -11,7 +13,7 @@ export function getAll(req: Request, res: Response, next: NextFunction): void {
     });
 }
 
-export function create(req: Request, res: Response, next: NextFunction): void {
+export function create(req: Request, res: Response, next: NextFunction) {
   const { Address } = req.app.get('models');
   const address = new Address(req.body);
   address

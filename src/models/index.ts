@@ -13,27 +13,24 @@ import ShowFactory from '../models/show';
 import UserFactory from '../models/user';
 import VenueFactory from '../models/venue';
 
-const operatorsAliases = {
+const operatorsAliases: Sequelize.OperatorsAliases = {
+  // NOTE: http://docs.sequelizejs.com/manual/tutorial/querying.html#operators-aliases
   $and: Sequelize.Op.and,
   $eq: Sequelize.Op.eq,
-  $gt: Sequelize.Op.gt,
-  $gte: Sequelize.Op.gte,
-  $iLike: Sequelize.Op.iLike,
   $in: Sequelize.Op.in,
-  $is: Sequelize.Op.is,
   $like: Sequelize.Op.like,
-  $lt: Sequelize.Op.lt,
-  $lte: Sequelize.Op.lte,
-  $ne: Sequelize.Op.ne,
   $or: Sequelize.Op.or,
 };
 
-const define = {
+const define: Sequelize.DefineOptions<any> = {
+  // TODO: NOTE: link to list here
   paranoid: true,
   timestamps: true,
 };
 
-const sequelize = new Sequelize(config.url || process.env.DATABASE_CONNECTION_URI, { operatorsAliases, define });
+// NOTE: http://docs.sequelizejs.com/class/lib/sequelize.js~Sequelize.html
+const sequelize: Sequelize.Sequelize =
+  new Sequelize(config.url || process.env.DATABASE_CONNECTION_URI, { operatorsAliases, define });
 
 const db = {
   Address: AddressFactory(sequelize),
@@ -46,9 +43,10 @@ const db = {
   sequelize,
 };
 
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
+Object.keys(db).forEach((dbKey): void => {
+  // TODO: how to type to account for non-models
+  if (db[dbKey].associate) {
+    db[dbKey].associate(db);
   }
 });
 

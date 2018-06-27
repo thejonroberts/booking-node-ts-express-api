@@ -1,20 +1,20 @@
 import * as Sequelize from 'sequelize';
 
-interface IVenueAttributes {
+interface VenueAttributes {
   AddressId?: number;
   name?: string;
 }
 
-type VenueInstance = Sequelize.Instance<IVenueAttributes> & IVenueAttributes;
+type VenueInstance = Sequelize.Instance<VenueAttributes> & VenueAttributes;
 
 export default (sequelize: Sequelize.Sequelize) => {
 
-  const attributes: SequelizeAttributes<IVenueAttributes> = {
+  const attributes: SequelizeAttributes<VenueAttributes> = {
     AddressId: Sequelize.INTEGER,
     name: Sequelize.STRING,
   };
 
-  const Venue = sequelize.define<VenueInstance, IVenueAttributes>('Venue', attributes);
+  const Venue = sequelize.define<VenueInstance, VenueAttributes>('Venue', attributes);
 
   Venue.associate = models => {
     Venue.hasMany(models.Show, {

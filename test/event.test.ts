@@ -54,7 +54,7 @@ describe('POST /shows', () => {
 
 const showUpdate = {
   VenueId: 2,
-  description: 'A hootin tootin good time',
+  description: 'A really good time',
   endsAt: new Date('January 17, 2020 23:59:00').toISOString(),
   startsAt: new Date('January 17, 2020 02:00:00').toISOString(),
   title: 'Champagne Jam',

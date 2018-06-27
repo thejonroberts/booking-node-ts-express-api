@@ -22,7 +22,8 @@
     "indent": [true, "spaces", 2],
     "semicolon": [true, "always"],
     "no-trailing-whitespace": true,
-    "linebreak-style": [true, "LF"]
+    "linebreak-style": [true, "LF"],
+    "interface-name": false
   },
   "jsRules": {
     "no-unused-variable": false,

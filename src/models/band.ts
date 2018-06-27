@@ -1,6 +1,6 @@
 import * as Sequelize from 'sequelize';
 
-interface IBandAttributes {
+interface BandAttributes {
   GenreId?: number;
   bandcamp?: string;
   label?: string;
@@ -8,11 +8,11 @@ interface IBandAttributes {
   website?: string;
 }
 
-type BandInstance = Sequelize.Instance<IBandAttributes> & IBandAttributes;
+type BandInstance = Sequelize.Instance<BandAttributes> & BandAttributes;
 
 export default (sequelize: Sequelize.Sequelize) => {
 
-  const attributes: SequelizeAttributes<IBandAttributes> = {
+  const attributes: SequelizeAttributes<BandAttributes> = {
     GenreId: Sequelize.INTEGER,
     bandcamp: Sequelize.STRING,
     label: Sequelize.STRING,
@@ -20,7 +20,7 @@ export default (sequelize: Sequelize.Sequelize) => {
     website: Sequelize.STRING,
   };
 
-  const Band = sequelize.define<BandInstance, IBandAttributes>('Band', attributes);
+  const Band = sequelize.define<BandInstance, BandAttributes>('Band', attributes);
 
   Band.associate = models => {
     Band.belongsTo(models.Genre, {

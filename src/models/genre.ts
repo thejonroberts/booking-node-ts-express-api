@@ -1,18 +1,18 @@
 import * as Sequelize from 'sequelize';
 
-interface IGenreAttributes {
+interface GenreAttributes {
   name?: string;
 }
 
-type GenreInstance = Sequelize.Instance<IGenreAttributes> & IGenreAttributes;
+type GenreInstance = Sequelize.Instance<GenreAttributes> & GenreAttributes;
 
 export default (sequelize: Sequelize.Sequelize) => {
 
-  const attributes: SequelizeAttributes<IGenreAttributes> = {
+  const attributes: SequelizeAttributes<GenreAttributes> = {
     name: Sequelize.STRING,
   };
 
-  const Genre = sequelize.define<GenreInstance, IGenreAttributes>('Genre', attributes);
+  const Genre = sequelize.define<GenreInstance, GenreAttributes>('Genre', attributes);
 
   // {
   //   "error": {

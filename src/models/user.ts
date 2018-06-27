@@ -1,6 +1,6 @@
 import * as Sequelize from 'sequelize';
 
-interface IUserAttributes {
+interface UserAttributes {
   AddressId?: number;
   email?: string;
   firstName?: string;
@@ -11,11 +11,11 @@ interface IUserAttributes {
   username?: string;
 }
 
-type UserInstance = Sequelize.Instance<IUserAttributes> & IUserAttributes;
+type UserInstance = Sequelize.Instance<UserAttributes> & UserAttributes;
 
 export default (sequelize: Sequelize.Sequelize) => {
 
-  const attributes: SequelizeAttributes<IUserAttributes> = {
+  const attributes: SequelizeAttributes<UserAttributes> = {
     AddressId: Sequelize.INTEGER,
     email: Sequelize.STRING,
     firstName: Sequelize.STRING,
@@ -26,7 +26,7 @@ export default (sequelize: Sequelize.Sequelize) => {
     username: Sequelize.TEXT,
   };
 
-  const User = sequelize.define<UserInstance, IUserAttributes>('User', attributes);
+  const User = sequelize.define<UserInstance, UserAttributes>('User', attributes);
 
   User.associate = models => {
     User.hasOne(models.Address, {

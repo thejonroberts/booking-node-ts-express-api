@@ -1,6 +1,6 @@
 import * as Sequelize from 'sequelize';
 
-interface IShowAttributes {
+interface ShowAttributes {
   VenueId?: number;
   description?: string;
   endsAt?: string;
@@ -8,11 +8,11 @@ interface IShowAttributes {
   title?: string;
 }
 
-type ShowInstance = Sequelize.Instance<IShowAttributes> & IShowAttributes;
+type ShowInstance = Sequelize.Instance<ShowAttributes> & ShowAttributes;
 
 export default (sequelize: Sequelize.Sequelize) => {
 
-  const attributes: SequelizeAttributes<IShowAttributes> = {
+  const attributes: SequelizeAttributes<ShowAttributes> = {
     VenueId: Sequelize.INTEGER,
     description: Sequelize.STRING,
     endsAt: Sequelize.DATE,
@@ -20,7 +20,7 @@ export default (sequelize: Sequelize.Sequelize) => {
     title: Sequelize.STRING,
   };
 
-  const Show = sequelize.define<ShowInstance, IShowAttributes>('Show', attributes);
+  const Show = sequelize.define<ShowInstance, ShowAttributes>('Show', attributes);
 
   Show.associate = models => {
     // TODO: this isn't working

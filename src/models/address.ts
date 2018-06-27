@@ -1,6 +1,6 @@
 import * as Sequelize from 'sequelize';
 
-interface IAddressAttributes {
+interface AddressAttributes {
   id?: string;
   city?: string;
   placeId?: number;
@@ -11,11 +11,11 @@ interface IAddressAttributes {
   zipCode?: number;
 }
 
-type AddressInstance = Sequelize.Instance<IAddressAttributes> & IAddressAttributes;
+type AddressInstance = Sequelize.Instance<AddressAttributes> & AddressAttributes;
 
 export default (sequelize: Sequelize.Sequelize) => {
 
-  const attributes: SequelizeAttributes<IAddressAttributes> = {
+  const attributes: SequelizeAttributes<AddressAttributes> = {
     city: Sequelize.STRING,
     placeId: Sequelize.INTEGER,
     stateCode: Sequelize.STRING,
@@ -25,7 +25,7 @@ export default (sequelize: Sequelize.Sequelize) => {
     zipCode: Sequelize.STRING,
   };
 
-  const Address = sequelize.define<AddressInstance, IAddressAttributes>('Address', attributes);
+  const Address = sequelize.define<AddressInstance, AddressAttributes>('Address', attributes);
 
   Address.associate = models => {
     Address.hasMany(models.User, {

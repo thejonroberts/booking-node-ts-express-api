@@ -16,14 +16,18 @@ class App {
 
   constructor() {
     this.app = express();
+    this.config();
     this.middleware();
     this.routes();
     this.errors();
   }
 
-  private middleware(): void {
+  private config(): void {
     this.app.set('port', process.env.PORT || 3000);
     this.app.set('host', process.env.HOST || '127.0.0.1');
+  }
+
+  private middleware(): void {
     this.app.set('models', models);
     // HTTP Headers
     // Enable CORS from client-side - TODO check best practices / security

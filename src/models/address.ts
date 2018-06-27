@@ -1,6 +1,6 @@
 import * as Sequelize from 'sequelize';
 
-interface AddressAttributes {
+export interface AddressAttributes {
   id?: string;
   city?: string;
   placeId?: number;
@@ -13,6 +13,7 @@ interface AddressAttributes {
 
 type AddressInstance = Sequelize.Instance<AddressAttributes> & AddressAttributes;
 
+// todo no default exports
 export default (sequelize: Sequelize.Sequelize) => {
 
   const attributes: SequelizeAttributes<AddressAttributes> = {
@@ -28,7 +29,8 @@ export default (sequelize: Sequelize.Sequelize) => {
   const Address = sequelize.define<AddressInstance, AddressAttributes>('Address', attributes);
 
   Address.associate = models => {
-    // NOTE: was causing sync cyclic dependency error
+    // NOTE: was causing sequelize.sync cyclic dependency error, but not using
+    // sync currently...
     // Address.hasMany(models.User, {
     //   foreignKey: 'AddressId',
     // });

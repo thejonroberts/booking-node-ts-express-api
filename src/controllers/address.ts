@@ -1,14 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
+import { AddressAttributes } from '../models/address';
 
 // TODO: http://docs.sequelizejs.com/manual/tutorial/models-definition.html#validations
-
 export function getAll(req: Request, res: Response, next: NextFunction): void {
   const { Address } = req.app.get('models');
   Address.findAll()
-    .then(data => {
+    .then((data: AddressAttributes[]): void => {
       res.status(200).json(data);
     })
-    .catch(err => {
+    .catch((err: Error) => {
       next(err);
     });
 }
@@ -18,10 +18,10 @@ export function create(req: Request, res: Response, next: NextFunction) {
   const address = new Address(req.body);
   address
     .save()
-    .then(response => {
+    .then((response: AddressAttributes) => {
       res.status(200).json(response);
     })
-    .catch(err => {
+    .catch((err: Error) => {
       next(err);
     });
 }
@@ -29,10 +29,11 @@ export function create(req: Request, res: Response, next: NextFunction) {
 export function getId(req: Request, res: Response, next: NextFunction): void {
   const { Address } = req.app.get('models');
   Address.findById(req.params.id, {})
-    .then(data => {
+  // TODO overload / include associations in type??
+    .then((data: AddressAttributes): void => {
       res.status(200).json(data);
     })
-    .catch(err => {
+    .catch((err: Error) => {
       next(err);
     });
 }
@@ -49,13 +50,13 @@ export function updateId(
       id: req.params.id,
     },
   })
-    .then(response => {
+    .then((response: AddressAttributes) => {
       res
       .status(200)
       .json(response);
     })
 
-    .catch(err => {
+    .catch((err: Error) => {
       next(err);
     });
 }
@@ -70,10 +71,10 @@ export function deleteId(
     returning: true,
     where: { id: req.params.id },
   })
-    .then(response => {
+    .then((response: number[]) => {
       res.status(200).json(response);
     })
-    .catch(err => {
+    .catch((err: Error) => {
       next(err);
     });
 }

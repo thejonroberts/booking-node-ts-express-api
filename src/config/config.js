@@ -20,6 +20,29 @@ switch (env) {
     url = 'postgres://postgres:postgres@localhost:5432/booking';
 }
 
+// compatibility with sequelize cli for migrations, etc...
 module.exports = {
-    url,
+  development: {
+    database: 'booking',
+    dialect: 'postgres',
+    host: '127.0.0.1',
+  },
+  production: {
+    use_env_variable: 'DATABASE_URL',
+  },
+  test: {
+    database: 'booking',
+    dialect: 'postgres',
+    host: '127.0.0.1',
+    port: process.env.TEST_DB_PORT || 5432,
+  },
+  testing: {
+    database: 'travis_ci_test',
+    dialect: 'postgres',
+    host: '127.0.0.1',
+    password: process.env.DB_PASS || null,
+    port: process.env.DB_PORT || 5432,
+    username: process.env.DB_USER || 'postgres',
+  },
+  url,
 };

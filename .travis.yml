@@ -2,18 +2,16 @@ language: node_js
 nvm:
 - 10.2.1
 env:
-- NODE_ENV=test
+- NODE_ENV=testing
 global:
-- PGPORT=5433
-- CI_DB_USERNAME='postgres'
-- CI_DB_PASSWORD=null
-- CI_DB_NAME='travis_ci_test'
-- CI_DB_PORT=5433
+- DB_NAME='travis_ci_test'
+- DB_PORT=5433
 install: npm install
 services:
 - postgresql
 before_script:
 - psql -c 'create database travis_ci_test;' -U postgres
+- npm run build
 - npm run reset
 script: npm test
 after_success:

@@ -11,8 +11,8 @@ services:
 - postgresql
 before_script:
 - psql -c 'create database travis_ci_test;' -U postgres
-- npm run build
 - npm run reset
+- npm run build
 script: npm test
 after_success:
 - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && npm run coverage

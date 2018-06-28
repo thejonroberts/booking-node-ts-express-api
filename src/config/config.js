@@ -28,10 +28,10 @@ module.exports = {
     host: '127.0.0.1',
   },
   production: {
-    use_env_variable: 'DATABASE_URL',
+    use_env_variable: process.env.DATABASE_URL,
   },
   test: {
-    database: 'booking',
+    database: 'booking_test',
     dialect: 'postgres',
     host: '127.0.0.1',
     port: process.env.TEST_DB_PORT || 5432,

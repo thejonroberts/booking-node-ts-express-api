@@ -6,6 +6,8 @@ import app from '../dist/server';
 const expect = chai.expect;
 const accept = 'application/json';
 
+import { AddressAttributes } from '../src/models/address';
+
 describe('GET /addresses', () => {
   it('responds with json array', done => {
     request(app)
@@ -13,7 +15,7 @@ describe('GET /addresses', () => {
       .set('Accept', accept)
       .expect('Content-Type', /json/)
       .expect(200)
-      .end((err, res) => {
+      .end((err: Error, res) => {
         if (err) {return done(err); }
         expect(res.body).to.be.an('array');
         done();
@@ -21,11 +23,11 @@ describe('GET /addresses', () => {
   });
 });
 
-let createdId;
+let createdId: number;
 
 describe('POST /addresses', () => {
   it('responds with created address', done => {
-    const newAddress = {
+    const newAddress: AddressAttributes = {
       city: 'Nashville',
       placeId: null,
       stateCode: 'TN',
@@ -56,7 +58,7 @@ describe('POST /addresses', () => {
   });
 });
 
-const addressUpdate = {
+const addressUpdate: AddressAttributes = {
   city: 'Memphis',
   placeId: 56,
   stateCode: 'TX',

@@ -8,7 +8,7 @@ export interface AddressAttributes {
   street?: string;
   streetTwo?: string;
   timeZone?: string;
-  zipCode?: number;
+  zipCode?: string;
 }
 
 type AddressInstance = Sequelize.Instance<AddressAttributes> & AddressAttributes;

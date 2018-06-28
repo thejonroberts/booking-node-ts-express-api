@@ -23,14 +23,19 @@ const operatorsAliases: Sequelize.OperatorsAliases = {
 };
 
 const define: Sequelize.DefineOptions<any> = {
-  // TODO: NOTE: link to options list here
   paranoid: true,
   timestamps: true,
 };
 
+const options: Sequelize.Options = {
+  // http://sequelize.readthedocs.io/en/latest/api/sequelize/index.html
+  define,
+  operatorsAliases,
+};
+
 // NOTE: http://docs.sequelizejs.com/class/lib/sequelize.js~Sequelize.html
 const sequelize: Sequelize.Sequelize =
-  new Sequelize(config.url || process.env.DATABASE_CONNECTION_URI, { operatorsAliases, define });
+  new Sequelize(config.url || process.env.DATABASE_CONNECTION_URI, options);
 
 // NOTE: https://stackoverflow.com/questions/50377182/sequelize-import-having-an-issue-with-typescript
 interface DbMember {

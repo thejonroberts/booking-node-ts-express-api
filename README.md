@@ -12,7 +12,7 @@ It uses express, postgres, and sequelize, and is written in typescript (mostly).
 
 I'm using [nvm](https://github.com/creationix/nvm) for node version management. If you have that setup, hit `nvm use` and you're good to `npm install`.
 
-You wil want to install global versions of typescript, sequelize-cli, tslint, and concurrently packages, `npm link` them, or change the scripts to use the node_modules/.bin files.
+You wil want to install global versions of typescript, sequelize-cli, and tslint packages, `npm link` them, or change the scripts to use the node_modules/.bin files.
 
 Environment variables are kept in a dotenv file (.env), which is git-ignored. There is a .env.example file to copy your machine.
 

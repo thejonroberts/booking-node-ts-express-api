@@ -6,6 +6,8 @@ import app from '../dist/server';
 const expect = chai.expect;
 const accept = 'application/json';
 
+import { ShowAttributes } from '../src/models/show';
+
 describe('GET /shows', () => {
   it('responds with json array', done => {
     request(app)
@@ -21,11 +23,11 @@ describe('GET /shows', () => {
   });
 });
 
-let createdId;
+let createdId: number;
 
 describe('POST /shows', () => {
   it('responds with created show', done => {
-    const newShow = {
+    const newShow: ShowAttributes = {
       VenueId: 1,
       description: 'A smasher',
       endsAt: new Date('December 17, 2016 23:59:00').toISOString(),
@@ -52,7 +54,7 @@ describe('POST /shows', () => {
   });
 });
 
-const showUpdate = {
+const showUpdate: ShowAttributes = {
   VenueId: 2,
   description: 'A really good time',
   endsAt: new Date('January 17, 2020 23:59:00').toISOString(),

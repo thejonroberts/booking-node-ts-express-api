@@ -6,6 +6,8 @@ import app from '../dist/server';
 const expect = chai.expect;
 const accept = 'application/json';
 
+import { BandAttributes } from '../src/models/band';
+
 describe('GET /bands', () => {
   it('responds with json array', done => {
     request(app)
@@ -21,11 +23,11 @@ describe('GET /bands', () => {
   });
 });
 
-let createdId;
+let createdId: number;
 
 describe('POST /bands', () => {
   it('responds with created band', done => {
-    const newBand = {
+    const newBand: BandAttributes = {
       GenreId: 1,
       bandcamp: 'badtestband.bandcamp.com',
       label: 'in the red',
@@ -52,7 +54,7 @@ describe('POST /bands', () => {
   });
 });
 
-const bandUpdate = {
+const bandUpdate: BandAttributes = {
   GenreId: 2,
   bandcamp: 'badtestband.bandcamp.com',
   label: 'in the red',

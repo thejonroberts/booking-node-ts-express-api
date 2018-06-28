@@ -21,7 +21,7 @@ describe('GET /genres', () => {
   });
 });
 
-let createdId;
+let createdId: number;
 
 describe('POST /genres', () => {
   it('responds with created genre', done => {

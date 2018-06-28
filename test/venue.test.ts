@@ -6,6 +6,8 @@ import app from '../dist/server';
 const expect = chai.expect;
 const accept = 'application/json';
 
+import { VenueAttributes } from '../src/models/venue';
+
 describe('GET /venues', () => {
   it('responds with json array', done => {
     request(app)
@@ -21,11 +23,11 @@ describe('GET /venues', () => {
   });
 });
 
-let createdId;
+let createdId: number;
 
 describe('POST /venues', () => {
   it('responds with created venue', done => {
-    const newVenue = {
+    const newVenue: VenueAttributes = {
       AddressId: 1,
       name: 'Mutiny',
     };
@@ -45,7 +47,7 @@ describe('POST /venues', () => {
   });
 });
 
-const venueUpdate = {
+const venueUpdate: VenueAttributes = {
   AddressId: 1,
   name: 'New Mutiny',
 };

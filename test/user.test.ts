@@ -7,6 +7,8 @@ import app from '../dist/server';
 const expect = chai.expect;
 const accept = 'application/json';
 
+import { UserAttributes } from '../src/models/user';
+
 describe('GET /users', () => {
   it('responds with json array', done => {
     request(app)
@@ -22,11 +24,11 @@ describe('GET /users', () => {
   });
 });
 
-let createdId;
+let createdId: number;
 
 describe('POST /users', () => {
   it('responds with created user', done => {
-    const newUser = {
+    const newUser: UserAttributes = {
       AddressId: 1,
       email: 'josh@josh.com',
       firstName: 'Josh',
@@ -59,7 +61,7 @@ describe('POST /users', () => {
   });
 });
 
-const userUpdate = {
+const userUpdate: UserAttributes = {
   AddressId: 2,
   email: 'josh-new-email@josh.com',
   firstName: 'Josh',

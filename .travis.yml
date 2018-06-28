@@ -1,7 +1,7 @@
 language: node_js
 nvm:
 - 10.2.1
-env:
+global:
 - NODE_ENV='test_travis'
 - PORT=3000
 - DB_NAME='booking_travis_ci'

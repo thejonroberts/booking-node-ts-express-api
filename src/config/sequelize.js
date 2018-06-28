@@ -26,7 +26,7 @@ switch (env) {
     url = 'postgres://postgres:postgres@localhost:5432/booking';
 }
 /* tslint:disable-next-line */
-console.log('HEROKU URL?', process.env.DATABASE_URL);
+console.log('HEROKU URL?', process.env.DATABASE_URL, url);
 
 // NOTE: compatibility with sequelize cli for migrations, etc...
 // could probably just set all to {url}
@@ -54,5 +54,5 @@ module.exports = {
     port,
   },
   // NOTE: this is what is used by the app (src/model/index)
-  url,
+  // url,
 };

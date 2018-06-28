@@ -9,11 +9,13 @@ const database = process.env.DB_NAME || 'booking';
 const user = process.env.DB_USER || 'postgres';
 const password = process.env.DB_PASS || 'postgres';
 const host = process.env.DB_HOST || 'localhost';
+// let url = process.env.DATABASE_URL || null;
 
-let url;
+// console.log({url});
+
 switch (env) {
   case 'production':
-    url = process.env.DATABASE_URL + ''; // NOTE: coerce to string for heroku
+    url = process.env.DATABASE_URL + ''; // NOTE: coerce to string for heroku?
     break;
   case 'testing':
   case 'test_travis':
@@ -23,8 +25,11 @@ switch (env) {
   default:
     url = 'postgres://postgres:postgres@localhost:5432/booking';
 }
+/* tslint:disable-next-line */
+console.log('HEROKU URL?', process.env.DATABASE_URL);
 
 // NOTE: compatibility with sequelize cli for migrations, etc...
+// could probably just set all to {url}
 module.exports = {
   development: {
     database,

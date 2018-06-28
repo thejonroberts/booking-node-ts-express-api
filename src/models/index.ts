@@ -31,7 +31,7 @@ const options: Sequelize.Options = {
 
 // NOTE: http://docs.sequelizejs.com/class/lib/sequelize.js~Sequelize.html
 const sequelize: Sequelize.Sequelize =
-  new Sequelize(config.url || process.env.DATABASE_CONNECTION_URI, options);
+  new Sequelize(config.url || process.env.DATABASE_URL, options);
 
 // NOTE: https://stackoverflow.com/questions/50377182/sequelize-import-having-an-issue-with-typescript
 interface DbMember {

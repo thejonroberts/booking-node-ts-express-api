@@ -2,17 +2,20 @@ language: node_js
 nvm:
 - 10.2.1
 env:
-- NODE_ENV=testing
-global:
-- DB_NAME='travis_ci_test'
+- NODE_ENV='test_travis'
+- PORT=3000
+- DB_NAME='booking_travis_ci'
+- DB_USER='postgres'
 - DB_PORT=5432
+- SESSION_SECRET='a_monkey_has_to_Eat'
+- SECRET_KEY='dbsecretkey123'
 install: npm install
 services:
 - postgresql
 before_script:
-- psql -c 'create database travis_ci_test;' -U postgres
-- npm run reset
+- psql -c 'create database booking_travis_ci;' -U postgres
 - npm run build
+- npm run reset
 script: npm test
 after_success:
 - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && npm run coverage

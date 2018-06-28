@@ -13,8 +13,8 @@
   },
   "main": "dist/server.js",
   "scripts": {
-    "postinstall": "npm run reset",
-    "prestart": "npm run teardown && npm run reset && npm run build",
+    "postinstall": "npm run build",
+    "prestart": "npm run build",
     "start": "node ./dist/server.js",
     "build": "tsc",
     "dev": "npm run watch-test",

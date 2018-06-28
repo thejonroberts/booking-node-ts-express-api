@@ -23,7 +23,7 @@ const operatorsAliases: Sequelize.OperatorsAliases = {
 };
 
 const define: Sequelize.DefineOptions<any> = {
-  // TODO: NOTE: link to list here
+  // TODO: NOTE: link to options list here
   paranoid: true,
   timestamps: true,
 };
@@ -32,7 +32,14 @@ const define: Sequelize.DefineOptions<any> = {
 const sequelize: Sequelize.Sequelize =
   new Sequelize(config.url || process.env.DATABASE_CONNECTION_URI, { operatorsAliases, define });
 
-const db = {
+// NOTE: https://stackoverflow.com/questions/50377182/sequelize-import-having-an-issue-with-typescript
+interface DbMember {
+  [key: string]: any;
+}
+
+let db: DbMember = {};
+
+db = {
   Address: AddressFactory(sequelize),
   Band: BandFactory(sequelize),
   Genre: GenreFactory(sequelize),
@@ -43,9 +50,10 @@ const db = {
   sequelize,
 };
 
-Object.keys(db).forEach((dbKey): void => {
-  // TODO: how to type to account for non-models
-  if (db[dbKey].associate) {
+Object.keys(db).forEach((dbKey: string): void => {
+  // NOTE:  https://basarat.gitbooks.io/typescript/content/docs/types/typeGuard.html
+  // - used in conjunction with DbMember interface above
+  if ('associate' in db[dbKey]) {
     db[dbKey].associate(db);
   }
 });

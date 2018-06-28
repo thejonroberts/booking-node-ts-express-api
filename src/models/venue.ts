@@ -1,6 +1,6 @@
 import * as Sequelize from 'sequelize';
 
-interface VenueAttributes {
+export interface VenueAttributes {
   AddressId?: number;
   name?: string;
 }

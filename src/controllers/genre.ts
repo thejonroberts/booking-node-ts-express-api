@@ -1,13 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
+import { GenreAttributes } from '../models/genre';
 
 export function getAll(req: Request, res: Response, next: NextFunction): void {
   const { Genre } = req.app.get('models');
   Genre.findAll()
-    .then(data => {
+    .then((data: GenreAttributes) => {
       res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }
 
@@ -16,11 +17,11 @@ export function create(req: Request, res: Response, next: NextFunction): void {
   const genre = new Genre(req.body);
   genre
     .save()
-    .then(response => {
-      res.status(200).json(response);
+    .then((data: GenreAttributes) => {
+      res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }
 
@@ -36,11 +37,11 @@ export function getId(req: Request, res: Response, next: NextFunction): void {
       },
     ],
   })
-    .then(data => {
+    .then((data: GenreAttributes) => {
       res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }
 
@@ -54,11 +55,11 @@ export function updateId(
     returning: true,
     where: { id: req.params.id },
   })
-    .then(response => {
-      res.status(200).json(response);
+    .then((data: GenreAttributes) => {
+      res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }
 
@@ -72,10 +73,10 @@ export function deleteId(
     returning: true,
     where: { id: req.params.id },
   })
-    .then(response => {
-      res.status(200).json(response);
+    .then((data: GenreAttributes) => {
+      res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }

@@ -1,6 +1,6 @@
 import * as Sequelize from 'sequelize';
 
-interface BandAttributes {
+export interface BandAttributes {
   GenreId?: number;
   bandcamp?: string;
   label?: string;

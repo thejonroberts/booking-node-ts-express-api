@@ -1,6 +1,6 @@
 import * as Sequelize from 'sequelize';
 
-interface GenreAttributes {
+export interface GenreAttributes {
   name?: string;
 }
 

@@ -1,13 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
+import { VenueAttributes } from '../models/venue';
 
 export function getAll(req: Request, res: Response, next: NextFunction): void {
   const { Venue } = req.app.get('models');
   Venue.findAll()
-    .then(data => {
+    .then((data: VenueAttributes) => {
       res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }
 
@@ -16,11 +17,11 @@ export function create(req: Request, res: Response, next: NextFunction): void {
   const venue = new Venue(req.body);
   venue
     .save()
-    .then(response => {
-      res.status(200).json(response);
+    .then((data: VenueAttributes) => {
+      res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }
 
@@ -29,11 +30,11 @@ export function getId(req: Request, res: Response, next: NextFunction): void {
   Venue.findById(req.params.id, {
     include: [{ model: Show }, { model: User }],
   })
-    .then(data => {
+    .then((data: VenueAttributes) => {
       res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }
 
@@ -47,11 +48,11 @@ export function updateId(
     returning: true,
     where: { id: req.params.id },
   })
-    .then(response => {
-      res.status(200).json(response);
+    .then((data: VenueAttributes) => {
+      res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }
 
@@ -65,10 +66,10 @@ export function deleteId(
     returning: true,
     where: { id: req.params.id },
   })
-    .then(response => {
-      res.status(200).json(response);
+    .then((data: VenueAttributes) => {
+      res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }

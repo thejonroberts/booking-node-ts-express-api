@@ -9,7 +9,7 @@ const database = process.env.DB_NAME || 'booking';
 const user = process.env.DB_USER || 'postgres';
 const password = process.env.DB_PASS || 'postgres';
 const host = process.env.DB_HOST || 'localhost';
-// let url = process.env.DATABASE_URL || null;
+let url = process.env.DATABASE_URL || null;
 
 // console.log({url});
 
@@ -39,7 +39,7 @@ module.exports = {
   },
   production: {
     // NOTE: basically so that I can use just one env variable with heroku,
-    use_env_variable: process.env.DATABASE_URL,
+    use_env_variable: url,
   },
   test_travis: {
     database,
@@ -54,5 +54,5 @@ module.exports = {
     port,
   },
   // NOTE: this is what is used by the app (src/model/index)
-  // url,
+  url,
 };

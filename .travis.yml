@@ -5,7 +5,7 @@ env:
 - NODE_ENV=testing
 global:
 - DB_NAME='travis_ci_test'
-- DB_PORT=5433
+- DB_PORT=5432
 install: npm install
 services:
 - postgresql

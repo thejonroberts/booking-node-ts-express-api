@@ -11,7 +11,7 @@ const host = process.env.DB_HOST || 'localhost';
 let url;
 switch (env) {
   case 'production':
-    url = process.env.DATABASE_URL;
+    url = process.env.DATABASE_URL + ''; // NOTE: coerce to string for heroku
     break;
   case 'testing':
   case 'test_travis':

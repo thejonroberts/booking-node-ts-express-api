@@ -1,7 +1,7 @@
 // tslint:disable no-implicit-dependencies
 import * as chai from 'chai';
 import request from 'supertest';
-import app from '../src/server';
+import app from '../server';
 
 const expect = chai.expect;
 const accept = 'application/json';

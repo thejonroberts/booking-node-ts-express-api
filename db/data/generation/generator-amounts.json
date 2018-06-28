@@ -3,14 +3,14 @@
     "numUsers": 200,
 		"numBands": 60,
 		"numVenues": 10,
-		"numEvents": 20,
+		"numShows": 20,
 		"numGenres": 5,
     "numAddresses": 250,
-    "numEventBands": 100,
+    "numShowBands": 100,
     "numUsersBands": 150,
     "numUsersVenues": 30,
     "numVenueGenres": 20,
-    "maxBandsPerEvent": 6,
+    "maxBandsPerShow": 6,
     "maxUsersPerBand": 6,
     "maxUsersPerVenue": 3
 	}

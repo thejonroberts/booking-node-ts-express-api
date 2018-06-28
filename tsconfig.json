@@ -3,7 +3,7 @@
     /* Basic Options */
 
     /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */
-    "target": "es6",
+    "target": "ES2017",
 
     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
     "module": "commonjs",
@@ -11,10 +11,11 @@
     /* Specify library files to be included in the compilation. */
     // "lib": [],
 
-    /* TODO: false??? Allow javascript files to be compiled. */
+    /* Allow javascript files to be compiled. */
     "allowJs": true,
 
-    /* Report errors in .js files. */
+    /* TODO:
+     * Report errors in .js files. */
     // "checkJs": true
 
     /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
@@ -27,13 +28,14 @@
     // "declarationMap": true,
 
     /* Generates corresponding '.map' file. */
-    // "sourceMap": true,
+    "sourceMap": true,
 
-    /* TODO: webpack??? Concatenate and emit output to single file. */
+    /* TODO:
+     * Concatenate and emit output to single file. */
     // "outFile": "./",
 
     /* Redirect output structure to the directory. */
-    "outDir": "dist",
+    "outDir": "./dist/",
 
     /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
     // "rootDir": "./",
@@ -47,7 +49,8 @@
     /* Do not emit outputs. */
     // "noEmit": true,
 
-    /* TODO: best practices - Import emit helpers from 'tslib'. */
+    /* TODO: ???
+     * Import emit helpers from 'tslib'. */
     // "importHelpers": true,
 
     /* Provide full support for iterables in 'for-of', spread, and destructuring when targeting 'ES5' or 'ES3'. */
@@ -61,8 +64,9 @@
     /* Enable all strict type-checking options. */
     // "strict": true
 
-    /* TODO: Raise error on expressions and declarations with an implied 'any' type. */
-    // "noImplicitAny": true,
+    /* TODO:
+     * Raise error on expressions and declarations with an implied 'any' type. */
+    "noImplicitAny": true,
 
     /* Enable strict null checks. */
     // "strictNullChecks": true,
@@ -73,7 +77,8 @@
     /* Enable strict checking of property initialization in classes. */
     // "strictPropertyInitialization": true,
 
-    /* Raise error on 'this' expressions with an implied 'any' type. */
+    /* TODO:
+     * Raise error on 'this' expressions with an implied 'any' type. */
     // "noImplicitThis": true,
 
     /* Parse in strict mode and emit "use strict" for each source file. */
@@ -81,13 +86,16 @@
 
     /* Additional Checks */
 
-    /* Report errors on unused locals. */
+    /* TODO:
+     * Report errors on unused locals. */
     // "noUnusedLocals": true,
 
-    /* Report errors on unused parameters. */
+    /* TODO:
+     * Report errors on unused parameters. */
     // "noUnusedParameters": true,
 
-    /* Report error when not all code paths in function return a value. */
+    /* TODO:
+     * Report error when not all code paths in function return a value. */
     // "noImplicitReturns": true,
 
     /* Report errors for fallthrough cases in switch statement. */
@@ -146,5 +154,8 @@
     /* Enables experimental support for emitting type metadata for decorators. */
     // "emitDecoratorMetadata": true,
   },
-  "include": ["src/**/*"]
+  /* include test files for VSCode TS integration */
+  "include": ["src/**/*"],
+  /* exclude test files from compilation */
+  // "exclude": ["test/**/*.test.ts"]
 }

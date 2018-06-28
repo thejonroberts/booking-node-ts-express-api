@@ -14,12 +14,12 @@ for (let i = 0; i < seedGenres.length; i++) {
   const createdAt = faker.date.past().toISOString();
   const updatedAt = new Date().toISOString();
   genres.push({
+    createdAt,
     name,
     updatedAt,
-    createdAt,
   });
 }
 const genresJson = JSON.stringify(genres);
 fs.writeFile('./db/data/genres.json', genresJson, err => {
-  if (err) throw err;
+  if (err) { throw err; }
 });

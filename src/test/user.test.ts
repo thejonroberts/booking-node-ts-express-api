@@ -2,10 +2,12 @@
 // tslint:disable no-hardcoded-credentials
 import * as chai from 'chai';
 import request from 'supertest';
-import app from '../src/server';
+import app from '../server';
 
 const expect = chai.expect;
 const accept = 'application/json';
+
+import { UserAttributes } from '../models/user';
 
 describe('GET /users', () => {
   it('responds with json array', done => {
@@ -22,11 +24,11 @@ describe('GET /users', () => {
   });
 });
 
-let createdId;
+let createdId: number;
 
 describe('POST /users', () => {
   it('responds with created user', done => {
-    const newUser = {
+    const newUser: UserAttributes = {
       AddressId: 1,
       email: 'josh@josh.com',
       firstName: 'Josh',
@@ -59,7 +61,7 @@ describe('POST /users', () => {
   });
 });
 
-const userUpdate = {
+const userUpdate: UserAttributes = {
   AddressId: 2,
   email: 'josh-new-email@josh.com',
   firstName: 'Josh',

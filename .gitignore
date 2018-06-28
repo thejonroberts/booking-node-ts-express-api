@@ -51,11 +51,10 @@ Thumbs.db
 /css/***
 /dist/**/*
 
-# environment/config #
+# environment #
 ######################
 
-.env
-/config/config.json
+.env**
 
 # generated data #
 ##################

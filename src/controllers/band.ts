@@ -1,13 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
+import { BandAttributes } from '../models/band';
 
 export function getAll(req: Request, res: Response, next: NextFunction): void {
   const { Band } = req.app.get('models');
   Band.findAll()
-    .then(data => {
+    .then((data: BandAttributes[]) => {
       res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }
 
@@ -16,24 +17,24 @@ export function create(req: Request, res: Response, next: NextFunction): void {
   const band = new Band(req.body);
   band
     .save()
-    .then(response => {
-      res.status(200).json(response);
+    .then((data: BandAttributes) => {
+      res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }
 
 export function getId(req: Request, res: Response, next: NextFunction): void {
-  const { Band, Event, User } = req.app.get('models');
+  const { Band, Show, User } = req.app.get('models');
   Band.findById(req.params.id, {
-    include: [{ model: User }, { model: Event }],
+    include: [{ model: User }, { model: Show }],
   })
-    .then(data => {
+    .then((data: BandAttributes) => {
       res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }
 
@@ -44,11 +45,11 @@ export function updateId(
 ): void {
   const { Band } = req.app.get('models');
   Band.update(req.body, { returning: true, where: { id: req.params.id } })
-    .then(response => {
-      res.status(200).json(response);
+    .then((data: BandAttributes) => {
+      res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }
 
@@ -59,10 +60,10 @@ export function deleteId(
 ): void {
   const { Band } = req.app.get('models');
   Band.destroy({ returning: true, where: { id: req.params.id } })
-    .then(response => {
-      res.status(200).json(response);
+    .then((data: BandAttributes) => {
+      res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }

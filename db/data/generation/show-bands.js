@@ -1,22 +1,22 @@
 'use strict';
 const faker = require('faker');
 const {
-  amounts: { numEvents, numBands, maxBandsPerEvent },
+  amounts: { numShows, numBands, maxBandsPerShow },
 } = require('./generator-amounts.json');
 let fs = require('fs');
-let eventBands = [];
-for (let k = 1; k <= numEvents; k++) {
-  let EventId = k;
-  let bandsAtEvent = Math.floor(Math.random() * maxBandsPerEvent) + 1;
+let showBands = [];
+for (let k = 1; k <= numShows; k++) {
+  let ShowId = k;
+  let bandsAtShow = Math.floor(Math.random() * maxBandsPerShow) + 1;
   let previousBandIds = [];
-  for (let j = 0; j < bandsAtEvent; j++) {
+  for (let j = 0; j < bandsAtShow; j++) {
     let BandId = Math.floor(Math.random() * numBands) + 1;
     if (previousBandIds.indexOf(BandId) === -1) {
       previousBandIds.push(BandId);
       let createdAt = faker.date.past().toISOString();
       let updatedAt = new Date().toISOString();
-      eventBands.push({
-        EventId,
+      showBands.push({
+        ShowId,
         BandId,
         updatedAt,
         createdAt,
@@ -24,7 +24,7 @@ for (let k = 1; k <= numEvents; k++) {
     }
   }
 }
-const eventBandsJson = JSON.stringify(eventBands);
-fs.writeFile('./db/data/event-bands.json', eventBandsJson, err => {
+const showBandsJson = JSON.stringify(showBands);
+fs.writeFile('./db/data/show-bands.json', showBandsJson, err => {
   if (err) throw err;
 });

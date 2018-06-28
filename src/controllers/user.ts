@@ -1,13 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
+import { UserAttributes } from '../models/user';
 
 export function getAll(req: Request, res: Response, next: NextFunction): void {
   const { User } = req.app.get('models');
   User.findAll()
-    .then(data => {
+    .then((data: UserAttributes) => {
       res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }
 
@@ -16,11 +17,11 @@ export function create(req: Request, res: Response, next: NextFunction): void {
   const user = new User(req.body);
   user
     .save()
-    .then(response => {
-      res.status(200).json(response);
+    .then((data: UserAttributes) => {
+      res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }
 
@@ -29,11 +30,11 @@ export function getId(req: Request, res: Response, next: NextFunction): void {
   User.findById(req.params.id, {
     include: [{ model: Band }, { model: Venue }],
   })
-    .then(data => {
+    .then((data: UserAttributes) => {
       res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }
 
@@ -47,11 +48,11 @@ export function updateId(
     returning: true,
     where: { id: req.params.id },
   })
-    .then(response => {
-      res.status(200).json(response);
+    .then((data: UserAttributes) => {
+      res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }
 
@@ -65,10 +66,10 @@ export function deleteId(
     returning: true,
     where: { id: req.params.id },
   })
-    .then(response => {
-      res.status(200).json(response);
+    .then((data: UserAttributes) => {
+      res.status(200).json(data);
     })
-    .catch(err => {
-      next(err);
+    .catch((error: Error) => {
+      next(error);
     });
 }

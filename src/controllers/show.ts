@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
-import { GenreAttributes } from '../models/genre';
+import { ShowAttributes } from '../models/show';
 
 export function getAll(req: Request, res: Response, next: NextFunction): void {
-  const { Genre } = req.app.get('models');
-  Genre.findAll()
-    .then((data: GenreAttributes) => {
+  const { Show } = req.app.get('models');
+  Show.findAll()
+    .then((data: ShowAttributes) => {
       res.status(200).json(data);
     })
     .catch((error: Error) => {
@@ -13,11 +13,11 @@ export function getAll(req: Request, res: Response, next: NextFunction): void {
 }
 
 export function create(req: Request, res: Response, next: NextFunction): void {
-  const { Genre } = req.app.get('models');
-  const genre = new Genre(req.body);
-  genre
+  const { Show } = req.app.get('models');
+  const show = new Show(req.body);
+  show
     .save()
-    .then((data: GenreAttributes) => {
+    .then((data: ShowAttributes) => {
       res.status(200).json(data);
     })
     .catch((error: Error) => {
@@ -26,18 +26,11 @@ export function create(req: Request, res: Response, next: NextFunction): void {
 }
 
 export function getId(req: Request, res: Response, next: NextFunction): void {
-  const { Band, Genre, Venue } = req.app.get('models');
-  Genre.findById(req.params.id, {
-    include: [
-      {
-        model: Band,
-      },
-      {
-        model: Venue,
-      },
-    ],
+  const { Band, Show, Venue } = req.app.get('models');
+  Show.findById(req.params.id, {
+    include: [{ model: Band }, { model: Venue }],
   })
-    .then((data: GenreAttributes) => {
+    .then((data: ShowAttributes) => {
       res.status(200).json(data);
     })
     .catch((error: Error) => {
@@ -50,12 +43,12 @@ export function updateId(
   res: Response,
   next: NextFunction
 ): void {
-  const { Genre } = req.app.get('models');
-  Genre.update(req.body, {
+  const { Show } = req.app.get('models');
+  Show.update(req.body, {
     returning: true,
     where: { id: req.params.id },
   })
-    .then((data: GenreAttributes) => {
+    .then((data: ShowAttributes) => {
       res.status(200).json(data);
     })
     .catch((error: Error) => {
@@ -68,12 +61,12 @@ export function deleteId(
   res: Response,
   next: NextFunction
 ): void {
-  const { Genre } = req.app.get('models');
-  Genre.destroy({
+  const { Show } = req.app.get('models');
+  Show.destroy({
     returning: true,
     where: { id: req.params.id },
   })
-    .then((data: GenreAttributes) => {
+    .then((data: ShowAttributes) => {
       res.status(200).json(data);
     })
     .catch((error: Error) => {

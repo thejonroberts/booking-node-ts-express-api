@@ -1,5 +1,7 @@
-const dotenv = require('dotenv');
-dotenv.config();
+if (process.env.NODE_ENV !== 'production') {
+  const dotenv = require('dotenv');
+  dotenv.config();
+}
 const env = process.env.NODE_ENV || 'production';
 const port = process.env.DB_PORT || 5432;
 const dialect = process.env.DIALECT || 'postgres';

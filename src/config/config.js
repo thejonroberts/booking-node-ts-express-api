@@ -1,16 +1,13 @@
 module.exports = {
   development : {
     dialect : 'postgres',
-    operatorsAliases : false,
     url : 'postgres://postgres:postgres@localhost:5432/booking',
   },
   production : {
     dialect : 'postgres',
-    operatorsAliases : false,
   },
   test : {
     dialect : 'postgres',
-    operatorsAliases : false,
     url : 'postgres://postgres:postgres@localhost:5432/travis_ci_test',
   },
   testing: {

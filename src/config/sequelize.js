@@ -8,12 +8,15 @@ const user = process.env.DB_USER || 'postgres';
 const password = process.env.DB_PASS || 'postgres';
 const host = process.env.DB_HOST || 'localhost';
 
+console.log({env, port, database, user, password, host});
+
 let url;
 switch (env) {
   case 'production':
     url = process.env.DATABASE_URL;
     break;
   case 'testing':
+  case 'test_travis':
   case 'development':
     url = `postgres://${user}:${password}@${host}:${port}/${database}`;
     break;
@@ -30,6 +33,7 @@ module.exports = {
     port,
   },
   production: {
+    // NOTE: basically so that I can use just one env variable with heroku,
     use_env_variable: process.env.DATABASE_URL,
   },
   test_travis: {

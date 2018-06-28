@@ -9,13 +9,12 @@ const database = process.env.DB_NAME || 'booking';
 const user = process.env.DB_USER || 'postgres';
 const password = process.env.DB_PASS || 'postgres';
 const host = process.env.DB_HOST || 'localhost';
-// let url = process.env.DATABASE_URL || null;
 
-// console.log({url});
+let url = process.env.DATABASE_URL || null;
 
 switch (env) {
   case 'production':
-    url = process.env.DATABASE_URL + ''; // NOTE: coerce to string for heroku?
+    url = process.env.DATABASE_URL;
     break;
   case 'testing':
   case 'test_travis':
@@ -26,8 +25,7 @@ switch (env) {
     url = 'postgres://postgres:postgres@localhost:5432/booking';
 }
 /* tslint:disable-next-line */
-console.log('HEROKU URL?', process.env.DATABASE_URL);
-
+console.log({url});
 // NOTE: compatibility with sequelize cli for migrations, etc...
 // could probably just set all to {url}
 module.exports = {
@@ -39,7 +37,7 @@ module.exports = {
   },
   production: {
     // NOTE: basically so that I can use just one env variable with heroku,
-    use_env_variable: process.env.DATABASE_URL,
+    url,
   },
   test_travis: {
     database,

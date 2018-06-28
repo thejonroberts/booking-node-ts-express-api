@@ -8,8 +8,6 @@ const user = process.env.DB_USER || 'postgres';
 const password = process.env.DB_PASS || 'postgres';
 const host = process.env.DB_HOST || 'localhost';
 
-console.log({env, port, database, user, password, host});
-
 let url;
 switch (env) {
   case 'production':

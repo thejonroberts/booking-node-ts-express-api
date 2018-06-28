@@ -1,14 +1,15 @@
 language: node_js
 nvm:
 - 10.2.1
-global:
-- NODE_ENV='test_travis'
-- PORT=3000
-- DB_NAME='booking_travis_ci'
-- DB_USER='postgres'
-- DB_PORT=5432
-- SESSION_SECRET='a_monkey_has_to_Eat'
-- SECRET_KEY='dbsecretkey123'
+env:
+  global:
+  - NODE_ENV='test_travis'
+  - PORT=3000
+  - DB_NAME='booking_travis_ci'
+  - DB_USER='postgres'
+  - DB_PORT=5432
+  - SESSION_SECRET='a_monkey_has_to_Eat'
+  - SECRET_KEY='dbsecretkey123'
 install: npm install
 services:
 - postgresql

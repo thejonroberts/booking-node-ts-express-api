@@ -13,7 +13,7 @@
   },
   "main": "dist/server.js",
   "scripts": {
-    "postinstall": "npm run reset",
+    "postinstall": "npm run build",
     "prestart": "npm run teardown && npm run reset && npm run build",
     "start": "node ./dist/server.js",
     "build": "tsc",
@@ -23,8 +23,6 @@
     "test": "nyc --reporter=html --reporter=text mocha --recursive dist/test/**/*.test.js --exit",
     "watch-test": "mocha --watch-extensions ts --watch --require ts-node/register \"test/**/*.test.ts\"",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "drop": "node_modules/.bin/sequelize db:drop",
-    "create": "node_modules/.bin/sequelize db:create",
     "teardown": "node_modules/.bin/sequelize db:migrate:undo:all",
     "migrate": "node_modules/.bin/sequelize db:migrate",
     "seed": "node_modules/.bin/sequelize db:seed:all",

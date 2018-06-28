@@ -1,9 +1,4 @@
-import errorhandler from 'errorhandler';
 import app from './app';
-
-if (process.env.NODE_ENV === 'development') {
-  app.use(errorhandler());
-}
 
 const server = app.listen(app.get('port'), () => {
   /* tslint:disable-next-line */

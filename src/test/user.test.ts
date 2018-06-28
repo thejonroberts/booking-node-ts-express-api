@@ -2,12 +2,12 @@
 // tslint:disable no-hardcoded-credentials
 import * as chai from 'chai';
 import request from 'supertest';
-import app from '../dist/server';
+import app from '../server';
 
 const expect = chai.expect;
 const accept = 'application/json';
 
-import { UserAttributes } from '../src/models/user';
+import { UserAttributes } from '../models/user';
 
 describe('GET /users', () => {
   it('responds with json array', done => {

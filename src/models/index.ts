@@ -1,10 +1,5 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
-
 import Sequelize from 'sequelize';
-const env = process.env.NODE_ENV || 'development';
-import * as configByEnv from '../config/config';
-const config = configByEnv[env];
+import * as config from '../config/config';
 
 import AddressFactory from '../models/address';
 import BandFactory from '../models/band';
@@ -30,6 +25,7 @@ const define: Sequelize.DefineOptions<any> = {
 const options: Sequelize.Options = {
   // http://sequelize.readthedocs.io/en/latest/api/sequelize/index.html
   define,
+  logging: false,
   operatorsAliases,
 };
 
@@ -42,9 +38,7 @@ interface DbMember {
   [key: string]: any;
 }
 
-let db: DbMember = {};
-
-db = {
+const db: DbMember = {
   Address: AddressFactory(sequelize),
   Band: BandFactory(sequelize),
   Genre: GenreFactory(sequelize),

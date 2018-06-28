@@ -1,15 +1,17 @@
 // tslint:disable no-implicit-dependencies
 import * as chai from 'chai';
 import request from 'supertest';
-import app from '../dist/server';
+import app from '../server';
 
 const expect = chai.expect;
 const accept = 'application/json';
 
-describe('GET /genres', () => {
+import { VenueAttributes } from '../models/venue';
+
+describe('GET /venues', () => {
   it('responds with json array', done => {
     request(app)
-      .get('/genres')
+      .get('/venues')
       .set('Accept', accept)
       .expect('Content-Type', /json/)
       .expect(200)
@@ -23,51 +25,53 @@ describe('GET /genres', () => {
 
 let createdId: number;
 
-describe('POST /genres', () => {
-  it('responds with created genre', done => {
-    const newGenre = {
-      name: 'Jazz Fusion',
+describe('POST /venues', () => {
+  it('responds with created venue', done => {
+    const newVenue: VenueAttributes = {
+      AddressId: 1,
+      name: 'Mutiny',
     };
 
     request(app)
-      .post('/genres')
+      .post('/venues')
       .set('Accept', accept)
-      .send(newGenre)
+      .send(newVenue)
       .expect(200)
       .end((err, res) => {
         if (err) { return done(err); }
         expect(res.body).to.be.an('object');
         createdId = parseInt(res.body.id, 10);
-        expect(res.body.name).to.equal(newGenre.name);
+        expect(res.body.name).to.equal(newVenue.name);
         done();
       });
   });
 });
 
-const genreUpdate = {
-  name: 'Jazz Scat',
+const venueUpdate: VenueAttributes = {
+  AddressId: 1,
+  name: 'New Mutiny',
 };
 
-describe('PATCH /genres', () => {
-  it('updates the given genre id', done => {
+describe('PATCH /venues', () => {
+  it('updates the given venue id', done => {
     request(app)
-      .patch(`/genres/${createdId}`)
+      .patch(`/venues/${createdId}`)
       .set('Accept', accept)
-      .send(genreUpdate)
+      .send(venueUpdate)
       .expect(200)
       .end((err, res) => {
         if (err) { return done(err); }
         expect(res.body[1][0]).to.be.an('object');
-        expect(res.body[1][0].name).to.equal(genreUpdate.name);
+        expect(res.body[1][0].name).to.equal(venueUpdate.name);
         done();
       });
   });
 
   it('returns 0 rows updated for non-existent id', done => {
     request(app)
-      .patch(`/genres/${createdId + 10}`)
+      .patch(`/venues/${createdId + 10}`)
       .set('Accept', accept)
-      .send(genreUpdate)
+      .send(venueUpdate)
       .expect(200)
       .end((err, res) => {
         if (err) { return done(err); }
@@ -77,16 +81,16 @@ describe('PATCH /genres', () => {
   });
 });
 
-describe('DELETE /genres', () => {
-  it('deletes the given genre id', done => {
+describe('DELETE /venues', () => {
+  it('deletes the given venue id', done => {
     request(app)
-      .delete(`/genres/${createdId}`)
+      .delete(`/venues/${createdId}`)
       .set('Accept', accept)
       .expect(200)
       .end((err, res) => {
         if (err) { return done(err); }
         expect(res.body[0]).to.be.an('object');
-        expect(res.body[0].name).to.equal(genreUpdate.name);
+        expect(res.body[0].name).to.equal(venueUpdate.name);
         expect(res.body[0].deletedAt).to.be.a('string');
         done();
       });

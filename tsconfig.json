@@ -155,7 +155,7 @@
     // "emitDecoratorMetadata": true,
   },
   /* include test files for VSCode TS integration */
-  "include": ["src/**/*", "test/**/*"],
+  "include": ["src/**/*"],
   /* exclude test files from compilation */
-  "exclude": ["test/*"]
+  // "exclude": ["test/**/*.test.ts"]
 }

@@ -1,6 +1,6 @@
 # booking-node-api
 
-[![Coverage Status](https://coveralls.io/repos/github/thejonroberts/booking-node-api/badge.svg?branch=code-coverage-instanbul)](https://coveralls.io/github/thejonroberts/booking-node-api?branch=code-coverage-instanbul) [![Build Status](https://travis-ci.com/thejonroberts/booking-node-api.svg?branch=master)](https://travis-ci.com/thejonroberts/booking-node-api)
+[![Coverage Status](https://coveralls.io/repos/github/thejonroberts/booking-node-api/badge.svg?branch=master)](https://coveralls.io/github/thejonroberts/booking-node-api?branch=master) [![Build Status](https://travis-ci.com/thejonroberts/booking-node-api.svg?branch=master)](https://travis-ci.com/thejonroberts/booking-node-api)
 
 This is a node api, ostensibly for bands and venues to book shows. I mainly built it so that I could play around with some new front end tech. But, I ended up playing around with this a good deal, and plan to continue!
 

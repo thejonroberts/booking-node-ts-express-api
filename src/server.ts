@@ -10,8 +10,8 @@ server.on('error', (err: any) => {
   /* tslint:disable-next-line */
     console.log('Address in use, closing...');
     setTimeout(() => {
+      // NOTE: keeps watch-test script running instead of crashing.
       server.close();
-      // TODO: restart server???
     }, 1000);
   } else {
     /* tslint:disable-next-line */

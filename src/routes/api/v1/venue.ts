@@ -8,7 +8,7 @@ import {
   getAll,
   getId,
   updateId,
-} from '../../../controllers/venue';
+} from '../../../controllers/api/venue';
 
 venues
   .route('/')

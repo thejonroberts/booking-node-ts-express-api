@@ -1,7 +1,7 @@
 import { Router } from 'express';
 const user = Router();
 
-import { create, deleteId, getAll, getId, updateId } from '../../../controllers/user';
+import { create, deleteId, getAll, getId, updateId } from '../../../controllers/api/user';
 
 user
   .route('/')

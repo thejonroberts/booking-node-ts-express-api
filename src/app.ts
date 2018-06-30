@@ -28,8 +28,13 @@ class App {
   }
 
   private middleware(): void {
-    // DATABASE connection
-    // TODO: change name?  add models.on('error') handler?
+    /**
+     * NOTE: attaching the database / model instances to the express app here to
+     * this creates a singleton-esque setup.  However, we need the request.app
+     * object to access db. This leads to needing two controller setups for api
+     * & admin - each nearly identical, but ending with either res.send (api)
+     * or res.render (admin). Less than ideal!
+     */
     this.app.set('models', models);
 
     // HTTP Headers

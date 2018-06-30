@@ -6,7 +6,7 @@ import {
   getAll,
   getId,
   updateId,
-} from '../../../controllers/api/address';
+} from '../../controllers/api/address';
 
 // TODO: implement auth guards
 // const { isLoggedIn } = require('../controllers/authentication');

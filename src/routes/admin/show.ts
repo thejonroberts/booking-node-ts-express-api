@@ -1,16 +1,23 @@
 import { Router } from 'express';
-const band = Router();
+const show = Router();
 
-import { create, deleteId, getAll, getId, updateId } from '../../../controllers/api/band';
+import {
+  create,
+  deleteId,
+  getAll,
+  getId,
+  updateId,
+} from '../../controllers/api/show';
 
-band
+show
   .route('/')
   .get(getAll)
   .post(create);
-band
+
+show
   .route('/:id')
   .get(getId)
   .patch(updateId)
   .delete(deleteId);
 
-export default band;
+export default show;

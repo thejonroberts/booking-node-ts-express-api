@@ -48,7 +48,7 @@ const models: Model = {
 };
 
 Object.keys(models).forEach((modelKey: string): void => {
-  // NOTE:  https://basarat.gitbooks.io/typescript/content/docs/types/typeGuard.html
+  // NOTE: https://basarat.gitbooks.io/typescript/content/docs/types/typeGuard.html
   // - used in conjunction with Model interface above
   if ('associate' in models[modelKey]) {
     models[modelKey].associate(models);

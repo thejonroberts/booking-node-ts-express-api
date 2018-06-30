@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { AddressAttributes } from '../models/address';
+import { AddressAttributes } from '../../models/address';
 
 // TODO: http://docs.sequelizejs.com/manual/tutorial/models-definition.html#validations
 export function getAll(req: Request, res: Response, next: NextFunction): void {
@@ -27,7 +27,6 @@ export function create(req: Request, res: Response, next: NextFunction): void {
 
 export function getId(req: Request, res: Response, next: NextFunction): void {
   const { Address } = req.app.get('models');
-  // TODO overload / include associations in type??
   Address.findById(req.params.id, {})
   .then((data: AddressAttributes): void => {
     res.status(200).json(data);

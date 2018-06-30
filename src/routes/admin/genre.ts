@@ -7,7 +7,7 @@ import {
   getAll,
   getId,
   updateId,
-} from '../../../controllers/api/genre';
+} from '../../controllers/api/genre';
 
 genre
   .route('/')

@@ -1,16 +1,16 @@
 import { Router } from 'express';
-const band = Router();
+const user = Router();
 
-import { create, deleteId, getAll, getId, updateId } from '../../../controllers/api/band';
+import { create, deleteId, getAll, getId, updateId } from '../../controllers/api/user';
 
-band
+user
   .route('/')
   .get(getAll)
   .post(create);
-band
+user
   .route('/:id')
   .get(getId)
   .patch(updateId)
   .delete(deleteId);
 
-export default band;
+export default user;

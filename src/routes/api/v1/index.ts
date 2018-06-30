@@ -24,7 +24,7 @@ router.get('/api/v1/endpoints', (req: Request, res: Response, next: NextFunction
   next(res.status(200).json(routes));
 });
 
-router.use('./authentication', authentication);
+router.use('/authentication', authentication);
 router.use('/addresses', address);
 router.use('/bands', band);
 router.use('/shows', show);

@@ -7,7 +7,7 @@ import {
   getAll,
   getId,
   updateId,
-} from '../../../controllers/show';
+} from '../../../controllers/api/show';
 
 show
   .route('/')

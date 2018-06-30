@@ -1,24 +1,23 @@
 import { NextFunction, Request, Response } from 'express';
-import { BandAttributes } from '../models/band';
+import { GenreAttributes } from '../../models/genre';
 
 export function getAll(req: Request, res: Response, next: NextFunction): void {
-    const { Band } = req.app.get('models');
-    Band.findAll()
-    .then((data: BandAttributes[]) => {
+  const { Genre } = req.app.get('models');
+  Genre.findAll()
+    .then((data: GenreAttributes) => {
       res.status(200).json(data);
     })
-    // TODO: what is the proper sequelize error handling here?
     .catch((error: Error) => {
       next(error);
     });
 }
 
 export function create(req: Request, res: Response, next: NextFunction): void {
-  const { Band } = req.app.get('models');
-  const band = new Band(req.body);
-  band
+  const { Genre } = req.app.get('models');
+  const genre = new Genre(req.body);
+  genre
     .save()
-    .then((data: BandAttributes) => {
+    .then((data: GenreAttributes) => {
       res.status(200).json(data);
     })
     .catch((error: Error) => {
@@ -27,11 +26,18 @@ export function create(req: Request, res: Response, next: NextFunction): void {
 }
 
 export function getId(req: Request, res: Response, next: NextFunction): void {
-  const { Band, Show, User } = req.app.get('models');
-  Band.findById(req.params.id, {
-    include: [{ model: User }, { model: Show }],
+  const { Band, Genre, Venue } = req.app.get('models');
+  Genre.findById(req.params.id, {
+    include: [
+      {
+        model: Band,
+      },
+      {
+        model: Venue,
+      },
+    ],
   })
-    .then((data: BandAttributes) => {
+    .then((data: GenreAttributes) => {
       res.status(200).json(data);
     })
     .catch((error: Error) => {
@@ -44,9 +50,12 @@ export function updateId(
   res: Response,
   next: NextFunction
 ): void {
-  const { Band } = req.app.get('models');
-  Band.update(req.body, { returning: true, where: { id: req.params.id } })
-    .then((data: BandAttributes) => {
+  const { Genre } = req.app.get('models');
+  Genre.update(req.body, {
+    returning: true,
+    where: { id: req.params.id },
+  })
+    .then((data: GenreAttributes) => {
       res.status(200).json(data);
     })
     .catch((error: Error) => {
@@ -59,9 +68,12 @@ export function deleteId(
   res: Response,
   next: NextFunction
 ): void {
-  const { Band } = req.app.get('models');
-  Band.destroy({ returning: true, where: { id: req.params.id } })
-    .then((data: BandAttributes) => {
+  const { Genre } = req.app.get('models');
+  Genre.destroy({
+    returning: true,
+    where: { id: req.params.id },
+  })
+    .then((data: GenreAttributes) => {
       res.status(200).json(data);
     })
     .catch((error: Error) => {

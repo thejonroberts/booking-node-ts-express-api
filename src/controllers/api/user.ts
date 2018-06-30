@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
-import { VenueAttributes } from '../models/venue';
+import { UserAttributes } from '../../models/user';
 
 export function getAll(req: Request, res: Response, next: NextFunction): void {
-  const { Venue } = req.app.get('models');
-  Venue.findAll()
-    .then((data: VenueAttributes) => {
+  const { User } = req.app.get('models');
+  User.findAll()
+    .then((data: UserAttributes) => {
       res.status(200).json(data);
     })
     .catch((error: Error) => {
@@ -13,11 +13,11 @@ export function getAll(req: Request, res: Response, next: NextFunction): void {
 }
 
 export function create(req: Request, res: Response, next: NextFunction): void {
-  const { Venue } = req.app.get('models');
-  const venue = new Venue(req.body);
-  venue
+  const { User } = req.app.get('models');
+  const user = new User(req.body);
+  user
     .save()
-    .then((data: VenueAttributes) => {
+    .then((data: UserAttributes) => {
       res.status(200).json(data);
     })
     .catch((error: Error) => {
@@ -26,11 +26,11 @@ export function create(req: Request, res: Response, next: NextFunction): void {
 }
 
 export function getId(req: Request, res: Response, next: NextFunction): void {
-  const { Show, User, Venue } = req.app.get('models');
-  Venue.findById(req.params.id, {
-    include: [{ model: Show }, { model: User }],
+  const { Band, User, Venue } = req.app.get('models');
+  User.findById(req.params.id, {
+    include: [{ model: Band }, { model: Venue }],
   })
-    .then((data: VenueAttributes) => {
+    .then((data: UserAttributes) => {
       res.status(200).json(data);
     })
     .catch((error: Error) => {
@@ -43,12 +43,12 @@ export function updateId(
   res: Response,
   next: NextFunction
 ): void {
-  const { Venue } = req.app.get('models');
-  Venue.update(req.body, {
+  const { User } = req.app.get('models');
+  User.update(req.body, {
     returning: true,
     where: { id: req.params.id },
   })
-    .then((data: VenueAttributes) => {
+    .then((data: UserAttributes) => {
       res.status(200).json(data);
     })
     .catch((error: Error) => {
@@ -61,12 +61,12 @@ export function deleteId(
   res: Response,
   next: NextFunction
 ): void {
-  const { Venue } = req.app.get('models');
-  Venue.destroy({
+  const { User } = req.app.get('models');
+  User.destroy({
     returning: true,
     where: { id: req.params.id },
   })
-    .then((data: VenueAttributes) => {
+    .then((data: UserAttributes) => {
       res.status(200).json(data);
     })
     .catch((error: Error) => {

@@ -9,7 +9,7 @@ import user from './user';
 import venue from './venue';
 
 const router = Router();
-// TODO - convert req toLowerCase() ?
+// TODO: - convert req toLowerCase() ?
 router.get('/endpoints', (req: Request, res: Response, next: NextFunction) => {
   const routes = {
     endpoints: [

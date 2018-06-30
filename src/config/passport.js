@@ -1,5 +1,5 @@
 'use strict';
-// TODO ts for this file
+// TODO: ts for this file
 const bCrypt = require('bcrypt-nodejs');
 const passport = require('passport');
 const { Strategy } = require('passport-local');

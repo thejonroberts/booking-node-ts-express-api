@@ -3,7 +3,6 @@ nvm:
 - 10.2.1
 env:
   global:
-  # NOTE: should match .env.example for travis db.
   - NODE_ENV='test_travis'
   - PORT=3000
   - DB_NAME='booking_travis_ci'

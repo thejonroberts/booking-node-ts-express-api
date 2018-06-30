@@ -28,7 +28,10 @@ class App {
   }
 
   private middleware(): void {
+    // DATABASE connection
+    // TODO: change name?  add models.on('error') handler?
     this.app.set('models', models);
+
     // HTTP Headers
     // Enable CORS from client-side - TODO check best practices / security
     this.app.use(
@@ -67,7 +70,7 @@ class App {
         next();
       }
     );
-    // TODO express-validator
+    // TODO: express-validator
     this.app.use(validator());
 
   }
@@ -77,10 +80,10 @@ class App {
   }
 
   private errors(): void {
-    // TODO error handlers / logging
+    // TODO: error handlers / logging
     // http://thecodebarbarian.com/80-20-guide-to-express-error-handling.html
     this.app.use(
-      (error: any, request: Request, res: Response, next: NextFunction): void => {
+      (error: Error, request: Request, res: Response, next: NextFunction): void => {
         if (error) {
           res.send({ error });
         } else {
@@ -92,7 +95,7 @@ class App {
 
 export default new App().app;
 
-// DOCS - TODO - swagger-ui & swagger-jsonDoc
+// DOCS - TODO: - swagger-ui & swagger-jsonDoc
 // swaggerUi  require('swagger-ui-express');
 // const swaggerDocument = require('./config/swagger.json');
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

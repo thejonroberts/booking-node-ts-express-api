@@ -5,7 +5,7 @@ export function getAll(req: Request, res: Response, next: NextFunction): void {
     const { Band } = req.app.get('models');
     Band.findAll()
     .then((bands: BandAttributes[]) => {
-      res.render('index', {bands});
+      res.render('band/index', {bands});
     })
     // TODO: what is the proper sequelize error handling here?
     .catch((error: Error) => {

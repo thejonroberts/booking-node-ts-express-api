@@ -18,5 +18,5 @@
 	"eslint.enable": false,
   "eslint.autoFixOnSave": false,
   "tslint.jsEnable": true,
-
+  "puglint.enable": true
 }

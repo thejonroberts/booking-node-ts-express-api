@@ -2,17 +2,17 @@
 // tslint:disable no-hardcoded-credentials
 import * as chai from 'chai';
 import request from 'supertest';
-import app from '../server';
+import app from '../../../server';
 
 const expect = chai.expect;
 const accept = 'application/json';
 
-import { UserAttributes } from '../models/user';
+import { UserAttributes } from '../../../models/user';
 
-describe('GET /users', () => {
+describe('GET /api/v1/users', () => {
   it('responds with json array', done => {
     request(app)
-      .get('/users')
+      .get('/api/v1/users')
       .set('Accept', accept)
       .expect('Content-Type', /json/)
       .expect(200)
@@ -26,7 +26,7 @@ describe('GET /users', () => {
 
 let createdId: number;
 
-describe('POST /users', () => {
+describe('POST /api/v1/users', () => {
   it('responds with created user', done => {
     const newUser: UserAttributes = {
       AddressId: 1,
@@ -40,7 +40,7 @@ describe('POST /users', () => {
     };
 
     request(app)
-      .post('/users')
+      .post('/api/v1/users')
       .set('Accept', accept)
       .send(newUser)
       .expect(200)
@@ -72,10 +72,10 @@ const userUpdate: UserAttributes = {
   username: 'joshrips',
 };
 
-describe('PATCH /users', () => {
+describe('PATCH /api/v1/users', () => {
   it('updates the given user id', done => {
     request(app)
-      .patch(`/users/${createdId}`)
+      .patch(`/api/v1/users/${createdId}`)
       .set('Accept', accept)
       .send(userUpdate)
       .expect(200)
@@ -96,7 +96,7 @@ describe('PATCH /users', () => {
 
   it('returns 0 rows updated for non-existent id', done => {
     request(app)
-      .patch(`/users/${createdId + 10}`)
+      .patch(`/api/v1/users/${createdId + 10}`)
       .set('Accept', accept)
       .send(userUpdate)
       .expect(200)
@@ -108,10 +108,10 @@ describe('PATCH /users', () => {
   });
 });
 
-describe('DELETE /users', () => {
+describe('DELETE /api/v1/users', () => {
   it('deletes the given user id', done => {
     request(app)
-      .delete(`/users/${createdId}`)
+      .delete(`/api/v1/users/${createdId}`)
       .set('Accept', accept)
       .expect(200)
       .end((err, res) => {

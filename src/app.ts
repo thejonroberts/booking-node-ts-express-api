@@ -9,7 +9,7 @@ const env = dotenv.config();
 import './config/passport.js';
 
 import * as models from './models';
-import router from './routes';
+import router from './routes/index';
 
 class App {
   public app: Application;

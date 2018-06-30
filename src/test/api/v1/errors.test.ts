@@ -1,7 +1,7 @@
 // tslint:disable no-implicit-dependencies
 import * as chai from 'chai';
 import request from 'supertest';
-import app from '../server';
+import app from '../../../server';
 
 const expect = chai.expect;
 const accept = 'application/json';
@@ -9,7 +9,7 @@ const accept = 'application/json';
 describe('GET invalid route', () => {
   it('should return an error', done => {
     request(app)
-      .get('/garbage')
+      .get('/api/v1/garbage')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(404)

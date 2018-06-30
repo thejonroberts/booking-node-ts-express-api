@@ -1,17 +1,17 @@
 // tslint:disable no-implicit-dependencies
 import * as chai from 'chai';
 import request from 'supertest';
-import app from '../server';
+import app from '../../../server';
 
 const expect = chai.expect;
 const accept = 'application/json';
 
-import { BandAttributes } from '../models/band';
+import { BandAttributes } from '../../../models/band';
 
-describe('GET /bands', () => {
+describe('GET /api/v1/bands', () => {
   it('responds with json array', done => {
     request(app)
-      .get('/bands')
+      .get('/api/v1/bands')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
@@ -25,7 +25,7 @@ describe('GET /bands', () => {
 
 let createdId: number;
 
-describe('POST /bands', () => {
+describe('POST /api/v1/bands', () => {
   it('responds with created band', done => {
     const newBand: BandAttributes = {
       GenreId: 1,
@@ -36,7 +36,7 @@ describe('POST /bands', () => {
     };
 
     request(app)
-      .post('/bands')
+      .post('/api/v1/bands')
       .set('Accept', accept)
       .send(newBand)
       .expect(200)
@@ -62,10 +62,10 @@ const bandUpdate: BandAttributes = {
   website: 'www.badtestband.com',
 };
 
-describe('PATCH /bands', () => {
+describe('PATCH /api/v1/bands', () => {
   it('updates the given band id', done => {
     request(app)
-      .patch(`/bands/${createdId}`)
+      .patch(`/api/v1/bands/${createdId}`)
       .set('Accept', accept)
       .send(bandUpdate)
       .expect(200)
@@ -83,7 +83,7 @@ describe('PATCH /bands', () => {
 
   it('returns 0 rows updated for non-existent id', done => {
     request(app)
-      .patch(`/bands/${createdId + 10}`)
+      .patch(`/api/v1/bands/${createdId + 10}`)
       .set('Accept', accept)
       .send(bandUpdate)
       .expect(200)
@@ -95,10 +95,10 @@ describe('PATCH /bands', () => {
   });
 });
 
-describe('DELETE /bands', () => {
+describe('DELETE /api/v1/bands', () => {
   it('deletes the given band id', done => {
     request(app)
-      .delete(`/bands/${createdId}`)
+      .delete(`/api/v1/bands/${createdId}`)
       .set('Accept', accept)
       .expect(200)
       .end((err, res) => {

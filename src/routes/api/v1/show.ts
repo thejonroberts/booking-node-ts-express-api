@@ -1,16 +1,23 @@
 import { Router } from 'express';
-const user = Router();
+const show = Router();
 
-import { create, deleteId, getAll, getId, updateId } from '../controllers/user';
+import {
+  create,
+  deleteId,
+  getAll,
+  getId,
+  updateId,
+} from '../../../controllers/show';
 
-user
+show
   .route('/')
   .get(getAll)
   .post(create);
-user
+
+show
   .route('/:id')
   .get(getId)
   .patch(updateId)
   .delete(deleteId);
 
-export default user;
+export default show;

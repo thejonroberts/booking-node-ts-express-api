@@ -21,7 +21,7 @@
     "lint": "tslint --project . --fix -t stylish",
     "pretest": "npm run build",
     "test": "nyc --reporter=html --reporter=text mocha --recursive dist/test/**/*.test.js --exit",
-    "watch-test": "mocha --watch-extensions ts --watch --require ts-node/register \"test/**/*.test.ts\"",
+    "watch-test": "mocha --reporter dot --watch-extensions ts --watch --require ts-node/register \"src/test/**/*.test.ts\"",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "release": "standard-version",
     "teardown": "node_modules/.bin/sequelize db:migrate:undo:all",

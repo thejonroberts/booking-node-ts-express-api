@@ -1,17 +1,17 @@
 // tslint:disable no-implicit-dependencies
 import * as chai from 'chai';
 import request from 'supertest';
-import app from '../server';
+import app from '../../../server';
 
 const expect = chai.expect;
 const accept = 'application/json';
 
-import { AddressAttributes } from '../models/address';
+import { AddressAttributes } from '../../../models/address';
 
-describe('GET /addresses', () => {
+describe('GET /api/v1/addresses', () => {
   it('responds with json array', done => {
     request(app)
-      .get('/addresses')
+      .get('/api/v1/addresses')
       .set('Accept', accept)
       .expect('Content-Type', /json/)
       .expect(200)
@@ -25,7 +25,7 @@ describe('GET /addresses', () => {
 
 let createdId: number;
 
-describe('POST /addresses', () => {
+describe('POST /api/v1/addresses', () => {
   it('responds with created address', done => {
     const newAddress: AddressAttributes = {
       city: 'Nashville',
@@ -38,7 +38,7 @@ describe('POST /addresses', () => {
     };
 
     request(app)
-      .post('/addresses')
+      .post('/api/v1/addresses')
       .set('Accept', accept)
       .send(newAddress)
       .expect(200)
@@ -68,10 +68,10 @@ const addressUpdate: AddressAttributes = {
   zipCode: '55555',
 };
 
-describe('PATCH /addresses', () => {
+describe('PATCH /api/v1/addresses', () => {
   it('updates the given address id', done => {
     request(app)
-      .patch(`/addresses/${createdId}`)
+      .patch(`/api/v1/addresses/${createdId}`)
       .set('Accept', accept)
       .send(addressUpdate)
       .expect(200)
@@ -91,7 +91,7 @@ describe('PATCH /addresses', () => {
 
   it('returns 0 rows updated for non-existent id', done => {
     request(app)
-      .patch(`/addresses/${createdId + 10}`)
+      .patch(`/api/v1/addresses/${createdId + 10}`)
       .set('Accept', accept)
       .send(addressUpdate)
       .expect(200)
@@ -103,10 +103,10 @@ describe('PATCH /addresses', () => {
   });
 });
 
-describe('DELETE /addresses', () => {
+describe('DELETE /api/v1/addresses', () => {
   it('deletes the given address id', done => {
     request(app)
-      .delete(`/addresses/${createdId}`)
+      .delete(`/api/v1/addresses/${createdId}`)
       .set('Accept', accept)
       .expect(200)
       .end((err, res) => {

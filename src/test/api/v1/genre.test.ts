@@ -1,15 +1,15 @@
 // tslint:disable no-implicit-dependencies
 import * as chai from 'chai';
 import request from 'supertest';
-import app from '../server';
+import app from '../../../server';
 
 const expect = chai.expect;
 const accept = 'application/json';
 
-describe('GET /genres', () => {
+describe('GET /api/v1/genres', () => {
   it('responds with json array', done => {
     request(app)
-      .get('/genres')
+      .get('/api/v1/genres')
       .set('Accept', accept)
       .expect('Content-Type', /json/)
       .expect(200)
@@ -23,14 +23,14 @@ describe('GET /genres', () => {
 
 let createdId: number;
 
-describe('POST /genres', () => {
+describe('POST /api/v1/genres', () => {
   it('responds with created genre', done => {
     const newGenre = {
       name: 'Jazz Fusion',
     };
 
     request(app)
-      .post('/genres')
+      .post('/api/v1/genres')
       .set('Accept', accept)
       .send(newGenre)
       .expect(200)
@@ -48,10 +48,10 @@ const genreUpdate = {
   name: 'Jazz Scat',
 };
 
-describe('PATCH /genres', () => {
+describe('PATCH /api/v1/genres', () => {
   it('updates the given genre id', done => {
     request(app)
-      .patch(`/genres/${createdId}`)
+      .patch(`/api/v1/genres/${createdId}`)
       .set('Accept', accept)
       .send(genreUpdate)
       .expect(200)
@@ -65,7 +65,7 @@ describe('PATCH /genres', () => {
 
   it('returns 0 rows updated for non-existent id', done => {
     request(app)
-      .patch(`/genres/${createdId + 10}`)
+      .patch(`/api/v1/genres/${createdId + 10}`)
       .set('Accept', accept)
       .send(genreUpdate)
       .expect(200)
@@ -77,10 +77,10 @@ describe('PATCH /genres', () => {
   });
 });
 
-describe('DELETE /genres', () => {
+describe('DELETE /api/v1/genres', () => {
   it('deletes the given genre id', done => {
     request(app)
-      .delete(`/genres/${createdId}`)
+      .delete(`/api/v1/genres/${createdId}`)
       .set('Accept', accept)
       .expect(200)
       .end((err, res) => {

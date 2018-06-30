@@ -1,17 +1,17 @@
 // tslint:disable no-implicit-dependencies
 import * as chai from 'chai';
 import request from 'supertest';
-import app from '../server';
+import app from '../../../server';
 
 const expect = chai.expect;
 const accept = 'application/json';
 
-import { VenueAttributes } from '../models/venue';
+import { VenueAttributes } from '../../../models/venue';
 
-describe('GET /venues', () => {
+describe('GET /api/v1/venues', () => {
   it('responds with json array', done => {
     request(app)
-      .get('/venues')
+      .get('/api/v1/venues')
       .set('Accept', accept)
       .expect('Content-Type', /json/)
       .expect(200)
@@ -25,7 +25,7 @@ describe('GET /venues', () => {
 
 let createdId: number;
 
-describe('POST /venues', () => {
+describe('POST /api/v1/venues', () => {
   it('responds with created venue', done => {
     const newVenue: VenueAttributes = {
       AddressId: 1,
@@ -33,7 +33,7 @@ describe('POST /venues', () => {
     };
 
     request(app)
-      .post('/venues')
+      .post('/api/v1/venues')
       .set('Accept', accept)
       .send(newVenue)
       .expect(200)
@@ -52,10 +52,10 @@ const venueUpdate: VenueAttributes = {
   name: 'New Mutiny',
 };
 
-describe('PATCH /venues', () => {
+describe('PATCH /api/v1/venues', () => {
   it('updates the given venue id', done => {
     request(app)
-      .patch(`/venues/${createdId}`)
+      .patch(`/api/v1/venues/${createdId}`)
       .set('Accept', accept)
       .send(venueUpdate)
       .expect(200)
@@ -69,7 +69,7 @@ describe('PATCH /venues', () => {
 
   it('returns 0 rows updated for non-existent id', done => {
     request(app)
-      .patch(`/venues/${createdId + 10}`)
+      .patch(`/api/v1/venues/${createdId + 10}`)
       .set('Accept', accept)
       .send(venueUpdate)
       .expect(200)
@@ -81,10 +81,10 @@ describe('PATCH /venues', () => {
   });
 });
 
-describe('DELETE /venues', () => {
+describe('DELETE /api/v1/venues', () => {
   it('deletes the given venue id', done => {
     request(app)
-      .delete(`/venues/${createdId}`)
+      .delete(`/api/v1/venues/${createdId}`)
       .set('Accept', accept)
       .expect(200)
       .end((err, res) => {

@@ -1,5 +1,6 @@
 import { Router } from 'express';
-const show = Router();
+
+const venues = Router();
 
 import {
   create,
@@ -7,17 +8,17 @@ import {
   getAll,
   getId,
   updateId,
-} from '../controllers/show';
+} from '../../../controllers/venue';
 
-show
+venues
   .route('/')
   .get(getAll)
   .post(create);
 
-show
+venues
   .route('/:id')
   .get(getId)
   .patch(updateId)
   .delete(deleteId);
 
-export default show;
+export default venues;

@@ -1,23 +1,16 @@
 import { Router } from 'express';
-const genre = Router();
+const band = Router();
 
-import {
-  create,
-  deleteId,
-  getAll,
-  getId,
-  updateId,
-} from '../controllers/genre';
+import { create, deleteId, getAll, getId, updateId } from '../../../controllers/band';
 
-genre
+band
   .route('/')
   .get(getAll)
   .post(create);
-
-genre
+band
   .route('/:id')
   .get(getId)
   .patch(updateId)
   .delete(deleteId);
 
-export default genre;
+export default band;

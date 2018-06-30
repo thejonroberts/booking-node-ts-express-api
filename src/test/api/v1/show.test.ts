@@ -1,17 +1,17 @@
 // tslint:disable no-implicit-dependencies
 import * as chai from 'chai';
 import request from 'supertest';
-import app from '../server';
+import app from '../../../server';
 
 const expect = chai.expect;
 const accept = 'application/json';
 
-import { ShowAttributes } from '../models/show';
+import { ShowAttributes } from '../../../models/show';
 
-describe('GET /shows', () => {
+describe('GET /api/v1/shows', () => {
   it('responds with json array', done => {
     request(app)
-      .get('/shows')
+      .get('/api/v1/shows')
       .set('Accept', accept)
       .expect('Content-Type', /json/)
       .expect(200)
@@ -25,7 +25,7 @@ describe('GET /shows', () => {
 
 let createdId: number;
 
-describe('POST /shows', () => {
+describe('POST /api/v1/shows', () => {
   it('responds with created show', done => {
     const newShow: ShowAttributes = {
       VenueId: 1,
@@ -36,7 +36,7 @@ describe('POST /shows', () => {
     };
 
     request(app)
-      .post('/shows')
+      .post('/api/v1/shows')
       .set('Accept', accept)
       .send(newShow)
       .expect(200)
@@ -62,10 +62,10 @@ const showUpdate: ShowAttributes = {
   title: 'Champagne Jam',
 };
 
-describe('PATCH /shows', () => {
+describe('PATCH /api/v1/shows', () => {
   it('updates the given show id', done => {
     request(app)
-      .patch(`/shows/${createdId}`)
+      .patch(`/api/v1/shows/${createdId}`)
       .set('Accept', accept)
       .send(showUpdate)
       .expect(200)
@@ -83,7 +83,7 @@ describe('PATCH /shows', () => {
 
   it('returns 0 rows updated for non-existent id', done => {
     request(app)
-      .patch(`/shows/${createdId + 10}`)
+      .patch(`/api/v1/shows/${createdId + 10}`)
       .set('Accept', accept)
       .send(showUpdate)
       .expect(200)
@@ -95,10 +95,10 @@ describe('PATCH /shows', () => {
   });
 });
 
-describe('DELETE /shows', () => {
+describe('DELETE /api/v1/shows', () => {
   it('deletes the given show id', done => {
     request(app)
-      .delete(`/shows/${createdId}`)
+      .delete(`/api/v1/shows/${createdId}`)
       .set('Accept', accept)
       .expect(200)
       .end((err, res) => {

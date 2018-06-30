@@ -2,11 +2,12 @@ import { NextFunction, Request, Response } from 'express';
 import { BandAttributes } from '../models/band';
 
 export function getAll(req: Request, res: Response, next: NextFunction): void {
-  const { Band } = req.app.get('models');
-  Band.findAll()
+    const { Band } = req.app.get('models');
+    Band.findAll()
     .then((data: BandAttributes[]) => {
       res.status(200).json(data);
     })
+    // TODO: what is the proper sequelize error handling here?
     .catch((error: Error) => {
       next(error);
     });

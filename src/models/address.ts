@@ -29,12 +29,6 @@ export default (sequelize: Sequelize.Sequelize) => {
   const Address = sequelize.define<AddressInstance, AddressAttributes>('Address', attributes);
 
   Address.associate = models => {
-    // NOTE: was causing sequelize.sync cyclic dependency error, but not using
-    // sync currently...
-    // Address.hasMany(models.User, {
-    //   foreignKey: 'AddressId',
-    // });
-
     Address.hasMany(models.Venue, {
       foreignKey: 'AddressId',
     });

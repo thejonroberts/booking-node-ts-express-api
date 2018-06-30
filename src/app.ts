@@ -70,7 +70,7 @@ class App {
         next();
       }
     );
-    // TODO: express-validator
+    // TODO: express-validator validations
     this.app.use(validator());
 
   }
@@ -94,9 +94,3 @@ class App {
 }
 
 export default new App().app;
-
-// DOCS - TODO: - swagger-ui & swagger-jsonDoc
-// swaggerUi  require('swagger-ui-express');
-// const swaggerDocument = require('./config/swagger.json');
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-// app.use('/api/v1', router);

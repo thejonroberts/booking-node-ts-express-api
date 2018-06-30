@@ -1,12 +1,12 @@
 import Sequelize from 'sequelize';
 import * as config from '../config/sequelize';
 
-import AddressFactory from '../models/address';
-import BandFactory from '../models/band';
-import GenreFactory from '../models/genre';
-import ShowFactory from '../models/show';
-import UserFactory from '../models/user';
-import VenueFactory from '../models/venue';
+import Address from '../models/address';
+import Band from '../models/band';
+import Genre from '../models/genre';
+import Show from '../models/show';
+import User from '../models/user';
+import Venue from '../models/venue';
 
 const operatorsAliases: Sequelize.OperatorsAliases = {
   // NOTE: http://docs.sequelizejs.com/manual/tutorial/querying.html#operators-aliases
@@ -34,27 +34,30 @@ const sequelize: Sequelize.Sequelize =
   new Sequelize(config.url || process.env.DATABASE_URL, options);
 
 // NOTE: https://stackoverflow.com/questions/50377182/sequelize-import-having-an-issue-with-typescript
-interface DbMember {
+interface Model {
   [key: string]: any;
 }
 
-const db: DbMember = {
-  Address: AddressFactory(sequelize),
-  Band: BandFactory(sequelize),
-  Genre: GenreFactory(sequelize),
-  Sequelize,
-  Show: ShowFactory(sequelize),
-  User: UserFactory(sequelize),
-  Venue: VenueFactory(sequelize),
-  sequelize,
+const models: Model = {
+  Address: Address(sequelize),
+  Band: Band(sequelize),
+  Genre: Genre(sequelize),
+  Show: Show(sequelize),
+  User: User(sequelize),
+  Venue: Venue(sequelize),
 };
 
-Object.keys(db).forEach((dbKey: string): void => {
+Object.keys(models).forEach((modelKey: string): void => {
   // NOTE:  https://basarat.gitbooks.io/typescript/content/docs/types/typeGuard.html
-  // - used in conjunction with DbMember interface above
-  if ('associate' in db[dbKey]) {
-    db[dbKey].associate(db);
+  // - used in conjunction with Model interface above
+  if ('associate' in models[modelKey]) {
+    models[modelKey].associate(models);
   }
 });
+
+const db = {
+  ...models,
+  sequelize,
+};
 
 module.exports = db;

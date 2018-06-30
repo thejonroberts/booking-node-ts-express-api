@@ -1,7 +1,7 @@
 import { Router } from 'express';
 const band = Router();
 
-import { create, deleteId, getAll, getId, updateId } from '../../controllers/api/band';
+import { create, deleteId, getAll, getId, updateId } from '../../controllers/admin/band';
 
 band
   .route('/')

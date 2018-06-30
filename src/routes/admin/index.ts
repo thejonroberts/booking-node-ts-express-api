@@ -2,7 +2,7 @@ import { NextFunction, Request, Response, Router } from 'express';
 
 // import address from './address';
 // import authentication from './authentication';
-// import band from './band';
+import band from './band';
 // import genre from './genre';
 // import show from './show';
 // import user from './user';
@@ -12,7 +12,7 @@ const router = Router();
 
 // router.use('./authentication', authentication);
 // router.use('/addresses', address);
-// router.use('/bands', band);
+router.use('/bands', band);
 // router.use('/shows', show);
 // router.use('/genres', genre);
 // router.use('/users', user);

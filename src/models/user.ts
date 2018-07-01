@@ -9,6 +9,9 @@ export interface UserAttributes {
   password?: string;
   phoneNumber?: string;
   username?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  deletedAt?: string;
 }
 
 type UserInstance = Sequelize.Instance<UserAttributes> & UserAttributes;
@@ -19,6 +22,14 @@ export default (sequelize: Sequelize.Sequelize) => {
     addressId: {
       field: 'address_id',
       type: Sequelize.INTEGER,
+    },
+    createdAt: {
+      field: 'created_at',
+      type: Sequelize.DATE,
+    },
+    deletedAt: {
+      field: 'deleted_at',
+      type: Sequelize.DATE,
     },
     email: Sequelize.STRING,
     firstName: {
@@ -38,6 +49,10 @@ export default (sequelize: Sequelize.Sequelize) => {
     phoneNumber: {
       field: 'phone_number',
       type: Sequelize.STRING,
+    },
+    updatedAt: {
+      field: 'updated_at',
+      type: Sequelize.DATE,
     },
     username: Sequelize.TEXT,
   };

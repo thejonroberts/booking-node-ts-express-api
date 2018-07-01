@@ -2,9 +2,12 @@ import * as Sequelize from 'sequelize';
 
 export interface VenueAttributes {
   addressId?: number;
-  description?: number;
+  description?: string;
   name?: string;
   tagline?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  deletedAt?: string;
 }
 
 type VenueInstance = Sequelize.Instance<VenueAttributes> & VenueAttributes;
@@ -16,9 +19,21 @@ export default (sequelize: Sequelize.Sequelize) => {
       field: 'address_id',
       type: Sequelize.INTEGER,
     },
+    createdAt: {
+      field: 'created_at',
+      type: Sequelize.DATE,
+    },
+    deletedAt: {
+      field: 'deleted_at',
+      type: Sequelize.DATE,
+    },
     description: Sequelize.STRING,
     name: Sequelize.STRING,
     tagline: Sequelize.STRING,
+    updatedAt: {
+      field: 'updated_at',
+      type: Sequelize.DATE,
+    },
   };
 
   const Venue = sequelize.define<VenueInstance, VenueAttributes>('Venue', attributes);

@@ -29,7 +29,9 @@ describe('POST /api/v1/venues', () => {
   it('responds with created venue', done => {
     const newVenue: VenueAttributes = {
       addressId: 1,
+      description: 'Come check out the world\'s largest urinal.  The bathroom is weird, too!',
       name: 'Mutiny',
+      tagline: 'Chicago\'s Dive Rock Club',
     };
 
     request(app)
@@ -42,6 +44,8 @@ describe('POST /api/v1/venues', () => {
         expect(res.body).to.be.an('object');
         createdId = parseInt(res.body.id, 10);
         expect(res.body.name).to.equal(newVenue.name);
+        expect(res.body.tagline).to.equal(newVenue.tagline);
+        expect(res.body.description).to.equal(newVenue.description);
         done();
       });
   });
@@ -49,7 +53,9 @@ describe('POST /api/v1/venues', () => {
 
 const venueUpdate: VenueAttributes = {
   addressId: 1,
+  description: 'Keeping Logan Square weird and awful since 1991.',
   name: 'New Mutiny',
+  tagline: 'Chicago\'s Dive Rock Club',
 };
 
 describe('PATCH /api/v1/venues', () => {
@@ -63,6 +69,8 @@ describe('PATCH /api/v1/venues', () => {
         if (err) { return done(err); }
         expect(res.body[1][0]).to.be.an('object');
         expect(res.body[1][0].name).to.equal(venueUpdate.name);
+        expect(res.body[1][0].tagline).to.equal(venueUpdate.tagline);
+        expect(res.body[1][0].description).to.equal(venueUpdate.description);
         done();
       });
   });

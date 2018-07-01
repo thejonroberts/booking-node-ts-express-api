@@ -29,10 +29,10 @@ describe('POST /api/v1/addresses', () => {
   it('responds with created address', done => {
     const newAddress: AddressAttributes = {
       city: 'Nashville',
+      lineOne: null,
       placeId: null,
-      stateCode: 'TN',
+      state: 'Tennessee',
       street: '3000 Test St',
-      streetTwo: null,
       timeZone: 'America/Chicago',
       zipCode: '37216',
     };
@@ -47,9 +47,9 @@ describe('POST /api/v1/addresses', () => {
         expect(res.body).to.be.an('object');
         createdId = parseInt(res.body.id, 10);
         expect(res.body.street).to.equal(newAddress.street);
-        expect(res.body.streetTwo).to.equal(newAddress.streetTwo);
+        expect(res.body.lineOne).to.equal(newAddress.lineOne);
         expect(res.body.city).to.equal(newAddress.city);
-        expect(res.body.stateCode).to.equal(newAddress.stateCode);
+        expect(res.body.state).to.equal(newAddress.state);
         expect(res.body.zipCode).to.equal(newAddress.zipCode);
         expect(res.body.timeZone).to.equal(newAddress.timeZone);
         expect(res.body.placeId).to.equal(newAddress.placeId);
@@ -60,10 +60,10 @@ describe('POST /api/v1/addresses', () => {
 
 const addressUpdate: AddressAttributes = {
   city: 'Memphis',
+  lineOne: 'Apt 120',
   placeId: 56,
-  stateCode: 'TX',
+  state: 'Texas',
   street: '3000 Again St',
-  streetTwo: 'Apt 120',
   timeZone: 'America/Houston',
   zipCode: '55555',
 };
@@ -79,9 +79,9 @@ describe('PATCH /api/v1/addresses', () => {
         if (err) { return done(err); }
         expect(res.body[1][0]).to.be.an('object');
         expect(res.body[1][0].street).to.equal(addressUpdate.street);
-        expect(res.body[1][0].streetTwo).to.equal(addressUpdate.streetTwo);
+        expect(res.body[1][0].lineOne).to.equal(addressUpdate.lineOne);
         expect(res.body[1][0].city).to.equal(addressUpdate.city);
-        expect(res.body[1][0].stateCode).to.equal(addressUpdate.stateCode);
+        expect(res.body[1][0].state).to.equal(addressUpdate.state);
         expect(res.body[1][0].zipCode).to.equal(addressUpdate.zipCode);
         expect(res.body[1][0].timeZone).to.equal(addressUpdate.timeZone);
         expect(res.body[1][0].placeId).to.equal(addressUpdate.placeId);
@@ -113,9 +113,9 @@ describe('DELETE /api/v1/addresses', () => {
         if (err) { return done(err); }
         expect(res.body[0]).to.be.an('object');
         expect(res.body[0].street).to.equal(addressUpdate.street);
-        expect(res.body[0].streetTwo).to.equal(addressUpdate.streetTwo);
+        expect(res.body[0].lineOne).to.equal(addressUpdate.lineOne);
         expect(res.body[0].city).to.equal(addressUpdate.city);
-        expect(res.body[0].stateCode).to.equal(addressUpdate.stateCode);
+        expect(res.body[0].state).to.equal(addressUpdate.state);
         expect(res.body[0].zipCode).to.equal(addressUpdate.zipCode);
         expect(res.body[0].timeZone).to.equal(addressUpdate.timeZone);
         expect(res.body[0].placeId).to.equal(addressUpdate.placeId);

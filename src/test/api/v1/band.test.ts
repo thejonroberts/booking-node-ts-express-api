@@ -29,9 +29,11 @@ describe('POST /api/v1/bands', () => {
   it('responds with created band', done => {
     const newBand: BandAttributes = {
       bandcamp: 'badtestband.bandcamp.com',
+      description: 'No, like, for real. Not good bad, just bad',
       genreId: 1,
       label: 'in the red',
       name: 'bad test band',
+      tagline: 'We\'re really bad',
       website: 'www.badtestband.com',
     };
 
@@ -45,6 +47,8 @@ describe('POST /api/v1/bands', () => {
         expect(res.body).to.be.an('object');
         createdId = parseInt(res.body.id, 10);
         expect(res.body.name).to.equal(newBand.name);
+        expect(res.body.tagline).to.equal(newBand.tagline);
+        expect(res.body.description).to.equal(newBand.description);
         expect(res.body.bandcamp).to.equal(newBand.bandcamp);
         expect(res.body.website).to.equal(newBand.website);
         expect(res.body.label).to.equal(newBand.label);
@@ -56,9 +60,11 @@ describe('POST /api/v1/bands', () => {
 
 const bandUpdate: BandAttributes = {
   bandcamp: 'badtestband.bandcamp.com',
+  description: 'No, like, for real. Not good bad, just bad. Just don\'t',
   genreId: 2,
   label: 'in the red',
   name: 'bad test band',
+  tagline: 'This is not okay.',
   website: 'www.badtestband.com',
 };
 
@@ -73,6 +79,8 @@ describe('PATCH /api/v1/bands', () => {
         if (err) { return done(err); }
         expect(res.body[1][0]).to.be.an('object');
         expect(res.body[1][0].name).to.equal(bandUpdate.name);
+        expect(res.body[1][0].description).to.equal(bandUpdate.description);
+        expect(res.body[1][0].tagline).to.equal(bandUpdate.tagline);
         expect(res.body[1][0].bandcamp).to.equal(bandUpdate.bandcamp);
         expect(res.body[1][0].website).to.equal(bandUpdate.website);
         expect(res.body[1][0].label).to.equal(bandUpdate.label);

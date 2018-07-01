@@ -1,6 +1,17 @@
 extends ../layout.pug
 block content
-  h1 Bands
-  span Check em out!
-  each band in bands
-    h2 #{band.name}
+  .container
+    h1 Bands
+    h3 Check em out!
+    .row
+      .card-columns
+        each band in bands
+          div.card
+            img.card-img-top(src="/images/350x350.png" alt=`#{band.name} image or artwork`)
+            div.card-body
+              h5.card-title #{band.name}
+              .row
+                h6.card-subtitle.col-6 #{band.Genre.name}
+                h6.card-subtitle.text-right.col-6 City, ST, CTY
+              p.card-text I should add a band tagline / description here.
+              a.btn(href=`./${band.id}`) View

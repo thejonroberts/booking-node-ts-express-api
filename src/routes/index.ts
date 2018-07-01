@@ -5,8 +5,8 @@ import apiV1 from './api/v1';
 
 const router = Router();
 
-router.use('/admin', admin);
 router.use('/api/v1', apiV1);
+router.use('/', admin);
 
 router.get('*', (req, res, next) => {
   res.status(404);

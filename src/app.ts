@@ -3,6 +3,7 @@ import express, { Application, NextFunction, Request, Response } from 'express';
 import session from 'express-session';
 import validator from 'express-validator';
 import passport from 'passport';
+import path from 'path';
 
 import * as dotenv from 'dotenv';
 const env = dotenv.config();
@@ -26,6 +27,7 @@ class App {
     this.app.set('port', process.env.PORT || 3000);
     this.app.set('host', process.env.HOST || '127.0.0.1');
     this.app.set('view engine', 'pug');
+    this.app.use(express.static(path.join(__dirname, '../public')));
   }
 
   private middleware(): void {

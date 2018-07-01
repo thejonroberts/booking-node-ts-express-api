@@ -56,7 +56,7 @@ export default (sequelize: Sequelize.Sequelize) => {
     Venue.belongsToMany(models.User, {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
-      through: 'UsersVenues',
+      through: 'Employees',
     });
   };
 

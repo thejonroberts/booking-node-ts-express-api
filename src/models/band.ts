@@ -59,13 +59,13 @@ export default (sequelize: Sequelize.Sequelize) => {
     Band.belongsToMany(models.User, {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
-        through: 'UsersBands',
+        through: 'Members',
       });
 
     Band.belongsToMany(models.Show, {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
-      through: 'ShowsBands',
+      through: 'Lineups',
     });
   };
 

@@ -9,20 +9,6 @@ import user from './user';
 import venue from './venue';
 
 const router = Router();
-// TODO: - convert req toLowerCase() ?
-router.get('/api/v1/endpoints', (req: Request, res: Response, next: NextFunction) => {
-  const routes = {
-    endpoints: [
-      '/addresses',
-      '/bands',
-      '/shows',
-      '/genres',
-      '/users',
-      '/venues',
-    ],
-  };
-  next(res.status(200).json(routes));
-});
 
 router.use('/authentication', authentication);
 router.use('/addresses', address);

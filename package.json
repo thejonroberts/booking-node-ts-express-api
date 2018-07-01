@@ -24,6 +24,8 @@
     "watch-test": "mocha --reporter dot --watch-extensions ts --watch --require ts-node/register \"src/test/**/*.test.ts\"",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "release": "standard-version",
+    "DROP": "node_modules/.bin/sequelize db:drop",
+    "CREATE": "node_modules/.bin/sequelize db:create",
     "teardown": "node_modules/.bin/sequelize db:migrate:undo:all",
     "migrate": "node_modules/.bin/sequelize db:migrate",
     "seed": "node_modules/.bin/sequelize db:seed:all",

@@ -18,10 +18,4 @@ router.use('/bands', band);
 // router.use('/users', user);
 // router.use('/venues', venue);
 
-router.get('*', (req, res, next) => {
-  res.status(404);
-  // errorHander
-  next(`${req.path} does not exist. See /endpoints`);
-});
-
 export default router;

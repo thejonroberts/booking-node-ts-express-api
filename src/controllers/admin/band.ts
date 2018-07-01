@@ -30,12 +30,11 @@ export function create(req: Request, res: Response, next: NextFunction): void {
 }
 
 export function getId(req: Request, res: Response, next: NextFunction): void {
-  const { Band, Show, User } = req.app.get('models');
+  const { Band, Genre, Show, User } = req.app.get('models');
   Band.findById(req.params.id, {
-    include: [{ model: User }, { model: Show }],
+    include: [{ model: User }, { model: Show }, { model: Genre }],
   })
     .then((bandDetails: BandAttributes) => {
-      // res.json(bandDetails);
       res.render('band/show', {bandDetails});
     })
     .catch((error: Error) => {

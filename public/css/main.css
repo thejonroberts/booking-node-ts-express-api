@@ -1,7 +1,14 @@
-
-/* BOOTSTAP BREAKPOINTS */
+/* BOOTSTRAP BREAKPOINTS */
+/* XS */
+@media (max-width: 575.98px) {
+  .card-columns {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+  }
+}
 /* SM */
-@media (min-width: 576px) {
+@media (min-width: 576px) and (max-width: 767.98px) {
   .card-columns {
       -webkit-column-count: 1;
       -moz-column-count: 1;
@@ -9,7 +16,7 @@
   }
 }
 /* MD */
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 991.98px) {
   .card-columns {
       -webkit-column-count: 2;
       -moz-column-count: 2;
@@ -17,7 +24,7 @@
   }
 }
 /* LG */
-@media (min-width: 992px) {
+@media (min-width: 992px) and (max-width: 1199.98px) {
   .card-columns {
       -webkit-column-count: 3;
       -moz-column-count: 3;

@@ -6,6 +6,9 @@ import apiV1 from './api/v1';
 const router = Router();
 
 router.use('/api/v1', apiV1);
+router.use('/home', (req, res, next) => {
+  res.render('splash');
+});
 router.use('/', admin);
 
 router.get('*', (req, res, next) => {

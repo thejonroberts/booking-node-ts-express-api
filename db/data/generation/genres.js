@@ -1,22 +1,28 @@
+// tslint:disable variable-name
 'use strict';
 const faker = require('faker');
+const fs = require('fs');
+
 const {
   amounts: { numGenres },
 } = require('./generator-amounts.json');
-const fs = require('fs');
+
 const seedGenres = ['Blues', 'Country', 'Electronic', 'Hip-Hop', 'Rock'];
 let genres = [];
+
 if (seedGenres.length !== numGenres) {
   throw new Error('ERROR in /data/generation/genres.js: Genre number mismatch');
 }
+
 for (let i = 0; i < seedGenres.length; i++) {
   const name = seedGenres[i];
-  const createdAt = faker.date.past().toISOString();
-  const updatedAt = new Date().toISOString();
+  const created_at = faker.date.past().toISOString();
+  const updated_at = new Date().toISOString();
+
   genres.push({
-    createdAt,
+    created_at,
     name,
-    updatedAt,
+    updated_at,
   });
 }
 const genresJson = JSON.stringify(genres);

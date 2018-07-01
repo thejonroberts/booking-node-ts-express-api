@@ -20,6 +20,7 @@ const operatorsAliases: Sequelize.OperatorsAliases = {
 const define: Sequelize.DefineOptions<any> = {
   paranoid: true,
   timestamps: true,
+  underscored: true,
 };
 
 const options: Sequelize.Options = {

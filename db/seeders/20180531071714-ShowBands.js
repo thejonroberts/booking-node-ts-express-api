@@ -4,10 +4,10 @@ const showBands = require('../data/show-bands');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('ShowsBands', showBands, {});
+    return queryInterface.bulkInsert('Lineups', showBands, {});
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('ShowsBands', null, {});
+    return queryInterface.bulkDelete('Lineups', null, {});
   },
 };

@@ -1,8 +1,10 @@
 import * as Sequelize from 'sequelize';
 
 export interface VenueAttributes {
-  AddressId?: number;
+  addressId?: number;
+  description?: number;
   name?: string;
+  tagline?: string;
 }
 
 type VenueInstance = Sequelize.Instance<VenueAttributes> & VenueAttributes;
@@ -10,19 +12,24 @@ type VenueInstance = Sequelize.Instance<VenueAttributes> & VenueAttributes;
 export default (sequelize: Sequelize.Sequelize) => {
 
   const attributes: SequelizeAttributes<VenueAttributes> = {
-    AddressId: Sequelize.INTEGER,
+    addressId: {
+      field: 'address_id',
+      type: Sequelize.INTEGER,
+    },
+    description: Sequelize.STRING,
     name: Sequelize.STRING,
+    tagline: Sequelize.STRING,
   };
 
   const Venue = sequelize.define<VenueInstance, VenueAttributes>('Venue', attributes);
 
   Venue.associate = models => {
     Venue.hasMany(models.Show, {
-      foreignKey: 'VenueId',
+      foreignKey: 'venueId',
     });
 
     Venue.belongsTo(models.Address, {
-      foreignKey: 'AddressId',
+      foreignKey: 'addressId',
     });
 
     Venue.belongsToMany(models.Genre, {

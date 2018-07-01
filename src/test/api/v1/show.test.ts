@@ -28,11 +28,11 @@ let createdId: number;
 describe('POST /api/v1/shows', () => {
   it('responds with created show', done => {
     const newShow: ShowAttributes = {
-      VenueId: 1,
       description: 'A smasher',
       endsAt: new Date('December 17, 2016 23:59:00').toISOString(),
       startsAt: new Date('December 17, 2016 02:00:00').toISOString(),
       title: 'Hootenanny',
+      venueId: 1,
     };
 
     request(app)
@@ -48,18 +48,18 @@ describe('POST /api/v1/shows', () => {
         expect(res.body.endsAt).to.equal(newShow.endsAt);
         expect(res.body.title).to.equal(newShow.title);
         expect(res.body.description).to.equal(newShow.description);
-        expect(res.body.VenueId).to.equal(newShow.VenueId);
+        expect(res.body.venueId).to.equal(newShow.venueId);
         done();
       });
   });
 });
 
 const showUpdate: ShowAttributes = {
-  VenueId: 2,
   description: 'A really good time',
   endsAt: new Date('January 17, 2020 23:59:00').toISOString(),
   startsAt: new Date('January 17, 2020 02:00:00').toISOString(),
   title: 'Champagne Jam',
+  venueId: 2,
 };
 
 describe('PATCH /api/v1/shows', () => {
@@ -76,7 +76,7 @@ describe('PATCH /api/v1/shows', () => {
         expect(res.body[1][0].endsAt).to.equal(showUpdate.endsAt);
         expect(res.body[1][0].title).to.equal(showUpdate.title);
         expect(res.body[1][0].description).to.equal(showUpdate.description);
-        expect(res.body[1][0].VenueId).to.equal(showUpdate.VenueId);
+        expect(res.body[1][0].venueId).to.equal(showUpdate.venueId);
         done();
       });
   });
@@ -108,7 +108,7 @@ describe('DELETE /api/v1/shows', () => {
         expect(res.body[0].endsAt).to.equal(showUpdate.endsAt);
         expect(res.body[0].title).to.equal(showUpdate.title);
         expect(res.body[0].description).to.equal(showUpdate.description);
-        expect(res.body[0].VenueId).to.equal(showUpdate.VenueId);
+        expect(res.body[0].venueId).to.equal(showUpdate.venueId);
         expect(res.body[0].deletedAt).to.be.a('string');
         done();
       });

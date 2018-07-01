@@ -28,7 +28,7 @@ let createdId: number;
 describe('POST /api/v1/venues', () => {
   it('responds with created venue', done => {
     const newVenue: VenueAttributes = {
-      AddressId: 1,
+      addressId: 1,
       name: 'Mutiny',
     };
 
@@ -48,7 +48,7 @@ describe('POST /api/v1/venues', () => {
 });
 
 const venueUpdate: VenueAttributes = {
-  AddressId: 1,
+  addressId: 1,
   name: 'New Mutiny',
 };
 

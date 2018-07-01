@@ -1,5 +1,5 @@
+// tslint:disable object-literal-sort-keys
 'use strict';
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('VenuesGenres', {
@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      VenueId: {
+      venue_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -20,7 +20,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      GenreId: {
+      genre_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -30,15 +30,15 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      deletedAt: {
+      deleted_at: {
         type: Sequelize.DATE,
       },
     });

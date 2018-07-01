@@ -29,14 +29,14 @@ let createdId: number;
 describe('POST /api/v1/users', () => {
   it('responds with created user', done => {
     const newUser: UserAttributes = {
-      AddressId: 1,
+      addressId: 1,
       email: 'josh@josh.com',
       firstName: 'Josh',
       lastLoginDate: new Date('December 17, 2016 02:00:00').toISOString(),
       lastName: 'Test',
       password: 'insecure',
       phoneNumber: '5555555555',
-      username: 'joshrips',
+      username: 'joshRips',
     };
 
     request(app)
@@ -55,21 +55,21 @@ describe('POST /api/v1/users', () => {
         expect(res.body.password).to.equal(newUser.password);
         expect(res.body.phoneNumber).to.equal(newUser.phoneNumber);
         expect(res.body.lastLoginDate).to.equal(newUser.lastLoginDate);
-        expect(res.body.AddressId).to.equal(newUser.AddressId);
+        expect(res.body.addressId).to.equal(newUser.addressId);
         done();
       });
   });
 });
 
 const userUpdate: UserAttributes = {
-  AddressId: 2,
+  addressId: 2,
   email: 'josh-new-email@josh.com',
   firstName: 'Josh',
   lastLoginDate: new Date().toISOString(),
   lastName: 'Test',
   password: 'worse',
   phoneNumber: '7777777777',
-  username: 'joshrips',
+  username: 'joshRips',
 };
 
 describe('PATCH /api/v1/users', () => {
@@ -89,7 +89,7 @@ describe('PATCH /api/v1/users', () => {
         expect(res.body[1][0].password).to.equal(userUpdate.password);
         expect(res.body[1][0].phoneNumber).to.equal(userUpdate.phoneNumber);
         expect(res.body[1][0].lastLoginDate).to.equal(userUpdate.lastLoginDate);
-        expect(res.body[1][0].AddressId).to.equal(userUpdate.AddressId);
+        expect(res.body[1][0].addressId).to.equal(userUpdate.addressId);
         done();
       });
   });
@@ -124,7 +124,7 @@ describe('DELETE /api/v1/users', () => {
         expect(res.body[0].password).to.equal(userUpdate.password);
         expect(res.body[0].phoneNumber).to.equal(userUpdate.phoneNumber);
         expect(res.body[0].lastLoginDate).to.equal(userUpdate.lastLoginDate);
-        expect(res.body[0].AddressId).to.equal(userUpdate.AddressId);
+        expect(res.body[0].addressId).to.equal(userUpdate.addressId);
         done();
       });
   });

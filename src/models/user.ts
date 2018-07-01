@@ -1,7 +1,7 @@
 import * as Sequelize from 'sequelize';
 
 export interface UserAttributes {
-  AddressId?: number;
+  addressId?: number;
   email?: string;
   firstName?: string;
   lastLoginDate?: string;
@@ -16,13 +16,29 @@ type UserInstance = Sequelize.Instance<UserAttributes> & UserAttributes;
 export default (sequelize: Sequelize.Sequelize) => {
 
   const attributes: SequelizeAttributes<UserAttributes> = {
-    AddressId: Sequelize.INTEGER,
+    addressId: {
+      field: 'address_id',
+      type: Sequelize.INTEGER,
+    },
     email: Sequelize.STRING,
-    firstName: Sequelize.STRING,
-    lastLoginDate: Sequelize.DATE,
-    lastName: Sequelize.STRING,
+    firstName: {
+      field: 'first_name',
+      type: Sequelize.STRING,
+    },
+    lastLoginDate: {
+      field: 'last_login_date',
+      type: Sequelize.DATE,
+    },
+    lastName: {
+      field: 'last_name',
+      type: Sequelize.STRING,
+    },
     password: Sequelize.STRING,
-    phoneNumber: Sequelize.STRING,
+    // TODO: best type to use here? varchar?
+    phoneNumber: {
+      field: 'phone_number',
+      type: Sequelize.STRING,
+    },
     username: Sequelize.TEXT,
   };
 
@@ -36,13 +52,13 @@ export default (sequelize: Sequelize.Sequelize) => {
     User.belongsToMany(models.Band, {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
-      through: 'UsersBands',
+      through: 'Members',
     });
 
     User.belongsToMany(models.Venue, {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
-      through: 'UsersVenues',
+      through: 'Employees',
     });
   };
 

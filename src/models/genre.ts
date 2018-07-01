@@ -14,14 +14,9 @@ export default (sequelize: Sequelize.Sequelize) => {
 
   const Genre = sequelize.define<GenreInstance, GenreAttributes>('Genre', attributes);
 
-  // {
-  //   "error": {
-  //     "name": "SequelizeEagerLoadingError"
-  //   }
-  // }
   Genre.associate = models => {
     Genre.hasMany(models.Band, {
-      foreignKey: 'GenreId',
+      foreignKey: 'genreId',
     });
 
     Genre.belongsToMany(models.Venue, {

@@ -3,34 +3,48 @@ import * as Sequelize from 'sequelize';
 export interface AddressAttributes {
   id?: string;
   city?: string;
+  country?: string;
   placeId?: number;
-  stateCode?: string;
+  state?: string;
   street?: string;
-  streetTwo?: string;
+  lineOne?: string;
   timeZone?: string;
   zipCode?: string;
 }
 
 type AddressInstance = Sequelize.Instance<AddressAttributes> & AddressAttributes;
 
-// todo no default exports
+// TODO: no default exports
 export default (sequelize: Sequelize.Sequelize) => {
 
   const attributes: SequelizeAttributes<AddressAttributes> = {
     city: Sequelize.STRING,
-    placeId: Sequelize.INTEGER,
-    stateCode: Sequelize.STRING,
+    country: Sequelize.STRING,
+    lineOne: {
+      field: 'line_one',
+      type: Sequelize.STRING,
+    },
+    placeId: {
+      field: 'place_id',
+      type: Sequelize.INTEGER,
+    },
+    state: Sequelize.STRING,
     street: Sequelize.STRING,
-    streetTwo: Sequelize.STRING,
-    timeZone: Sequelize.STRING,
-    zipCode: Sequelize.STRING,
+    timeZone: {
+      field: 'time_zone',
+      type: Sequelize.STRING,
+    },
+    zipCode: {
+      field: 'zip_code',
+      type: Sequelize.STRING,
+    },
   };
 
   const Address = sequelize.define<AddressInstance, AddressAttributes>('Address', attributes);
 
   Address.associate = models => {
     Address.hasMany(models.Venue, {
-      foreignKey: 'AddressId',
+      foreignKey: 'addressId',
     });
   };
 

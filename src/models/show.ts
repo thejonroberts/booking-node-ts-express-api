@@ -1,7 +1,7 @@
 import * as Sequelize from 'sequelize';
 
 export interface ShowAttributes {
-  VenueId?: number;
+  venueId?: number;
   description?: string;
   endsAt?: string;
   startsAt?: string;
@@ -13,11 +13,20 @@ type ShowInstance = Sequelize.Instance<ShowAttributes> & ShowAttributes;
 export default (sequelize: Sequelize.Sequelize) => {
 
   const attributes: SequelizeAttributes<ShowAttributes> = {
-    VenueId: Sequelize.INTEGER,
     description: Sequelize.STRING,
-    endsAt: Sequelize.DATE,
-    startsAt: Sequelize.DATE,
+    endsAt: {
+      field: 'ends_at',
+      type: Sequelize.DATE,
+    },
+    startsAt: {
+      field: 'starts_at',
+      type: Sequelize.DATE,
+    },
     title: Sequelize.STRING,
+    venueId: {
+      field: 'venue_id',
+      type: Sequelize.INTEGER,
+    },
   };
 
   const Show = sequelize.define<ShowInstance, ShowAttributes>('Show', attributes);
@@ -25,13 +34,13 @@ export default (sequelize: Sequelize.Sequelize) => {
   Show.associate = models => {
     // TODO: this isn't working
     Show.belongsTo(models.Venue, {
-      foreignKey: 'VenueId',
+      foreignKey: 'venueId',
     });
 
     Show.belongsToMany(models.Band, {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
-      through: 'ShowsBands',
+      through: 'Lineups',
     });
   };
 

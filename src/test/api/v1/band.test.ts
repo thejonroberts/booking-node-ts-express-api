@@ -28,8 +28,8 @@ let createdId: number;
 describe('POST /api/v1/bands', () => {
   it('responds with created band', done => {
     const newBand: BandAttributes = {
-      GenreId: 1,
       bandcamp: 'badtestband.bandcamp.com',
+      genreId: 1,
       label: 'in the red',
       name: 'bad test band',
       website: 'www.badtestband.com',
@@ -48,15 +48,15 @@ describe('POST /api/v1/bands', () => {
         expect(res.body.bandcamp).to.equal(newBand.bandcamp);
         expect(res.body.website).to.equal(newBand.website);
         expect(res.body.label).to.equal(newBand.label);
-        expect(res.body.GenreId).to.equal(newBand.GenreId);
+        expect(res.body.genreId).to.equal(newBand.genreId);
         done();
       });
   });
 });
 
 const bandUpdate: BandAttributes = {
-  GenreId: 2,
   bandcamp: 'badtestband.bandcamp.com',
+  genreId: 2,
   label: 'in the red',
   name: 'bad test band',
   website: 'www.badtestband.com',
@@ -76,7 +76,7 @@ describe('PATCH /api/v1/bands', () => {
         expect(res.body[1][0].bandcamp).to.equal(bandUpdate.bandcamp);
         expect(res.body[1][0].website).to.equal(bandUpdate.website);
         expect(res.body[1][0].label).to.equal(bandUpdate.label);
-        expect(res.body[1][0].GenreId).to.equal(bandUpdate.GenreId);
+        expect(res.body[1][0].genreId).to.equal(bandUpdate.genreId);
         done();
       });
   });
@@ -108,7 +108,7 @@ describe('DELETE /api/v1/bands', () => {
         expect(res.body[0].bandcamp).to.equal(bandUpdate.bandcamp);
         expect(res.body[0].website).to.equal(bandUpdate.website);
         expect(res.body[0].label).to.equal(bandUpdate.label);
-        expect(res.body[0].GenreId).to.equal(bandUpdate.GenreId);
+        expect(res.body[0].genreId).to.equal(bandUpdate.genreId);
         expect(res.body[0].deletedAt).to.be.a('string');
         done();
       });

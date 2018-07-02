@@ -43,10 +43,10 @@ export default (sequelize: Sequelize.Sequelize) => {
     // });
 
     Genre.belongsToMany(models.Venue, {
+      foreignKey: 'genre_id',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
       otherKey: 'venue_id',
-      foreignKey: 'genre_id',
       through: 'VenuesGenres',
     });
   };

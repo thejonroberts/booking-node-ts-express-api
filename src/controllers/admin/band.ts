@@ -46,7 +46,6 @@ export function editId(req: Request, res: Response, next: NextFunction): void {
   const { Band, Show, User } = req.app.get('models');
   Band.findById(req.params.id, {})
     .then((bandDetails: BandAttributes) => {
-      // res.json(bandDetails);
       res.render('band/edit', {bandDetails});
     })
     .catch((error: Error) => {

@@ -60,10 +60,10 @@ export default (sequelize: Sequelize.Sequelize) => {
     });
 
     Show.belongsToMany(models.Band, {
+      foreignKey: 'show_id',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
       otherKey: 'band_id',
-      foreignKey: 'show_id',
       through: 'Lineups',
     });
   };

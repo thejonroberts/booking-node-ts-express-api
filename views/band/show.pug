@@ -2,10 +2,15 @@ extends ../layout.pug
 block content
   h1 #{bandDetails.name}
   h3 #{bandDetails.genre.name}
-  h3 #{bandDetails.bandcamp}
   h3 #{bandDetails.label}
+  h3 #{bandDetails.bandcamp}
   h3 #{bandDetails.website}
-
-  //- shows
-
-  //- members
+  br
+  h3 Upcoming Shows:
+  each show in bandDetails.shows
+    h2 #{show.title}
+  br
+  h3 Members
+  each member in bandDetails.users
+    h4 #{member.firstName} #{member.firstName}
+      a.btn.btn-sm.btn-secondary(href=`/users/${member.id}`) view

@@ -65,7 +65,6 @@ export default (sequelize: Sequelize.Sequelize) => {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
       otherKey: 'user_id',
-
       through: 'Employees',
     });
   };

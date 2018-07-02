@@ -72,18 +72,18 @@ export default (sequelize: Sequelize.Sequelize) => {
     });
 
     User.belongsToMany(models.Band, {
+      foreignKey: 'user_id',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
       otherKey: 'band_id',
-      foreignKey: 'user_id',
       through: 'Members',
     });
 
     User.belongsToMany(models.Venue, {
+      foreignKey: 'user_id',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
       otherKey: 'venue_id',
-      foreignKey: 'user_id',
       through: 'Employees',
     });
   };

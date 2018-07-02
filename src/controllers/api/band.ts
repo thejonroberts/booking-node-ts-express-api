@@ -7,7 +7,6 @@ export function getAll(req: Request, res: Response, next: NextFunction): void {
     .then((data: BandAttributes[]) => {
       res.status(200).json(data);
     })
-    // TODO: what is the proper sequelize error handling here?
     .catch((error: Error) => {
       next(error);
     });
@@ -32,7 +31,7 @@ export function getId(req: Request, res: Response, next: NextFunction): void {
     include: [{ model: User }, { model: Show }],
   })
     .then((data: BandAttributes) => {
-      res.status(200).json(data);
+      res.json(data);
     })
     .catch((error: Error) => {
       next(error);

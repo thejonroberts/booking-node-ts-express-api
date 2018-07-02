@@ -64,6 +64,7 @@ export default (sequelize: Sequelize.Sequelize) => {
     });
 
     Band.belongsToMany(models.User, {
+      // as: 'members',
       foreignKey: 'band_id',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',

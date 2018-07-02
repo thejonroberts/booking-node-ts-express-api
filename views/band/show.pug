@@ -14,3 +14,5 @@ block content
   each member in bandDetails.users
     h4 #{member.firstName} #{member.firstName}
       a.btn.btn-sm.btn-secondary(href=`/users/${member.id}`) view
+  br
+  a.btn.btn-sm.btn-danger(href=`/bands/${bandDetails.id}/edit`) edit

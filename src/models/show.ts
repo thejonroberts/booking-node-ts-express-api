@@ -44,7 +44,14 @@ export default (sequelize: Sequelize.Sequelize) => {
     },
   };
 
-  const Show = sequelize.define<ShowInstance, ShowAttributes>('Show', attributes);
+  const options = {
+    name: {
+      plural: 'shows',
+      singular: 'show',
+    },
+  };
+
+  const Show = sequelize.define<ShowInstance, ShowAttributes>('Show', attributes, options);
 
   Show.associate = models => {
     // TODO: this isn't working
@@ -55,6 +62,8 @@ export default (sequelize: Sequelize.Sequelize) => {
     Show.belongsToMany(models.Band, {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
+      otherKey: 'band_id',
+      foreignKey: 'show_id',
       through: 'Lineups',
     });
   };

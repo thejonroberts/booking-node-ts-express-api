@@ -26,7 +26,7 @@ const define: Sequelize.DefineOptions<any> = {
 const options: Sequelize.Options = {
   // NOTE: http://sequelize.readthedocs.io/en/latest/api/sequelize/index.html
   define,
-  // logging: false,
+  logging: false,
   operatorsAliases,
 };
 

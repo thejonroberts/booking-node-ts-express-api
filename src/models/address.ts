@@ -56,11 +56,18 @@ export default (sequelize: Sequelize.Sequelize) => {
 
   };
 
-  const Address = sequelize.define<AddressInstance, AddressAttributes>('Address', attributes);
+  const options = {
+    name: {
+      plural: 'addresses',
+      singular: 'address',
+    },
+  };
+
+  const Address = sequelize.define<AddressInstance, AddressAttributes>('Address', attributes, options);
 
   Address.associate = models => {
     Address.hasMany(models.Venue, {
-      foreignKey: 'addressId',
+      foreignKey: 'address_id',
     });
   };
 

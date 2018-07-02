@@ -57,7 +57,14 @@ export default (sequelize: Sequelize.Sequelize) => {
     username: Sequelize.TEXT,
   };
 
-  const User = sequelize.define<UserInstance, UserAttributes>('User', attributes);
+  const options = {
+    name: {
+      plural: 'users',
+      singular: 'user',
+    },
+  };
+
+  const User = sequelize.define<UserInstance, UserAttributes>('User', attributes, options);
 
   User.associate = models => {
     User.hasOne(models.Address, {
@@ -67,12 +74,16 @@ export default (sequelize: Sequelize.Sequelize) => {
     User.belongsToMany(models.Band, {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
+      otherKey: 'band_id',
+      foreignKey: 'user_id',
       through: 'Members',
     });
 
     User.belongsToMany(models.Venue, {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
+      otherKey: 'venue_id',
+      foreignKey: 'user_id',
       through: 'Employees',
     });
   };

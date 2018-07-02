@@ -117,7 +117,7 @@ describe('DELETE /api/v1/bands', () => {
         expect(res.body[0].website).to.equal(bandUpdate.website);
         expect(res.body[0].label).to.equal(bandUpdate.label);
         expect(res.body[0].genreId).to.equal(bandUpdate.genreId);
-        expect(res.body[0].deletedAt).to.be.a('string');
+        expect(res.body[0].deleted_at).to.be.a('string');
         done();
       });
   });

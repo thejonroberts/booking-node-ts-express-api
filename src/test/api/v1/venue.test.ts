@@ -99,7 +99,7 @@ describe('DELETE /api/v1/venues', () => {
         if (err) { return done(err); }
         expect(res.body[0]).to.be.an('object');
         expect(res.body[0].name).to.equal(venueUpdate.name);
-        expect(res.body[0].deletedAt).to.be.a('string');
+        expect(res.body[0].deleted_at).to.be.a('string');
         done();
       });
   });

@@ -119,7 +119,7 @@ describe('DELETE /api/v1/addresses', () => {
         expect(res.body[0].zipCode).to.equal(addressUpdate.zipCode);
         expect(res.body[0].timeZone).to.equal(addressUpdate.timeZone);
         expect(res.body[0].placeId).to.equal(addressUpdate.placeId);
-        expect(res.body[0].deletedAt).to.be.a('string');
+        expect(res.body[0].deleted_at).to.be.a('string');
         done();
       });
   });

@@ -49,7 +49,14 @@ export default (sequelize: Sequelize.Sequelize) => {
     website: Sequelize.STRING,
   };
 
-  const Band = sequelize.define<BandInstance, BandAttributes>('Band', attributes);
+  const options = {
+    name: {
+      plural: 'bands',
+      singular: 'band',
+    },
+  };
+
+  const Band = sequelize.define<BandInstance, BandAttributes>('Band', attributes, options);
 
   Band.associate = models => {
     Band.belongsTo(models.Genre, {
@@ -57,14 +64,18 @@ export default (sequelize: Sequelize.Sequelize) => {
     });
 
     Band.belongsToMany(models.User, {
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
-        through: 'Members',
-      });
-
-    Band.belongsToMany(models.Show, {
+      foreignKey: 'band_id',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
+      otherKey: 'user_id',
+      through: 'Members',
+    });
+
+    Band.belongsToMany(models.Show, {
+      foreignKey: 'band_id',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+      otherKey: 'show_id',
       through: 'Lineups',
     });
   };

@@ -27,16 +27,26 @@ export default (sequelize: Sequelize.Sequelize) => {
     },
   };
 
-  const Genre = sequelize.define<GenreInstance, GenreAttributes>('Genre', attributes);
+  const options = {
+    name: {
+      plural: 'genres',
+      singular: 'genre',
+    },
+  };
+
+  const Genre = sequelize.define<GenreInstance, GenreAttributes>('Genre', attributes, options);
 
   Genre.associate = models => {
-    Genre.hasMany(models.Band, {
-      foreignKey: 'genreId',
-    });
+    // TODO: need this?
+    // Genre.hasMany(models.Band, {
+    //   foreignKey: 'genreId',
+    // });
 
     Genre.belongsToMany(models.Venue, {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
+      otherKey: 'venue_id',
+      foreignKey: 'genre_id',
       through: 'VenuesGenres',
     });
   };

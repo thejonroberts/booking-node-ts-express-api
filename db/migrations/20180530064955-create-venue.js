@@ -20,6 +20,10 @@ module.exports = {
       },
       address_id: {
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Addresses',
+          key: 'id',
+      },
       },
       created_at: {
         allowNull: false,

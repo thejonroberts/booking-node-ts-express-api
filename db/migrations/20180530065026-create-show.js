@@ -23,6 +23,10 @@ module.exports = {
       },
       venue_id: {
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Venues',
+          key: 'id',
+      },
       },
       created_at: {
         allowNull: false,

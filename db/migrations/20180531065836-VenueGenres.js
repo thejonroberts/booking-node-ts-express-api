@@ -13,7 +13,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          // Again, note the plural!!!!!
           model: 'Venues',
           key: 'id',
         },

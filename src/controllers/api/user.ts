@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { UserAttributes } from '../../models/user';
 
+// TODO: Should not be sending any passwords, even if hashed. +  Add Test.
+
 export function getAll(req: Request, res: Response, next: NextFunction): void {
   const { User } = req.app.get('models');
   User.findAll()

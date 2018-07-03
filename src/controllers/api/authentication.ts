@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from 'express';
 
 import passport from 'passport';
 
+// TODO: Tests!
+
 export function isLoggedIn(
   req: Request,
   res: Response,
@@ -41,7 +43,7 @@ export function register(
 }
 
 export function login(req: Request, res: Response, next: NextFunction): void {
-  // TODO refactor to helper with strategy arg
+  // TODO: refactor to helper with strategy arg
   passport.authenticate('local-signIn', (err, user, msgObj) => {
     if (err) {
       return next(err);
@@ -66,7 +68,7 @@ export function logout(req: Request, res: Response, next: NextFunction): void {
     if (err) {
       res.status(500).json({ message: 'Error logging out!' });
     }
-    // TODO better message?
+    // TODO: better message?
     res.status(200).json({ message: 'Logged out of current session.' });
   });
 }

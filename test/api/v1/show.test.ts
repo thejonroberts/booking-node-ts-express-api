@@ -1,12 +1,12 @@
 // tslint:disable no-implicit-dependencies
 import * as chai from 'chai';
 import request from 'supertest';
-import app from '../../../server';
+import app from '../../../src/server';
 
 const expect = chai.expect;
 const accept = 'application/json';
 
-import { ShowAttributes } from '../../../models/show';
+import { ShowAttributes } from '../../../src/models/show';
 
 describe('GET /api/v1/shows', () => {
   it('responds with json array', done => {

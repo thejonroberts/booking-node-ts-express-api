@@ -41,7 +41,7 @@ class App {
     this.app.set('models', models);
 
     // HTTP Headers
-    // Enable CORS from client-side - TODO check best practices / security
+    // Enable CORS from client-side - TODO: check best practices / security
     this.app.use(
       (req: Request, res: Response, next: NextFunction): void => {
         res.header('Access-Control-Allow-Origin', '*');

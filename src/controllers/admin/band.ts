@@ -9,7 +9,6 @@ export function getAll(req: Request, res: Response, next: NextFunction): void {
     .then((bands: BandAttributes[]) => {
       res.render('band/index', {bands});
     })
-    // TODO: what is the proper sequelize error handling here?
     .catch((error: Error) => {
       next(error);
     });

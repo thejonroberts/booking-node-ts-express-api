@@ -1,12 +1,12 @@
 import Sequelize from 'sequelize';
 import * as config from '../config/sequelize';
 
-import Address from '../models/address';
-import Band from '../models/band';
-import Genre from '../models/genre';
-import Show from '../models/show';
-import User from '../models/user';
-import Venue from '../models/venue';
+import Address from './address';
+import Band from './band';
+import Genre from './genre';
+import Show from './show';
+import User from './user';
+import Venue from './venue';
 
 const operatorsAliases: Sequelize.OperatorsAliases = {
   // NOTE: http://docs.sequelizejs.com/manual/tutorial/querying.html#operators-aliases

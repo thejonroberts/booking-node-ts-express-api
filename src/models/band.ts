@@ -21,11 +21,15 @@ export default (sequelize: Sequelize.Sequelize) => {
 
   const attributes: SequelizeAttributes<BandAttributes> = {
     addressId: {
+      defaultValue: null,
       field: 'address_id',
       type: Sequelize.INTEGER,
     },
-    bandcamp: Sequelize.STRING,
+    bandcamp: {
+      defaultValue: '',
+      type: Sequelize.STRING},
     createdAt: {
+      defaultValue: '',
       field: 'created_at',
       type: Sequelize.DATE,
     },
@@ -33,8 +37,12 @@ export default (sequelize: Sequelize.Sequelize) => {
       field: 'deleted_at',
       type: Sequelize.DATE,
     },
-    description: Sequelize.STRING,
+    description: {
+      defaultValue: '',
+      type: Sequelize.STRING,
+    },
     genreId: {
+      defaultValue: null,
       field: 'genre_id',
       // TODO: any benefit to declaring this here?
       // need to import other Model - better to just use associations???
@@ -45,14 +53,25 @@ export default (sequelize: Sequelize.Sequelize) => {
       // },
       type: Sequelize.INTEGER,
     },
-    label: Sequelize.STRING,
-    name: Sequelize.STRING,
-    tagline: Sequelize.STRING,
+    label: {
+      defaultValue: '',
+      type: Sequelize.STRING,
+    },
+    name: {
+      defaultValue: '',
+      type: Sequelize.STRING,
+    },
+    tagline: {
+      defaultValue: '',
+      type: Sequelize.STRING,
+    },
     updatedAt: {
       field: 'updated_at',
       type: Sequelize.DATE,
     },
-    website: Sequelize.STRING,
+    website: {
+      defaultValue: '',
+      type: Sequelize.STRING},
   };
 
   const options = {

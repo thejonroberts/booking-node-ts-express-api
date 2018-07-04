@@ -2,16 +2,19 @@
 //- TODO: how to handle non-user members?  new table?
 //- TODO: LABEL table
 
-form#band-details(method="post" action=`/bands/${band.id}/edit`)
+form#band-details(method="post")
   .form-row
     .col-md-4.mb-3
       .form-group
         label(for="bandName") Name
-        input#bandName.form-control(type="text" name="band[name]" placeholder="Band Name" value=`${band.name}` required="")
+        input#bandName.form-control(type="text" name="band[name]" placeholder="ex: the New Band" value=`${band.name}` required="")
     .col-md-4.mb-3
       .form-group
         label(for="bandGenreId") Genre
+        //- NOTE: show prompt / disabled only if no current genre (new)
         select(class="form-control" name="band[genreId]" id="bandGenreId" required="")
+          if (!band.genre.id)
+            option(value="" selected disabled) Select Genre
           each genre in genres
             if genre.id === band.genre.id
               option(value=`${genre.id}` selected="selected") #{genre.name}
@@ -20,30 +23,32 @@ form#band-details(method="post" action=`/bands/${band.id}/edit`)
     .col-md-4.mb-3
       .form-group
         label(for="bandTagline") Tagline
-        input#bandTagline.form-control(type="text" name="band[tagline]" placeholder="Tagline" value=`${band.tagline}` required="")
+        input#bandTagline.form-control(type="text" name="band[tagline]" placeholder="ex: We rock." value=`${band.tagline}` required="")
   .form-row
     .col-md-12.mb-12
       .form-group
         label(for="bandDescription") Description
-        textarea#bandDescription.form-control(rows="3" name="band[description]") #{band.description}
+        textarea#bandDescription.form-control(rows="3" name="band[description]" maxlength="200") #{band.description}
   .form-row
     .col-md-4.mb-3
       .form-group
         label(for="bandBandcamp") Bandcamp
-        input#bandBandcamp.form-control(type="text" name="band[bandcamp]" placeholder="Last name" value=`${band.bandcamp}`)
+        input#bandBandcamp.form-control(type="text" name="band[bandcamp]" placeholder="ex: bandname.bandcamp.com" value=`${band.bandcamp}`)
     .col-md-4.mb-3
       .form-group
         label(for="bandWebsite") Website
-        input#bandWebsite.form-control(type="text" name="band[website]" placeholder="Last name" value=`${band.website}`)
+        input#bandWebsite.form-control(type="text" name="band[website]" placeholder="ex: www.name-band.com" value=`${band.website}`)
     .col-md-4.mb-3
       .form-group
         label(for="bandLabel") Label
-        input#bandLabel.form-control(type="text" name="band[label]" placeholder="Last name" value=`${band.label}`)
+        input#bandLabel.form-control(type="text" name="band[label]" placeholder="ex: Label Records, Inc" value=`${band.label}`)
   .form-row
+    //- NOTE: may need if sending null address id causes issues.
+    //- if band.address.id
     .col-md-4.mb-3.d-none
       .form-group
           label(for="bandAddressId") AddressId
-          input#bandAddressId(type="number" name="address[id]" value=`${band.address.id}` required="")
+          input#bandAddressId(type="number" name="address[id]" value=`${band.address.id}`)
     .col-md-4.mb-3
       .form-group
         label(for="bandAddressStreet") Street
@@ -55,19 +60,22 @@ form#band-details(method="post" action=`/bands/${band.id}/edit`)
     .col-md-4.mb-3
       .form-group
         label(for="bandAddressCity") City
-        input#bandAddressCity.form-control(type="text" name="address[city]" placeholder="City" value=`${band.address.city}` required="")
+        input#bandAddressCity.form-control(type="text" name="address[city]" placeholder="ex: Someton" value=`${band.address.city}` required="")
   .form-row
     .col-md-4.mb-3
       .form-group
         label(for="bandAddressState") State
-        input#bandAddressState.form-control(type="text" name="address[state]" placeholder="State" value=`${band.address.state}` required="")
+        input#bandAddressState.form-control(type="text" name="address[state]" placeholder="ex: New Indiana" value=`${band.address.state}` required="")
     .col-md-4.mb-3
       .form-group
         label(for="bandAddressZip") Zip
-        input#bandAddressZip.form-control(type="text" name="address[zipCode]" placeholder="Zip" value=`${band.address.zipCode}` required="")
+        input#bandAddressZip.form-control(type="text" name="address[zipCode]" placeholder="ex: 55555" value=`${band.address.zipCode}` required="")
     .col-md-4.mb-3
       .form-group
         label(for="bandAddressCountry") Country
-        input#bandAddressCountry.form-control(type="text" name="address[country]" placeholder="Country" value=`${band.address.country}` required="")
+        input#bandAddressCountry.form-control(type="text" name="address[country]" placeholder="ex: USA" value=`${band.address.country}` required="")
   .form-row
-    button.btn.btn-primary.right(type="submit") Submit form
+    if band.id
+      button.btn.btn-primary.right(type="submit" formaction=`/bands/${band.id}/edit`) Update Band
+    else
+      button.btn.btn-primary.right(type="submit" formaction=`/bands`) Create Band

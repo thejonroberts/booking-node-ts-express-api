@@ -1,12 +1,15 @@
 import { Router } from 'express';
 const band = Router();
 
-import { create, deleteId, editId, getAll, getId, updateId } from '../../controllers/admin/band';
+import { create, deleteId, editId, getAll, getId, showEditForm, updateId } from '../../controllers/admin/band';
 
 band
   .route('/')
-  .get(getAll);
-  // .post(create);
+  .get(getAll)
+  .post(create);
+band
+  .route('/new')
+  .get(showEditForm);
 band
   // TODO: check that id params is a number / guard
   .route('/:id/edit')

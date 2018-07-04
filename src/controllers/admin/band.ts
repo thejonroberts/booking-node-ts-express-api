@@ -17,11 +17,16 @@ export function getAll(req: Request, res: Response, next: NextFunction): void {
 }
 
 export function create(req: Request, res: Response, next: NextFunction): void {
-  const { Band } = req.app.get('models');
-  const band = new Band(req.body);
-  band.save()
-  .then((bandDetails: BandAttributes) => {
-    res.render('band/show', {bandDetails});
+  const { Address, Band } = req.app.get('models');
+  const newBand = new Band(req.body.band);
+  const newAddress = new Address(req.body.band.address);
+  newAddress.save()
+  .then((address: AddressAttributes) => {
+    newBand.addressId = address.id;
+    return newBand.save()
+    .then((band: BandAttributes) => {
+      return res.redirect(`bands/${band.id}`);
+    });
   })
   .catch((error: Error) => {
     next(error);
@@ -35,6 +40,24 @@ export function getId(req: Request, res: Response, next: NextFunction): void {
   })
   .then((bandDetails: BandAttributes) => {
     res.render('band/show', {bandDetails});
+  })
+  .catch((error: Error) => {
+    next(error);
+  });
+}
+
+export function showEditForm(req: Request, res: Response, next: NextFunction): void {
+  const { Band, Address, Genre } = req.app.get('models');
+  // NOTE: need these band.attributes to render the empty form!
+  const band = new Band();
+  const address = new Address();
+  band.address = address;
+  band.genre = {
+    id: null,
+  };
+  Genre.findAll()
+  .then((genres: GenreAttributes[]) => {
+    res.render('band/new', ({band, genres}));
   })
   .catch((error: Error) => {
     next(error);
@@ -59,7 +82,13 @@ export function editId(req: Request, res: Response, next: NextFunction): void {
 
 export function updateId(req: Request, res: Response, next: NextFunction): void {
   const { Address, Band } = req.app.get('models');
-  Band.update(req.body.band, { where: { id: req.params.id } })
+  // TODO: lint rule for this format?
+  Band.update(
+    req.body.band, {
+      where: {
+      id: req.params.id,
+    },
+  })
   .then((bandDetails: BandAttributes) => {
     return Address.update(req.body.address, { where: { id: req.body.address.id } })
     .then((address: AddressAttributes) => {
@@ -73,7 +102,9 @@ export function updateId(req: Request, res: Response, next: NextFunction): void 
 
 export function deleteId(req: Request, res: Response, next: NextFunction): void {
   const { Band } = req.app.get('models');
-  Band.destroy({ returning: true, where: { id: req.params.id } })
+  Band.destroy({
+      where: { id: req.params.id },
+  })
   .then((data: BandAttributes) => {
     res.render('band/index', data);
   })

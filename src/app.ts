@@ -59,7 +59,7 @@ class App {
       }
     );
     // body-parser
-    this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(bodyParser.json());
     // SESSION / AUTH
     this.app.use(

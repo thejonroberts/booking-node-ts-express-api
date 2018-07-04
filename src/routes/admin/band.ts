@@ -8,6 +8,7 @@ band
   .get(getAll);
   // .post(create);
 band
+  // TODO: check that id params is a number / guard
   .route('/:id/edit')
   .get(editId)
   .post(updateId);

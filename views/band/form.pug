@@ -1,76 +1,73 @@
-//- TODO: pull in genres, dropdown select / radio
-h4 add genre picker!
 //- TODO: user search and add
-h4 user search to add member
 //- TODO: how to handle non-user members?  new table?
-//- NOTE: how to handle band addresses - no street required
 //- TODO: LABEL table
 
-form.needs-validation(novalidate="")
+form#band-details(method="post" action=`/bands/${band.id}/edit`)
   .form-row
     .col-md-4.mb-3
-      label(for="validationCustom01") Name
-      input#validationCustom01.form-control(type="text" placeholder="First name" value="Mark" required="")
-      .valid-feedback
-        | Looks good!
+      .form-group
+        label(for="bandName") Name
+        input#bandName.form-control(type="text" name="band[name]" placeholder="Band Name" value=`${band.name}` required="")
     .col-md-4.mb-3
-      label(for="validationCustom02") Tagline
-      input#validationCustom02.form-control(type="text" placeholder="Last name" value="Otto" required="")
-      .valid-feedback
-        | Looks good!
+      .form-group
+        label(for="bandGenreId") Genre
+        select(class="form-control" name="band[genreId]" id="bandGenreId" required="")
+          each genre in genres
+            if genre.id === band.genre.id
+              option(value=`${genre.id}` selected="selected") #{genre.name}
+            else
+              option(value=`${genre.id}`) #{genre.name}
     .col-md-4.mb-3
-      label(for="validationCustom02") Bandcamp
-      input#validationCustom02.form-control(type="text" placeholder="Last name" value="Otto" required="")
-      .valid-feedback
-        | Looks good!
-    .col-md-4.mb-3
-      label(for="validationCustom02") Description
-      input#validationCustom02.form-control(type="text" placeholder="Last name" value="Otto" required="")
-      .valid-feedback
-        | Looks good!
-    .col-md-4.mb-3
-      label(for="validationCustom02") Label
-      input#validationCustom02.form-control(type="text" placeholder="Last name" value="Otto" required="")
-      .valid-feedback
-        | Looks good!
-    .col-md-4.mb-3
-      label(for="validationCustom02") Website
-      input#validationCustom02.form-control(type="text" placeholder="Last name" value="Otto" required="")
-      .valid-feedback
-        | Looks good!
+      .form-group
+        label(for="bandTagline") Tagline
+        input#bandTagline.form-control(type="text" name="band[tagline]" placeholder="Tagline" value=`${band.tagline}` required="")
   .form-row
-    .col-md-6.mb-3
-      label(for="validationCustom03") City
-      input#validationCustom03.form-control(type="text" placeholder="City" required="")
-      .invalid-feedback
-        | Please provide a valid city.
-    .col-md-3.mb-3
-      label(for="validationCustom04") State
-      input#validationCustom04.form-control(type="text" placeholder="State" required="")
-      .invalid-feedback
-        | Please provide a valid state.
-    .col-md-3.mb-3
-      label(for="validationCustom05") Zip
-      input#validationCustom05.form-control(type="text" placeholder="Zip" required="")
-      .invalid-feedback
-        | Please provide a valid zip.
-  button.btn.btn-primary(type="submit") Submit form
-script.
-  // Example starter JavaScript for disabling form submissions if there are invalid fields
-  (function() {
-    'use strict';
-    window.addEventListener('load', function() {
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      var forms = document.getElementsByClassName('needs-validation');
-      // Loop over them and prevent submission
-      var validation = Array.prototype.filter.call(forms, function(form) {
-          form.addEventListener('submit', function(event) {
-            if (form.checkValidity() === false) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-  })();
+    .col-md-12.mb-12
+      .form-group
+        label(for="bandDescription") Description
+        textarea#bandDescription.form-control(rows="3" name="band[description]") #{band.description}
+  .form-row
+    .col-md-4.mb-3
+      .form-group
+        label(for="bandBandcamp") Bandcamp
+        input#bandBandcamp.form-control(type="text" name="band[bandcamp]" placeholder="Last name" value=`${band.bandcamp}`)
+    .col-md-4.mb-3
+      .form-group
+        label(for="bandWebsite") Website
+        input#bandWebsite.form-control(type="text" name="band[website]" placeholder="Last name" value=`${band.website}`)
+    .col-md-4.mb-3
+      .form-group
+        label(for="bandLabel") Label
+        input#bandLabel.form-control(type="text" name="band[label]" placeholder="Last name" value=`${band.label}`)
+  .form-row
+    .col-md-4.mb-3.d-none
+      .form-group
+          label(for="bandAddressId") AddressId
+          input#bandAddressId(type="number" name="address[id]" value=`${band.address.id}` required="")
+    .col-md-4.mb-3
+      .form-group
+        label(for="bandAddressStreet") Street
+        input#bandAddressStreet.form-control(type="text" name="address[street]" placeholder="555 Example Ln." value=`${band.address.street}` required="")
+    .col-md-4.mb-3
+      .form-group
+        label(for="bandAddressLineOne") Street Additional
+        input#bandAddressLineOne.form-control(type="text" name="address[lineOne]" placeholder="ex: Apt 45" value=`${band.address.lineOne}` required="")
+    .col-md-4.mb-3
+      .form-group
+        label(for="bandAddressCity") City
+        input#bandAddressCity.form-control(type="text" name="address[city]" placeholder="City" value=`${band.address.city}` required="")
+  .form-row
+    .col-md-4.mb-3
+      .form-group
+        label(for="bandAddressState") State
+        input#bandAddressState.form-control(type="text" name="address[state]" placeholder="State" value=`${band.address.state}` required="")
+    .col-md-4.mb-3
+      .form-group
+        label(for="bandAddressZip") Zip
+        input#bandAddressZip.form-control(type="text" name="address[zipCode]" placeholder="Zip" value=`${band.address.zipCode}` required="")
+    .col-md-4.mb-3
+      .form-group
+        label(for="bandAddressCountry") Country
+        input#bandAddressCountry.form-control(type="text" name="address[country]" placeholder="Country" value=`${band.address.country}` required="")
+  .form-row
+    button.btn.btn-primary.right(type="submit") Submit form

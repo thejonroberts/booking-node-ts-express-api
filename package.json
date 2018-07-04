@@ -17,7 +17,7 @@
     "build": "tsc",
     "prestart": "npm run build",
     "start": "node ./dist/server.js",
-    "dev": "npm run test:watch",
+    "dev": "tsc -w & nodemon --watch dist --delay 500ms ./dist/server.js",
     "lint": "tslint --project . --fix -t stylish",
     "release": "standard-version",
     "test": "nyc --reporter=html --reporter=text mocha --opts ./mocha.opts --require source-map-support/register --exit",

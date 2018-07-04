@@ -4,7 +4,7 @@ const faker = require('faker');
 const fs = require('fs');
 
 const {
-  amounts: { numBands, numGenres },
+  amounts: { numAddresses, numBands, numGenres },
 } = require('./generator-amounts.json');
 
 let bands = [];
@@ -17,10 +17,12 @@ for (let i = 0; i < numBands; i++) {
   const description = faker.lorem.sentence();
   const label = faker.company.companyName();
   const genre_id = Math.floor(Math.random() * numGenres) + 1;
+  const address_id = Math.floor(Math.random() * numAddresses) + 1;
   const created_at = faker.date.past().toISOString();
   const updated_at = new Date().toISOString();
 
   bands.push({
+    address_id,
     bandcamp,
     created_at,
     description,

@@ -1,7 +1,9 @@
 import * as Sequelize from 'sequelize';
 
 export interface BandAttributes {
+  id?: number;
   genreId?: number;
+  addressId?: number;
   description?: string;
   bandcamp?: string;
   label?: string;
@@ -18,6 +20,10 @@ type BandInstance = Sequelize.Instance<BandAttributes> & BandAttributes;
 export default (sequelize: Sequelize.Sequelize) => {
 
   const attributes: SequelizeAttributes<BandAttributes> = {
+    addressId: {
+      field: 'address_id',
+      type: Sequelize.INTEGER,
+    },
     bandcamp: Sequelize.STRING,
     createdAt: {
       field: 'created_at',
@@ -61,6 +67,10 @@ export default (sequelize: Sequelize.Sequelize) => {
   Band.associate = models => {
     Band.belongsTo(models.Genre, {
       foreignKey: 'genreId',
+    });
+
+    Band.belongsTo(models.Address, {
+      foreignKey: 'addressId',
     });
 
     Band.belongsToMany(models.User, {

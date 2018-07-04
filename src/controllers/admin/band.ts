@@ -4,9 +4,9 @@ import { BandAttributes } from '../../models/band';
 import { GenreAttributes } from '../../models/genre';
 
 export function getAll(req: Request, res: Response, next: NextFunction): void {
-  const { Band, Genre } = req.app.get('models');
+  const { Address, Band, Genre } = req.app.get('models');
   Band.findAll({
-    include: [{ model: Genre }],
+    include: [{ model: Genre }, { model: Address }],
   })
   .then((bands: BandAttributes[]) => {
     res.render('band/index', {bands});
@@ -19,7 +19,7 @@ export function getAll(req: Request, res: Response, next: NextFunction): void {
 export function create(req: Request, res: Response, next: NextFunction): void {
   const { Address, Band } = req.app.get('models');
   const newBand = new Band(req.body.band);
-  const newAddress = new Address(req.body.band.address);
+  const newAddress = new Address(req.body.address);
   newAddress.save()
   .then((address: AddressAttributes) => {
     newBand.addressId = address.id;

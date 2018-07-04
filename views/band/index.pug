@@ -1,8 +1,7 @@
 extends ../layout.pug
 block content
   .container
-    h1 Bands
-    h3 Check em out!
+    a.btn.btn-primary.btn-md(href="/bands/new") Add your band!
     .row
       .card-columns
         each band in bands

@@ -1,20 +1,22 @@
 extends ../layout.pug
+block meta
 block style
 block content
-  h1 #{bandDetails.name}
-  h3 #{bandDetails.genre.name}
-  h3 #{bandDetails.label}
-  h3 #{bandDetails.bandcamp}
-  h3 #{bandDetails.website}
-  br
-  h3 Upcoming Shows:
-  each show in bandDetails.shows
-    h2 #{show.title}
-  br
-  h3 Members
-  each member in bandDetails.users
-    h4 #{member.firstName} #{member.firstName}
-      a.btn.btn-sm.btn-secondary(href=`/users/${member.id}`) view
-  br
-  a.btn.btn-sm.btn-danger(href=`/bands/${bandDetails.id}/edit`) edit
+  .container
+    h1 #{bandDetails.name}
+    h3 #{bandDetails.genre.name}
+    h3 #{bandDetails.label}
+    h3 #{bandDetails.bandcamp}
+    h3 #{bandDetails.website}
+    br
+    h3 Upcoming Shows:
+    each show in bandDetails.shows
+      h2 #{show.title}
+    br
+    h3 Members
+    each member in bandDetails.users
+      h4 #{member.firstName} #{member.firstName}
+        a.btn.btn-sm.btn-secondary(href=`/users/${member.id}`) view
+    br
+    a.btn.btn-sm.btn-danger(href=`/bands/${bandDetails.id}/edit`) edit
 block script

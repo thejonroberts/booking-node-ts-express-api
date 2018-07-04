@@ -11,8 +11,8 @@ let bands = [];
 for (let i = 0; i < numBands; i++) {
 
   const name = faker.random.word();
-  const bandcamp = `https://${name}.bandcamp.com/`;
-  const website = `https://www.${name}-band.com`;
+  const bandcamp = (`https://${name}.bandcamp.com/`).toLowerCase();
+  const website = (`https://www.${name}-band.com`).toLowerCase();
   const tagline = faker.company.bs();
   const description = faker.lorem.sentence();
   const label = faker.company.companyName();

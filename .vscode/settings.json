@@ -1,10 +1,11 @@
 {
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
-  "prettier.useTabs": false,
+  // "prettier.useTabs": false,
   "cSpell.words": [
     "badtestband",
     "bandcamp",
+    "bookin",
     "deserialize",
     "linebreak",
     "resave",
@@ -18,5 +19,5 @@
 	"eslint.enable": false,
   "eslint.autoFixOnSave": false,
   "tslint.jsEnable": true,
-
+  "puglint.enable": true
 }

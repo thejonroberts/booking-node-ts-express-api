@@ -9,6 +9,8 @@ if (process.env !== 'production') {
     'seeders-path': path.resolve('./db/seeders'),
   };
 }
+// NOTE: build script should be run before any sequelize cli commands due to ./dist/models location
+// (sequelize doesn't understand typescript!)
 module.exports = {
   'config': path.resolve('./src/config', 'sequelize.js'),
   'migrations-path': path.resolve('./db/migrations'),

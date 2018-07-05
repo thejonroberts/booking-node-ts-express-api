@@ -1,11 +1,14 @@
 import * as Sequelize from 'sequelize';
 
 export interface ShowAttributes {
-  VenueId?: number;
+  venueId?: number;
   description?: string;
   endsAt?: string;
   startsAt?: string;
   title?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  deletedAt?: string;
 }
 
 type ShowInstance = Sequelize.Instance<ShowAttributes> & ShowAttributes;
@@ -13,25 +16,68 @@ type ShowInstance = Sequelize.Instance<ShowAttributes> & ShowAttributes;
 export default (sequelize: Sequelize.Sequelize) => {
 
   const attributes: SequelizeAttributes<ShowAttributes> = {
-    VenueId: Sequelize.INTEGER,
-    description: Sequelize.STRING,
-    endsAt: Sequelize.DATE,
-    startsAt: Sequelize.DATE,
-    title: Sequelize.STRING,
+    createdAt: {
+      field: 'created_at',
+      type: Sequelize.DATE,
+    },
+    deletedAt: {
+      field: 'deleted_at',
+      type: Sequelize.DATE,
+    },
+    description: {
+      defaultValue: '',
+      type: Sequelize.STRING,
+    },
+    endsAt: {
+      defaultValue: null,
+      field: 'ends_at',
+      type: Sequelize.DATE,
+    },
+    startsAt: {
+      defaultValue: null,
+      field: 'starts_at',
+      type: Sequelize.DATE,
+    },
+    title: {
+      allowNull: false,
+      defaultValue: '',
+      type: Sequelize.STRING,
+    },
+    updatedAt: {
+      field: 'updated_at',
+      type: Sequelize.DATE,
+    },
+    venueId: {
+      field: 'venue_id',
+      type: Sequelize.INTEGER,
+      // references: {
+      //   key: 'id',
+      //   model: Venue,
+      // },
+    },
   };
 
-  const Show = sequelize.define<ShowInstance, ShowAttributes>('Show', attributes);
+  const options = {
+    name: {
+      plural: 'shows',
+      singular: 'show',
+    },
+  };
+
+  const Show = sequelize.define<ShowInstance, ShowAttributes>('Show', attributes, options);
 
   Show.associate = models => {
     // TODO: this isn't working
     Show.belongsTo(models.Venue, {
-      foreignKey: 'VenueId',
+      foreignKey: 'venueId',
     });
 
     Show.belongsToMany(models.Band, {
+      foreignKey: 'show_id',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
-      through: 'ShowsBands',
+      otherKey: 'band_id',
+      through: 'Lineups',
     });
   };
 

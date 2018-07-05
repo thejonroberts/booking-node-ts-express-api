@@ -1,3 +1,4 @@
+// tslint:disable object-literal-sort-keys
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -8,10 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      startsAt: {
+      starts_at: {
         type: Sequelize.DATE,
       },
-      endsAt: {
+      ends_at: {
         type: Sequelize.DATE,
       },
       title: {
@@ -20,18 +21,22 @@ module.exports = {
       description: {
         type: Sequelize.STRING,
       },
-      VenueId: {
+      venue_id: {
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Venues',
+          key: 'id',
       },
-      createdAt: {
+      },
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      deletedAt: {
+      deleted_at: {
         type: Sequelize.DATE,
       },
     });

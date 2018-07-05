@@ -157,5 +157,5 @@
   /* include test files for VSCode TS integration */
   "include": ["src/**/*"],
   /* exclude test files from compilation */
-  // "exclude": ["test/**/*.test.ts"]
+  "exclude": ["*.test.ts", "lib/**/*"]
 }

@@ -1,5 +1,5 @@
 'use strict';
-// TODO ts for this file
+// TODO: ts for this file
 const bCrypt = require('bcrypt-nodejs');
 const passport = require('passport');
 const { Strategy } = require('passport-local');
@@ -75,7 +75,7 @@ const LoginStrategy = new Strategy(
       .then(user => {
         if (!user) {
           return done(null, false, {
-            // TODO more info ?
+            // TODO: more info ?
             message:
               'Can\'t find a user with those credentials. Please try again',
           });

@@ -2,6 +2,9 @@ import * as Sequelize from 'sequelize';
 
 export interface GenreAttributes {
   name?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  deletedAt?: string;
 }
 
 type GenreInstance = Sequelize.Instance<GenreAttributes> & GenreAttributes;
@@ -9,24 +12,44 @@ type GenreInstance = Sequelize.Instance<GenreAttributes> & GenreAttributes;
 export default (sequelize: Sequelize.Sequelize) => {
 
   const attributes: SequelizeAttributes<GenreAttributes> = {
-    name: Sequelize.STRING,
+    createdAt: {
+      field: 'created_at',
+      type: Sequelize.DATE,
+    },
+    deletedAt: {
+      field: 'deleted_at',
+      type: Sequelize.DATE,
+    },
+    name: {
+      defaultValue: '',
+      type: Sequelize.STRING,
+    },
+    updatedAt: {
+      field: 'updated_at',
+      type: Sequelize.DATE,
+    },
   };
 
-  const Genre = sequelize.define<GenreInstance, GenreAttributes>('Genre', attributes);
+  const options = {
+    name: {
+      plural: 'genres',
+      singular: 'genre',
+    },
+  };
 
-  // {
-  //   "error": {
-  //     "name": "SequelizeEagerLoadingError"
-  //   }
-  // }
+  const Genre = sequelize.define<GenreInstance, GenreAttributes>('Genre', attributes, options);
+
   Genre.associate = models => {
-    Genre.hasMany(models.Band, {
-      foreignKey: 'GenreId',
-    });
+    // TODO: need this?
+    // Genre.hasMany(models.Band, {
+    //   foreignKey: 'genreId',
+    // });
 
     Genre.belongsToMany(models.Venue, {
+      foreignKey: 'genre_id',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
+      otherKey: 'venue_id',
       through: 'VenuesGenres',
     });
   };

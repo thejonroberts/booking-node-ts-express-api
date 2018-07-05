@@ -3,13 +3,14 @@ import express, { Application, NextFunction, Request, Response } from 'express';
 import session from 'express-session';
 import validator from 'express-validator';
 import passport from 'passport';
+import path from 'path';
 
 import * as dotenv from 'dotenv';
 const env = dotenv.config();
 import './config/passport.js';
 
 import * as models from './models';
-import router from './routes';
+import router from './routes/index';
 
 class App {
   public app: Application;
@@ -25,12 +26,25 @@ class App {
   private config(): void {
     this.app.set('port', process.env.PORT || 3000);
     this.app.set('host', process.env.HOST || '127.0.0.1');
+    this.app.set('view engine', 'pug');
+    if (process.env.NODE_ENV === 'development') {
+      this.app.set('view options', { debug: true, compileDebug: true });
+    }
+    this.app.use(express.static(path.join(__dirname, '../public')));
   }
 
   private middleware(): void {
+    /**
+     * NOTE: attaching the database / model instances to the express app here to
+     * this creates a singleton-esque setup.  However, we need the request.app
+     * object to access db. This leads to needing two controller setups for api
+     * & admin - each nearly identical, but ending with either res.send (api)
+     * or res.render (admin). Less than ideal!
+     */
     this.app.set('models', models);
+
     // HTTP Headers
-    // Enable CORS from client-side - TODO check best practices / security
+    // Enable CORS from client-side - TODO: check best practices / security
     this.app.use(
       (req: Request, res: Response, next: NextFunction): void => {
         res.header('Access-Control-Allow-Origin', '*');
@@ -48,7 +62,7 @@ class App {
       }
     );
     // body-parser
-    this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(bodyParser.json());
     // SESSION / AUTH
     this.app.use(
@@ -67,7 +81,7 @@ class App {
         next();
       }
     );
-    // TODO express-validator
+    // TODO: express-validator validations
     this.app.use(validator());
 
   }
@@ -77,10 +91,10 @@ class App {
   }
 
   private errors(): void {
-    // TODO error handlers / logging
+    // TODO: error handlers / logging
     // http://thecodebarbarian.com/80-20-guide-to-express-error-handling.html
     this.app.use(
-      (error: any, request: Request, res: Response, next: NextFunction): void => {
+      (error: Error, request: Request, res: Response, next: NextFunction): void => {
         if (error) {
           res.send({ error });
         } else {
@@ -91,9 +105,3 @@ class App {
 }
 
 export default new App().app;
-
-// DOCS - TODO - swagger-ui & swagger-jsonDoc
-// swaggerUi  require('swagger-ui-express');
-// const swaggerDocument = require('./config/swagger.json');
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-// app.use('/api/v1', router);

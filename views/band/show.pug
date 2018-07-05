@@ -1,0 +1,57 @@
+extends ../layout.pug
+block meta
+block style
+block content
+  .container
+    div.jumbotron
+      .row
+        .col-md-10
+          // TODO: show edit button if current user in band.members[]
+          a.btn.btn-sm.btn-info(href=`/bands/${band.id}/edit`) edit
+          h1.display-4 #{band.name}
+        .col-md-2.text-right.align-self-center
+          // TODO: contact page
+          a.btn.btn-sm.btn-info(href=`/bands/${band.id}/contact` disabled) contact
+      .row
+        .col-md-9
+          if band.address
+            h3.display-5 #{band.address.city}, #{band.address.state} #{band.address.country}
+          h3.display-5 #{band.genre.name}
+          h3.display-6 #{band.tagline}
+        .col-md-3.text-right
+          if band.label
+            h5 #{band.label}
+          a(href=`${band.bandcamp}` target='_blank') bandcamp
+          br
+          a(href=`${band.website}` target='_blank') website
+          br
+      hr.my-4
+      .row
+        .col-md-6
+          .container
+            img.img-fluid(src='/images/band_default.png')
+        .col-md-6.text-right
+          h3 Members
+          each member in band.users
+            h5 #{member.firstName} #{member.lastName}
+              a.btn.btn-sm.btn-secondary(href=`/users/${member.id}`) view
+      p.lead #{band.description}
+      .row
+        .col-md-6
+          h2.display-5 Upcoming Shows:
+          each show in band.shows
+            .row
+              .col-md-2
+                button.btn.btn-sm.btn-secondary(href=`/shows/${show.id}`) view
+              .col-md-10
+                h2.display-6 #{show.title}
+            if show.venue
+              .col-md-12
+                span #{show.venue.name}
+                if show.venue.address
+                  span - #{show.venue.address.city}, #{show.venue.address.state}
+      // TODO: only show if user is in band.members
+    form(method="POST" action=`/bands/${band.id}/delete`)
+      input.d-none(type="number" name="id" value=`${band.id}`)
+      button.btn.btn-sm.btn-danger(type="submit") Delete
+block script

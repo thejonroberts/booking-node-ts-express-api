@@ -1,0 +1,18 @@
+extends ../layout.pug
+block content
+  .container
+    a.btn.btn-primary.btn-md(href="/bands/new") Add your band!
+    .row
+      .card-columns
+        each band in bands
+          div.card
+            img.card-img-top(src="/images/350x350.png" alt=`#{band.name} image or artwork`)
+            div.card-body
+              h5.card-title #{band.name}
+              .row.justify-content-between
+                if band.genre
+                  h6.card-subtitle.col #{band.genre.name}
+                if band.address
+                  h6.card-subtitle.text-right.col #{band.address.city}, #{band.address.state} #{band.address.country}
+              p.card-text I should add a band tagline / description here.
+              a.btn(href=`/bands/${band.id}`) View

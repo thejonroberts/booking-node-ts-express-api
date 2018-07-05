@@ -108,11 +108,14 @@ export function updateId(req: Request, res: Response, next: NextFunction): void 
 
 export function deleteId(req: Request, res: Response, next: NextFunction): void {
   const { Band } = req.app.get('models');
+  // TODO: user / ownership check / scope
   Band.destroy({
       where: { id: req.params.id },
   })
   .then((data: BandAttributes) => {
-    res.render('band/index', data);
+    // TODO: flash deleted message - should probably prompt before this.
+    // NOTE: returns only number of rows destroyed (1)
+    res.redirect('/bands/');
   })
   .catch((error: Error) => {
     next(error);

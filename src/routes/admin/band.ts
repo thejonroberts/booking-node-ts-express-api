@@ -16,6 +16,9 @@ band
   .get(editId)
   .post(updateId);
 band
+  .route('/:id/delete')
+  .post(deleteId);
+band
   .route('/:id')
   .get(getId);
   // .patch(updateId)

@@ -7,7 +7,7 @@ block content
       .row
         .col-md-10
           // TODO: show edit button if current user in band.members[]
-          //- a.btn.btn-sm.btn-info(href=`/bands/${band.id}/edit`) edit
+          a.btn.btn-sm.btn-info(href=`/bands/${band.id}/edit`) edit
           h1.display-4 #{band.name}
         .col-md-2.text-right.align-self-center
           // TODO: contact page
@@ -50,4 +50,8 @@ block content
                 span #{show.venue.name}
                 if show.venue.address
                   span - #{show.venue.address.city}, #{show.venue.address.state}
+      // TODO: only show if user is in band.members
+    form(method="POST" action=`/bands/${band.id}/delete`)
+      input.d-none(type="number" name="id" value=`${band.id}`)
+      button.btn.btn-sm.btn-danger(type="submit") Delete
 block script

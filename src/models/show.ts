@@ -24,16 +24,25 @@ export default (sequelize: Sequelize.Sequelize) => {
       field: 'deleted_at',
       type: Sequelize.DATE,
     },
-    description: Sequelize.STRING,
+    description: {
+      defaultValue: '',
+      type: Sequelize.STRING,
+    },
     endsAt: {
+      defaultValue: null,
       field: 'ends_at',
       type: Sequelize.DATE,
     },
     startsAt: {
+      defaultValue: null,
       field: 'starts_at',
       type: Sequelize.DATE,
     },
-    title: Sequelize.STRING,
+    title: {
+      allowNull: false,
+      defaultValue: '',
+      type: Sequelize.STRING,
+    },
     updatedAt: {
       field: 'updated_at',
       type: Sequelize.DATE,
@@ -41,6 +50,10 @@ export default (sequelize: Sequelize.Sequelize) => {
     venueId: {
       field: 'venue_id',
       type: Sequelize.INTEGER,
+      // references: {
+      //   key: 'id',
+      //   model: Venue,
+      // },
     },
   };
 

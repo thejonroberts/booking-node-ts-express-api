@@ -34,12 +34,18 @@ export function create(req: Request, res: Response, next: NextFunction): void {
 }
 
 export function getId(req: Request, res: Response, next: NextFunction): void {
-  const { Band, Genre, Show, User } = req.app.get('models');
+  const { Address, Band, Genre, Show, User } = req.app.get('models');
   Band.findById(req.params.id, {
-    include: [{ model: User }, { model: Show }, { model: Genre }],
+    // TODO: Include venue and address (city) here, through show
+    include: [
+      { model: User },
+      { model: Show },
+      { model: Genre },
+      { model: Address },
+    ],
   })
-  .then((bandDetails: BandAttributes) => {
-    res.render('band/show', {bandDetails});
+  .then((band: BandAttributes) => {
+    res.render('band/show', {band});
   })
   .catch((error: Error) => {
     next(error);

@@ -20,7 +20,10 @@ export default (sequelize: Sequelize.Sequelize) => {
       field: 'deleted_at',
       type: Sequelize.DATE,
     },
-    name: Sequelize.STRING,
+    name: {
+      defaultValue: '',
+      type: Sequelize.STRING,
+    },
     updatedAt: {
       field: 'updated_at',
       type: Sequelize.DATE,

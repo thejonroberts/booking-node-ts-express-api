@@ -1,4 +1,12 @@
+body {
+  background-image: url("/images/liquid-pattern-6.jpg");
+  /* background-size: cover; */
+}
 
+.container,
+.fluid-container {
+  background-color: #ebebeb;
+}
 /* BOOTSTRAP BREAKPOINTS */
 /* XS -*/
 /* @media (max-width: 575.98px) { } */

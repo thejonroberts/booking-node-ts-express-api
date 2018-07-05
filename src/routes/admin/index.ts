@@ -18,4 +18,7 @@ router.use('/bands', band);
 // router.use('/users', user);
 // router.use('/venues', venue);
 
+// TODO: Admin specific render() error view
+// https://expressjs.com/en/guide/error-handling.html
+// https://expressjs.com/en/4x/api.html#res.render
 export default router;

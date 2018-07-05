@@ -7,6 +7,7 @@ export interface BandAttributes {
   description?: string;
   bandcamp?: string;
   label?: string;
+  imageUrl?: string;
   name?: string;
   tagline?: string;
   website?: string;
@@ -24,10 +25,15 @@ export default (sequelize: Sequelize.Sequelize) => {
       defaultValue: null,
       field: 'address_id',
       type: Sequelize.INTEGER,
+      // references: {
+      //   key: 'id',
+      //   model: Address,
+      // },
     },
     bandcamp: {
       defaultValue: '',
-      type: Sequelize.STRING},
+      type: Sequelize.STRING,
+    },
     createdAt: {
       defaultValue: '',
       field: 'created_at',
@@ -53,6 +59,12 @@ export default (sequelize: Sequelize.Sequelize) => {
       // },
       type: Sequelize.INTEGER,
     },
+    // TODO: rerun migrations to add this.
+    // imageUrl: {
+    //   defaultValue: '/public/images/band_default.png',
+    //   field: 'image_url',
+    //   type: Sequelize.STRING,
+    // },
     label: {
       defaultValue: '',
       type: Sequelize.STRING,

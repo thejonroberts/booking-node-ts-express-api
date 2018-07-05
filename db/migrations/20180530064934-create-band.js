@@ -27,6 +27,9 @@ module.exports = {
       label: {
         type: Sequelize.STRING,
       },
+      image_url: {
+        type: Sequelize.STRING,
+      },
       genre_id: {
         type: Sequelize.INTEGER,
         references: {

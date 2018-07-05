@@ -16,8 +16,13 @@ export default (sequelize: Sequelize.Sequelize) => {
 
   const attributes: SequelizeAttributes<VenueAttributes> = {
     addressId: {
+      allowNull: false,
       field: 'address_id',
       type: Sequelize.INTEGER,
+      // references: {
+      //   key: 'id',
+      //   model: Address,
+      // },
     },
     createdAt: {
       field: 'created_at',
@@ -27,8 +32,13 @@ export default (sequelize: Sequelize.Sequelize) => {
       field: 'deleted_at',
       type: Sequelize.DATE,
     },
-    description: Sequelize.STRING,
-    name: Sequelize.STRING,
+    description: {
+      type: Sequelize.STRING,
+    },
+    name: {
+      allowNull: false,
+      type: Sequelize.STRING,
+    },
     tagline: Sequelize.STRING,
     updatedAt: {
       field: 'updated_at',

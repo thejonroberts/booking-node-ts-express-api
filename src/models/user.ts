@@ -20,8 +20,13 @@ export default (sequelize: Sequelize.Sequelize) => {
 
   const attributes: SequelizeAttributes<UserAttributes> = {
     addressId: {
+      allowNull: false,
       field: 'address_id',
       type: Sequelize.INTEGER,
+      // references: {
+      //   key: 'id',
+      //   model: Address,
+      // },
     },
     createdAt: {
       field: 'created_at',
@@ -31,8 +36,12 @@ export default (sequelize: Sequelize.Sequelize) => {
       field: 'deleted_at',
       type: Sequelize.DATE,
     },
-    email: Sequelize.STRING,
+    email: {
+      allowNull: false,
+      type: Sequelize.STRING,
+    },
     firstName: {
+      allowNull: false,
       field: 'first_name',
       type: Sequelize.STRING,
     },
@@ -41,10 +50,14 @@ export default (sequelize: Sequelize.Sequelize) => {
       type: Sequelize.DATE,
     },
     lastName: {
+      allowNull: false,
       field: 'last_name',
       type: Sequelize.STRING,
     },
-    password: Sequelize.STRING,
+    password: {
+      allowNull: false,
+      type: Sequelize.STRING,
+    },
     // TODO: best type to use here? varchar?
     phoneNumber: {
       field: 'phone_number',
@@ -54,7 +67,10 @@ export default (sequelize: Sequelize.Sequelize) => {
       field: 'updated_at',
       type: Sequelize.DATE,
     },
-    username: Sequelize.TEXT,
+    username: {
+      allowNull: false,
+      type: Sequelize.TEXT,
+    },
   };
 
   const options = {
